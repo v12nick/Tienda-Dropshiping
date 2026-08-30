@@ -13,6 +13,7 @@ export default function CheckoutPage() {
   const { lines, subtotal, clear } = useCart();
   const [form, setForm] = useState({ name: "", email: "", address: "" });
   const [submitting, setSubmitting] = useState(false);
+  const [placed, setPlaced] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const shipping =
@@ -39,12 +40,21 @@ export default function CheckoutPage() {
         throw new Error(data.error ?? "Something went wrong.");
       }
 
-      clear();
+      setPlaced(true);
       router.push(`/order/${data.order.id}`);
+      clear();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.");
       setSubmitting(false);
     }
+  }
+
+  if (placed) {
+    return (
+      <div className="py-16 text-center text-slate-500">
+        Order placed! Taking you to your confirmation…
+      </div>
+    );
   }
 
   if (lines.length === 0) {
