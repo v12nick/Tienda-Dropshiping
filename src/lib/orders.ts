@@ -20,7 +20,18 @@ export type Order = {
 };
 
 // In-memory order store. Sufficient for local development and demos.
-const orders = new Map<string, Order>();
+// It is attached to `globalThis` so the data survives module re-evaluation
+// during Next.js dev hot-reloading / on-demand route compilation. Without
+// this, the map would reset between the create (POST) and fetch (GET)
+// requests once an unrelated route triggers a recompile.
+const globalForOrders = globalThis as unknown as {
+  __tiendaOrders?: Map<string, Order>;
+};
+
+const orders: Map<string, Order> =
+  globalForOrders.__tiendaOrders ?? new Map<string, Order>();
+
+globalForOrders.__tiendaOrders = orders;
 
 export function createOrder(order: Order): void {
   orders.set(order.id, order);
