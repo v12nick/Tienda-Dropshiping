@@ -1,0 +1,136 @@
+{%- liquid
+  assign image = section.settings.image
+-%}
+<section class="cp-specs" id="cp-specs-{{ section.id }}">
+  <div class="cp-specs__frame">
+    <div class="cp-specs__copy">
+      {%- if section.settings.kicker != blank -%}
+        <p class="cp-kicker cp-kicker--ink">{{ section.settings.kicker }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="cp-head__title">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <p class="cp-specs__lead">{{ section.settings.text }}</p>
+      {%- endif -%}
+      <ul class="cp-specs__list">
+        {%- for block in section.blocks -%}
+          <li {{ block.shopify_attributes }}>
+            <span>{{ block.settings.title }}</span>
+            <p>{{ block.settings.text }}</p>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+    <div class="cp-specs__media">
+      {%- if image != blank -%}
+        {{ image | image_url: width: 1400 | image_tag: class: 'cp-specs__photo', loading: 'lazy', alt: section.settings.heading }}
+      {%- else -%}
+        <img class="cp-specs__photo" src="{{ 'cp-angle-front.jpg' | asset_url }}" alt="{{ section.settings.heading | escape }}" width="1024" height="1024" loading="lazy">
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+.cp-specs {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 20px 16px 8px;
+}
+.cp-specs__frame {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 28px;
+  align-items: center;
+}
+.cp-specs__lead {
+  margin: 10px 0 0;
+  color: #46607a;
+  line-height: 1.55;
+  max-width: 38ch;
+}
+.cp-specs__list {
+  list-style: none;
+  margin: 22px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+.cp-specs__list li {
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: #f4f9fd;
+  animation: cp-rise 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.cp-specs__list li:nth-child(2) { animation-delay: 80ms; }
+.cp-specs__list li:nth-child(3) { animation-delay: 160ms; }
+.cp-specs__list li:nth-child(4) { animation-delay: 240ms; }
+.cp-specs__list span {
+  display: block;
+  font-weight: 650;
+  color: #0b1f33;
+}
+.cp-specs__list p {
+  margin: 4px 0 0;
+  color: #46607a;
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+.cp-specs__media {
+  border-radius: 28px;
+  overflow: hidden;
+  aspect-ratio: 1;
+  background: #eaf3fb;
+}
+.cp-specs__photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+@media (max-width: 749px) {
+  .cp-specs__frame { grid-template-columns: 1fr; }
+  .cp-specs__media { order: -1; aspect-ratio: 4 / 5; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cp-specs__list li { animation: none; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "CP Specs",
+  "tag": "section",
+  "class": "cp-section",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Foto (sin texto)" },
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "El diseño" },
+    { "type": "text", "id": "heading", "label": "Titulo", "default": "Panel blanco. Mezcla de azules." },
+    { "type": "textarea", "id": "text", "label": "Texto", "default": "Cuerpo blanco, interfaz clara y LEDs en cielo, eléctrico y teal. El color vive en el objeto; el copy, en la web." }
+  ],
+  "blocks": [
+    {
+      "type": "spec",
+      "name": "Spec",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titulo" },
+        { "type": "textarea", "id": "text", "label": "Texto" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "CP Specs",
+      "category": "CleanPro",
+      "blocks": [
+        { "type": "spec", "settings": { "title": "Panel blanco", "text": "Botón y LEDs en mezcla de azules, no un plastrón negro." } },
+        { "type": "spec", "settings": { "title": "Motor 360°", "text": "Tres velocidades para juntas, grasa y rines." } },
+        { "type": "spec", "settings": { "title": "IPX7", "text": "Uso húmedo en baño y cocina." } },
+        { "type": "spec", "settings": { "title": "Extensión", "text": "Poste telescópico para suelos y azulejos altos." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

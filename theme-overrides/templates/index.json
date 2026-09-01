@@ -6,7 +6,7 @@
         "height": 280,
         "kicker": "CleanPro360",
         "heading": "Limpia más rápido. Sin esfuerzo.",
-        "subheading": "Cepillo eléctrico 8 en 1, inalámbrico e IPX7. Panel blanco con acentos azules.",
+        "subheading": "Cepillo eléctrico 8 en 1. Panel blanco con mezcla de azules.",
         "cta_label": "Comprar ahora",
         "cta_url": "shopify://products/cleanpro360-cepillo-electrico-multiusos",
         "product": "cleanpro360-cepillo-electrico-multiusos"
@@ -43,11 +43,22 @@
         "heading": "Tres gestos. Casa impecable."
       }
     },
+    "cp_trust": {
+      "type": "cp-trust",
+      "blocks": {
+        "t1": { "type": "item", "settings": { "title": "IPX7", "text": "Lavable bajo el agua." } },
+        "t2": { "type": "item", "settings": { "title": "3 velocidades", "text": "De juntas a superficies." } },
+        "t3": { "type": "item", "settings": { "title": "8 cabezales", "text": "Baño, cocina y auto." } },
+        "t4": { "type": "item", "settings": { "title": "Inalámbrico", "text": "Carga USB, listo en casa." } }
+      },
+      "block_order": ["t1", "t2", "t3", "t4"],
+      "settings": {}
+    },
     "cp_angles": {
       "type": "cp-angles",
       "blocks": {
-        "a1": { "type": "shot", "settings": { "alt": "CleanPro360 de frente" } },
-        "a2": { "type": "shot", "settings": { "alt": "Kit de cabezales" } },
+        "a1": { "type": "shot", "settings": { "alt": "CleanPro360 de frente, panel blanco y LEDs azules" } },
+        "a2": { "type": "shot", "settings": { "alt": "Kit de cabezales CleanPro360" } },
         "a3": { "type": "shot", "settings": { "alt": "CleanPro360 de perfil" } },
         "a4": { "type": "shot", "settings": { "alt": "CleanPro360 con extensión" } }
       },
@@ -55,7 +66,22 @@
       "settings": {
         "kicker": "El objeto",
         "heading": "Un mismo set. Varios ángulos.",
-        "subheading": "Misma luz, misma paleta blanca y azul. El texto vive en la web, nunca en la foto."
+        "subheading": "Panel blanco, mezcla de azules. El texto vive en la web, nunca en la foto."
+      }
+    },
+    "cp_specs": {
+      "type": "cp-specs",
+      "blocks": {
+        "s1": { "type": "spec", "settings": { "title": "Panel blanco", "text": "Botón y LEDs en cielo, eléctrico y teal. Sin plastrón negro." } },
+        "s2": { "type": "spec", "settings": { "title": "Motor 360°", "text": "Tres velocidades para juntas, grasa y rines." } },
+        "s3": { "type": "spec", "settings": { "title": "IPX7", "text": "Uso húmedo en baño y cocina." } },
+        "s4": { "type": "spec", "settings": { "title": "Extensión", "text": "Poste telescópico para suelos y azulejos altos." } }
+      },
+      "block_order": ["s1", "s2", "s3", "s4"],
+      "settings": {
+        "kicker": "El diseño",
+        "heading": "Panel blanco. Mezcla de azules.",
+        "text": "Cuerpo blanco e interfaz clara. El color vive en el objeto; el copy, en la web."
       }
     },
     "cp_spot": {
@@ -69,5 +95,5 @@
       }
     }
   },
-  "order": ["cp_hero", "cp_steps", "cp_angles", "cp_spot"]
+  "order": ["cp_hero", "cp_steps", "cp_trust", "cp_angles", "cp_specs", "cp_spot"]
 }
