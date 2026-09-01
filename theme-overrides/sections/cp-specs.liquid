@@ -1,5 +1,9 @@
 {%- liquid
   assign image = section.settings.image
+  assign product = section.settings.product
+  if image == blank and product != blank and product.featured_image != blank
+    assign image = product.featured_image
+  endif
 -%}
 <section class="cp-specs" id="cp-specs-{{ section.id }}">
   <div class="cp-specs__frame">
@@ -105,10 +109,11 @@
   "class": "cp-section",
   "max_blocks": 6,
   "settings": [
-    { "type": "image_picker", "id": "image", "label": "Foto (sin texto)" },
+    { "type": "image_picker", "id": "image", "label": "Foto (vacío = foto del producto)" },
+    { "type": "product", "id": "product", "label": "Producto" },
     { "type": "text", "id": "kicker", "label": "Kicker", "default": "El diseño" },
-    { "type": "text", "id": "heading", "label": "Titulo", "default": "Panel blanco. Mezcla de azules." },
-    { "type": "textarea", "id": "text", "label": "Texto", "default": "Cuerpo blanco, interfaz clara y LEDs en cielo, eléctrico y teal. El color vive en el objeto; el copy, en la web." }
+    { "type": "text", "id": "heading", "label": "Titulo", "default": "8 cabezales. Cuerpo blanco. Panel negro con LEDs azules." },
+    { "type": "textarea", "id": "text", "label": "Texto", "default": "Inalámbrico, IPX7 y 3 velocidades. Las fotos de esta página son las de la ficha del producto." }
   ],
   "blocks": [
     {

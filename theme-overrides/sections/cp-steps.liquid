@@ -1,3 +1,4 @@
+{%- assign product = section.settings.product -%}
 <section class="cp-steps" id="cp-steps-{{ section.id }}">
   <header class="cp-head">
     {%- if section.settings.kicker != blank -%}
@@ -12,10 +13,20 @@
       {%- assign fallback = 'cp-step-bano.jpg' -%}
       {%- if forloop.index == 2 -%}{%- assign fallback = 'cp-step-cocina.jpg' -%}{%- endif -%}
       {%- if forloop.index == 3 -%}{%- assign fallback = 'cp-step-auto.jpg' -%}{%- endif -%}
+      {%- assign media_image = nil -%}
+      {%- if product != blank -%}
+        {%- for media in product.media -%}
+          {%- if media.media_type == 'image' and forloop.index == block.settings.media_index -%}
+            {%- assign media_image = media -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
       <article class="cp-card" {{ block.shopify_attributes }} style="--d: {{ forloop.index0 | times: 90 }}ms;">
         <div class="cp-card__media">
           {%- if block.settings.image != blank -%}
             {{ block.settings.image | image_url: width: 900 | image_tag: class: 'cp-card__photo', loading: 'lazy', alt: block.settings.title }}
+          {%- elsif media_image != blank -%}
+            {{ media_image | image_url: width: 900 | image_tag: class: 'cp-card__photo', loading: 'lazy', alt: block.settings.title }}
           {%- else -%}
             <img class="cp-card__photo" src="{{ fallback | asset_url }}" alt="{{ block.settings.title | escape }}" width="1024" height="1024" loading="lazy">
           {%- endif -%}
@@ -111,6 +122,7 @@
   "class": "cp-section",
   "max_blocks": 3,
   "settings": [
+    { "type": "product", "id": "product", "label": "Producto (fotos de la ficha)" },
     { "type": "text", "id": "kicker", "label": "Kicker", "default": "Así funciona" },
     { "type": "text", "id": "heading", "label": "Titulo", "default": "Tres gestos. Casa impecable." }
   ],
@@ -119,7 +131,8 @@
       "type": "step",
       "name": "Paso",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Foto del paso (sin texto)" },
+        { "type": "image_picker", "id": "image", "label": "Foto (vacío = foto del producto)" },
+        { "type": "range", "id": "media_index", "label": "Nº de foto del producto", "min": 1, "max": 12, "step": 1, "default": 2 },
         { "type": "text", "id": "title", "label": "Titulo", "default": "Paso" },
         { "type": "textarea", "id": "text", "label": "Texto" }
       ]

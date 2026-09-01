@@ -1,3 +1,4 @@
+{%- assign product = section.settings.product -%}
 <section class="cp-angles" id="cp-angles-{{ section.id }}">
   <header class="cp-head">
     {%- if section.settings.kicker != blank -%}
@@ -14,9 +15,19 @@
     {%- assign fallbacks = 'cp-angle-front.jpg,cp-angle-kit.jpg,cp-angle-side.jpg,cp-angle-extend.jpg' | split: ',' -%}
     {%- for block in section.blocks -%}
       {%- assign fb = fallbacks[forloop.index0] | default: fallbacks[0] -%}
+      {%- assign media_image = nil -%}
+      {%- if product != blank -%}
+        {%- for media in product.media -%}
+          {%- if media.media_type == 'image' and forloop.index == block.settings.media_index -%}
+            {%- assign media_image = media -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
       <figure class="cp-bento__item cp-bento__item--{{ forloop.index }}" {{ block.shopify_attributes }}>
         {%- if block.settings.image != blank -%}
           {{ block.settings.image | image_url: width: 1200 | image_tag: class: 'cp-bento__photo', loading: 'lazy', alt: block.settings.alt }}
+        {%- elsif media_image != blank -%}
+          {{ media_image | image_url: width: 1200 | image_tag: class: 'cp-bento__photo', loading: 'lazy', alt: block.settings.alt }}
         {%- else -%}
           <img class="cp-bento__photo" src="{{ fb | asset_url }}" alt="{{ block.settings.alt | escape }}" width="1024" height="1024" loading="lazy">
         {%- endif -%}
@@ -77,16 +88,18 @@
   "class": "cp-section",
   "max_blocks": 4,
   "settings": [
+    { "type": "product", "id": "product", "label": "Producto (fotos de la ficha)" },
     { "type": "text", "id": "kicker", "label": "Kicker", "default": "El objeto" },
     { "type": "text", "id": "heading", "label": "Titulo", "default": "Un mismo set. Varios ángulos." },
-    { "type": "textarea", "id": "subheading", "label": "Subtitulo", "default": "Misma luz. Panel blanco con mezcla de azules. El texto vive en la web, nunca en la foto." }
+    { "type": "textarea", "id": "subheading", "label": "Subtitulo", "default": "Las fotos de la ficha del producto, en la home." }
   ],
   "blocks": [
     {
       "type": "shot",
       "name": "Foto",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Foto (sin texto)" },
+        { "type": "image_picker", "id": "image", "label": "Foto (vacío = foto del producto)" },
+        { "type": "range", "id": "media_index", "label": "Nº de foto del producto", "min": 1, "max": 12, "step": 1, "default": 1 },
         { "type": "text", "id": "alt", "label": "Texto alternativo", "default": "CleanPro360" }
       ]
     }

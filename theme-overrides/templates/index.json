@@ -6,7 +6,7 @@
         "height": 280,
         "kicker": "CleanPro360",
         "heading": "Limpia más rápido. Sin esfuerzo.",
-        "subheading": "Cepillo eléctrico 8 en 1. Panel blanco con mezcla de azules.",
+        "subheading": "Cepillo eléctrico 8 en 1, inalámbrico e IPX7.",
         "cta_label": "Comprar ahora",
         "cta_url": "shopify://products/cleanpro360-cepillo-electrico-multiusos",
         "product": "cleanpro360-cepillo-electrico-multiusos"
@@ -18,6 +18,7 @@
         "step_bano": {
           "type": "step",
           "settings": {
+            "media_index": 5,
             "title": "Baño",
             "text": "Azulejos, grifería y juntas sin restregar."
           }
@@ -25,6 +26,7 @@
         "step_cocina": {
           "type": "step",
           "settings": {
+            "media_index": 6,
             "title": "Cocina",
             "text": "Grasa y encimeras, con el cabezal justo."
           }
@@ -32,13 +34,15 @@
         "step_auto": {
           "type": "step",
           "settings": {
-            "title": "Auto",
-            "text": "Rincones de llantas y molduras al detalle."
+            "media_index": 8,
+            "title": "Rincones",
+            "text": "Esquinas, suelos y zonas a las que cuesta llegar."
           }
         }
       },
       "block_order": ["step_bano", "step_cocina", "step_auto"],
       "settings": {
+        "product": "cleanpro360-cepillo-electrico-multiusos",
         "kicker": "Así funciona",
         "heading": "Tres gestos. Casa impecable."
       }
@@ -57,31 +61,33 @@
     "cp_angles": {
       "type": "cp-angles",
       "blocks": {
-        "a1": { "type": "shot", "settings": { "alt": "CleanPro360 de frente, panel blanco y LEDs azules" } },
-        "a2": { "type": "shot", "settings": { "alt": "Kit de cabezales CleanPro360" } },
-        "a3": { "type": "shot", "settings": { "alt": "CleanPro360 de perfil" } },
-        "a4": { "type": "shot", "settings": { "alt": "CleanPro360 con extensión" } }
+        "a1": { "type": "shot", "settings": { "media_index": 1, "alt": "CleanPro360 de frente" } },
+        "a2": { "type": "shot", "settings": { "media_index": 2, "alt": "Kit de cabezales CleanPro360" } },
+        "a3": { "type": "shot", "settings": { "media_index": 3, "alt": "CleanPro360 con extensión" } },
+        "a4": { "type": "shot", "settings": { "media_index": 4, "alt": "CleanPro360 y accesorios" } }
       },
       "block_order": ["a1", "a2", "a3", "a4"],
       "settings": {
-        "kicker": "El objeto",
-        "heading": "Un mismo set. Varios ángulos.",
-        "subheading": "Panel blanco, mezcla de azules. El texto vive en la web, nunca en la foto."
+        "product": "cleanpro360-cepillo-electrico-multiusos",
+        "kicker": "El producto",
+        "heading": "Las fotos de la ficha.",
+        "subheading": "Misma galería que ves al comprar. Sin fotos inventadas."
       }
     },
     "cp_specs": {
       "type": "cp-specs",
       "blocks": {
-        "s1": { "type": "spec", "settings": { "title": "Panel blanco", "text": "Botón y LEDs en cielo, eléctrico y teal. Sin plastrón negro." } },
+        "s1": { "type": "spec", "settings": { "title": "Cuerpo blanco", "text": "Panel negro con LEDs azules de batería y botón de encendido." } },
         "s2": { "type": "spec", "settings": { "title": "Motor 360°", "text": "Tres velocidades para juntas, grasa y rines." } },
         "s3": { "type": "spec", "settings": { "title": "IPX7", "text": "Uso húmedo en baño y cocina." } },
         "s4": { "type": "spec", "settings": { "title": "Extensión", "text": "Poste telescópico para suelos y azulejos altos." } }
       },
       "block_order": ["s1", "s2", "s3", "s4"],
       "settings": {
+        "product": "cleanpro360-cepillo-electrico-multiusos",
         "kicker": "El diseño",
-        "heading": "Panel blanco. Mezcla de azules.",
-        "text": "Cuerpo blanco e interfaz clara. El color vive en el objeto; el copy, en la web."
+        "heading": "8 cabezales. Una herramienta.",
+        "text": "Inalámbrico, IPX7 y 3 velocidades. Las fotos son las de la ficha del producto."
       }
     },
     "cp_spot": {

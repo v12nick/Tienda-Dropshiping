@@ -5,13 +5,16 @@
   if cta_url == blank and product != blank
     assign cta_url = product.url
   endif
+  if image == blank and product != blank and product.featured_image != blank
+    assign image = product.featured_image
+  endif
 -%}
 <section class="cp-hero" id="cp-hero-{{ section.id }}" style="--cp-hero-h: {{ section.settings.height }}px;">
   <div class="cp-hero__frame">
     {%- if image != blank -%}
       {{ image | image_url: width: 2000 | image_tag: class: 'cp-hero__photo', loading: 'eager', alt: section.settings.heading }}
     {%- else -%}
-      <img class="cp-hero__photo" src="{{ 'cp-hero-banner.jpg' | asset_url }}" alt="{{ section.settings.heading | escape }}" width="1536" height="1024">
+      <img class="cp-hero__photo" src="{{ 'cp-hero-banner.jpg' | asset_url }}" alt="{{ section.settings.heading | escape }}" width="600" height="600">
     {%- endif -%}
     <div class="cp-hero__veil"></div>
     <div class="cp-hero__copy">
@@ -53,7 +56,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 92% 50%;
+  object-position: 70% 50%;
   transform: scale(1.04);
   animation: cp-ken 18s ease-in-out infinite alternate;
 }
@@ -152,7 +155,7 @@
     { "type": "range", "id": "height", "min": 200, "max": 420, "step": 10, "unit": "px", "label": "Alto del banner", "default": 280 },
     { "type": "text", "id": "kicker", "label": "Kicker", "default": "CleanPro360" },
     { "type": "text", "id": "heading", "label": "Titulo", "default": "Limpia más rápido. Sin esfuerzo." },
-    { "type": "textarea", "id": "subheading", "label": "Subtitulo", "default": "Cepillo eléctrico 8 en 1. Panel blanco con mezcla de azules." },
+    { "type": "textarea", "id": "subheading", "label": "Subtitulo", "default": "Cepillo eléctrico 8 en 1, inalámbrico e IPX7." },
     { "type": "text", "id": "cta_label", "label": "Boton", "default": "Comprar ahora" },
     { "type": "url", "id": "cta_url", "label": "Enlace del boton" },
     { "type": "product", "id": "product", "label": "Producto (si no hay enlace)" }

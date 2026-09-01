@@ -4,6 +4,8 @@
     <div class="cp-spot__media">
       {%- if section.settings.image != blank -%}
         {{ section.settings.image | image_url: width: 1400 | image_tag: class: 'cp-spot__photo', loading: 'lazy', alt: section.settings.heading }}
+      {%- elsif product != blank and product.featured_image != blank -%}
+        {{ product.featured_image | image_url: width: 1400 | image_tag: class: 'cp-spot__photo', loading: 'lazy', alt: section.settings.heading }}
       {%- else -%}
         <img class="cp-spot__photo" src="{{ 'cp-angle-kit.jpg' | asset_url }}" alt="{{ section.settings.heading | escape }}" width="1024" height="1024" loading="lazy">
       {%- endif -%}
