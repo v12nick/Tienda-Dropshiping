@@ -1,0 +1,162 @@
+{%- liquid
+  assign image = section.settings.image
+  assign product = section.settings.product
+  assign cta_url = section.settings.cta_url
+  if cta_url == blank and product != blank
+    assign cta_url = product.url
+  endif
+-%}
+<section class="cp-hero" id="cp-hero-{{ section.id }}" style="--cp-hero-h: {{ section.settings.height }}px;">
+  <div class="cp-hero__frame">
+    {%- if image != blank -%}
+      {{ image | image_url: width: 2000 | image_tag: class: 'cp-hero__photo', loading: 'eager', alt: section.settings.heading }}
+    {%- else -%}
+      <img class="cp-hero__photo" src="{{ 'cp-hero-banner.jpg' | asset_url }}" alt="{{ section.settings.heading | escape }}" width="1536" height="1024">
+    {%- endif -%}
+    <div class="cp-hero__veil"></div>
+    <div class="cp-hero__copy">
+      {%- if section.settings.kicker != blank -%}
+        <p class="cp-kicker">{{ section.settings.kicker }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h1 class="cp-hero__title">{{ section.settings.heading }}</h1>
+      {%- endif -%}
+      {%- if section.settings.subheading != blank -%}
+        <p class="cp-hero__sub">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+      {%- if section.settings.cta_label != blank and cta_url != blank -%}
+        <a class="cp-btn" href="{{ cta_url }}">{{ section.settings.cta_label }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+.cp-hero {
+  padding: 16px 16px 8px;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+.cp-hero__frame {
+  position: relative;
+  height: var(--cp-hero-h, 280px);
+  max-height: 38vw;
+  min-height: 200px;
+  border-radius: 28px;
+  overflow: hidden;
+  isolation: isolate;
+  background: #e8f1f8;
+}
+.cp-hero__photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 92% 50%;
+  transform: scale(1.04);
+  animation: cp-ken 18s ease-in-out infinite alternate;
+}
+.cp-hero__veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(7, 28, 52, 0.78) 0%, rgba(7, 28, 52, 0.5) 38%, rgba(7, 28, 52, 0.08) 68%, rgba(7, 28, 52, 0) 82%);
+  pointer-events: none;
+}
+.cp-hero__copy {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 28px 42px;
+  max-width: min(52%, 560px);
+  color: #f4fbff;
+  animation: cp-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.cp-kicker {
+  margin: 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #7ec8ff;
+  font-weight: 600;
+}
+.cp-hero__title {
+  margin: 0;
+  font-size: clamp(1.6rem, 3.2vw, 2.6rem);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+}
+.cp-hero__sub {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: rgba(244, 251, 255, 0.82);
+  max-width: 36ch;
+}
+.cp-btn {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 6px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #3aa0ff 0%, #1d6fe8 52%, #0ea5e9 100%);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.92rem;
+  box-shadow: 0 10px 24px rgba(29, 111, 232, 0.35);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s;
+}
+.cp-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 30px rgba(29, 111, 232, 0.45);
+}
+@keyframes cp-ken {
+  from { transform: scale(1.04) translate3d(0, 0, 0); }
+  to { transform: scale(1.1) translate3d(-1.4%, 0, 0); }
+}
+@keyframes cp-rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+@media (max-width: 749px) {
+  .cp-hero__frame {
+    max-height: none;
+    height: 320px;
+    border-radius: 22px;
+  }
+  .cp-hero__photo { object-position: 80% 40%; }
+  .cp-hero__copy { max-width: 88%; padding: 22px 20px; }
+  .cp-hero__veil {
+    background: linear-gradient(180deg, rgba(7, 28, 52, 0.72) 0%, rgba(7, 28, 52, 0.45) 48%, rgba(7, 28, 52, 0.12) 100%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cp-hero__photo, .cp-hero__copy, .cp-btn { animation: none; transition: none; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "CP Hero",
+  "tag": "section",
+  "class": "cp-section",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Foto banner (sin texto)" },
+    { "type": "range", "id": "height", "min": 200, "max": 420, "step": 10, "unit": "px", "label": "Alto del banner", "default": 280 },
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "CleanPro360" },
+    { "type": "text", "id": "heading", "label": "Titulo", "default": "Limpia más rápido. Sin esfuerzo." },
+    { "type": "textarea", "id": "subheading", "label": "Subtitulo", "default": "Cepillo eléctrico 8 en 1, inalámbrico e IPX7. Panel blanco con acentos azules." },
+    { "type": "text", "id": "cta_label", "label": "Boton", "default": "Comprar ahora" },
+    { "type": "url", "id": "cta_url", "label": "Enlace del boton" },
+    { "type": "product", "id": "product", "label": "Producto (si no hay enlace)" }
+  ],
+  "presets": [{ "name": "CP Hero", "category": "CleanPro" }]
+}
+{% endschema %}
