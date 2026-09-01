@@ -79,6 +79,7 @@ const existingByHandle = new Map(
 );
 
 const created = [];
+let createdNow = 0;
 for (const product of products) {
   if (existingByHandle.has(product.handle)) {
     const existing = existingByHandle.get(product.handle);
@@ -86,6 +87,7 @@ for (const product of products) {
     console.log(`Skip existing ${existing.title} (${existing.id})`);
     continue;
   }
+  createdNow += 1;
   const result = shopifyExecute(
     CREATE_PRODUCT,
     {
@@ -140,6 +142,18 @@ for (const product of products) {
   );
   assertNoErrors(`publish ${product.handle}`, published.publishablePublish?.userErrors);
   console.log(`Created ${createdProduct.title} (${createdProduct.id})`);
+}
+
+if (createdNow === 0 && process.env.FORCE_SEED !== "1") {
+  console.log("All catalog products already exist; skipping collections and pages.");
+  console.log(
+    JSON.stringify(
+      { products: created.map((p) => ({ id: p.id, handle: p.handle, title: p.title })) },
+      null,
+      2
+    )
+  );
+  process.exit(0);
 }
 
 const collections = [
