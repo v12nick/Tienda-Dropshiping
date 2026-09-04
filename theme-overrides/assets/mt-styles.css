@@ -306,6 +306,52 @@ body{ overflow-x:clip; }
 .footer .newsletter-form__button{ color:#fff; }
 .footer .list-payment svg,
 .footer .list-payment img{ filter:none; }
+.mt-pagos-aceptados{
+  text-align:center;
+  padding:8px var(--mt-margen) 28px;
+}
+.mt-pagos-aceptados-heading{
+  font-family:var(--mt-fuente-cuerpo);
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.55);
+  margin:0 0 14px;
+}
+.mt-pagos-aceptados--footer .list-payment{
+  justify-content:center !important;
+  margin:0;
+  padding:0;
+  gap:8px;
+}
+.mt-pagos-aceptados .list-payment__item{
+  padding:0;
+}
+.mt-pagos-aceptados .list-payment svg,
+.mt-pagos-aceptados .list-payment img{
+  width:52px;
+  height:32px;
+  display:block;
+  background:#fff;
+  border-radius:6px;
+  padding:3px 4px;
+  box-sizing:content-box;
+}
+.mt-pagos-aceptados--pdp{
+  text-align:left;
+  padding:14px 0 0;
+}
+.mt-pagos-aceptados--pdp .mt-pagos-aceptados-heading{
+  color:var(--mt-color-texto-suave);
+  text-align:left;
+}
+.mt-pagos-aceptados--pdp .list-payment{
+  justify-content:flex-start !important;
+  margin:0;
+  padding:0;
+  gap:8px;
+}
 @media (max-width:749px){
   .mt-footer{
     grid-template-columns:1fr;

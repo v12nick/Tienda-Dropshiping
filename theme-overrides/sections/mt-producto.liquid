@@ -98,14 +98,7 @@
           {{ form | payment_button }}
         {%- endform -%}
 
-        {%- if shop.enabled_payment_types.size > 0 -%}
-          <div class="mt-pagos">
-            <span>Pagas al checkout con</span>
-            {%- for type in shop.enabled_payment_types -%}
-              {{ type | payment_type_svg_tag }}
-            {%- endfor -%}
-          </div>
-        {%- endif -%}
+        {%- render 'mt-payment-icons', heading: 'Pagos aceptados', class: 'mt-pagos-aceptados--pdp' -%}
         <p class="mt-producto-micro">El envío se calcula al pagar, según tu ciudad. <a href="/pages/contact#mt-envios">Ver plazos</a>.</p>
 
         <ul class="mt-producto-confianza">
