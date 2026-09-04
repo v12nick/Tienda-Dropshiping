@@ -171,7 +171,7 @@ body{ overflow-x:clip; }
   border-bottom:1px solid var(--mt-color-linea);
 }
 .header{
-  min-height:92px;
+  min-height:108px;
   align-items:center;
 }
 .header__heading,
@@ -182,8 +182,8 @@ body{ overflow-x:clip; }
 }
 .header__heading-logo,
 .header__heading-logo-wrapper img.header__heading-logo{
-  width:280px !important;
-  max-width:280px !important;
+  width:380px !important;
+  max-width:380px !important;
   height:auto !important;
   max-height:none !important;
   object-fit:contain;
@@ -191,7 +191,7 @@ body{ overflow-x:clip; }
 .header__heading-link{
   display:flex;
   align-items:center;
-  padding:8px 0;
+  padding:10px 0;
 }
 .header__icons{
   gap:2px;
@@ -202,7 +202,7 @@ body{ overflow-x:clip; }
 }
 .header__menu-item,
 .list-menu__item{
-  font-size:15px;
+  font-size:16px;
   font-weight:600;
   letter-spacing:.01em;
 }
@@ -210,26 +210,26 @@ body{ overflow-x:clip; }
 .utility-bar,
 .announcement-bar__message,
 .utility-bar__text{
-  font-size:16px !important;
+  font-size:17px !important;
   font-weight:600;
-  letter-spacing:.01em;
+  letter-spacing:.01em !important;
   line-height:1.4;
 }
 @media (max-width:749px){
   .header{
-    min-height:80px;
+    min-height:88px;
   }
   .header__heading-logo,
   .header__heading-logo-wrapper img.header__heading-logo{
-    width:220px !important;
-    max-width:220px !important;
+    width:250px !important;
+    max-width:250px !important;
     max-height:none !important;
   }
   .announcement-bar,
   .utility-bar,
   .announcement-bar__message,
   .utility-bar__text{
-    font-size:14.5px !important;
+    font-size:15px !important;
   }
 }
 .header__icon .svg-wrapper{
@@ -377,7 +377,7 @@ body{ overflow-x:clip; }
 .mt-hero p,
 .mt-hero-inner p{
   color:#ffffff !important;
-  font-size:21px !important;
+  font-size:22px !important;
   line-height:1.55;
   margin:0 0 28px;
   max-width:40ch;
@@ -418,7 +418,7 @@ body{ overflow-x:clip; }
 }
 .mt-hero-stat span{
   color:#ffffff !important;
-  font-size:16px;
+  font-size:17px;
   font-weight:500;
 }
 @media (max-width:989px){
@@ -457,11 +457,11 @@ body{ overflow-x:clip; }
   }
   .mt-hero-badge{ font-size:16px; padding:11px 16px; }
   .mt-hero h1,
-  .mt-hero-inner h1{ max-width:none; font-size:clamp(2.35rem, 9vw, 2.9rem) !important; color:#fff !important; }
+  .mt-hero-inner h1{ max-width:none; font-size:clamp(2.5rem, 9.4vw, 3.05rem) !important; color:#fff !important; }
   .mt-hero p,
-  .mt-hero-inner p{ font-size:19px !important; color:#fff !important; }
-  .mt-hero-stat b{ font-size:24px; }
-  .mt-hero-stat span{ font-size:15px; }
+  .mt-hero-inner p{ font-size:20px !important; color:#fff !important; }
+  .mt-hero-stat b{ font-size:26px; }
+  .mt-hero-stat span{ font-size:16px; }
   .mt-hero-ctas .mt-btn{ flex:1 1 160px; font-size:16px; }
 }
 
