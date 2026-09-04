@@ -11,21 +11,21 @@
 
 <section class="mt-section" id="mt-politicas">
   <div class="mt-container">
-    <div class="mt-pasos-head mt-reveal">
+    <div class="mt-pasos-head">
       {%- if section.settings.eyebrow != blank -%}<span class="mt-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
       <h2 class="mt-h2" style="font-size:{{ section.settings.titulo_size }}px;">{{ section.settings.titulo }}</h2>
       {%- if section.settings.texto != blank -%}<p class="mt-body" style="max-width:62ch;margin:0 auto;">{{ section.settings.texto }}</p>{%- endif -%}
     </div>
 
-    <article class="mt-politica mt-reveal" id="mt-envios">
+    <article class="mt-politica" id="mt-envios">
       <h3>Envíos</h3>
       {{ section.settings.envios }}
     </article>
-    <article class="mt-politica mt-reveal" id="mt-devoluciones">
+    <article class="mt-politica" id="mt-devoluciones">
       <h3>Cambios, retracto y fallas</h3>
       {{ section.settings.devoluciones }}
     </article>
-    <article class="mt-politica mt-reveal" id="mt-terminos">
+    <article class="mt-politica" id="mt-terminos">
       <h3>Términos del servicio</h3>
       {{ section.settings.terminos }}
     </article>
