@@ -182,10 +182,10 @@ body{ overflow-x:clip; }
 }
 .header__heading-logo,
 .header__heading-logo-wrapper img.header__heading-logo{
-  width:196px !important;
-  max-width:196px !important;
+  width:200px !important;
+  max-width:200px !important;
   height:auto !important;
-  max-height:44px !important;
+  max-height:46px !important;
   object-fit:contain;
 }
 .header__heading-link{
