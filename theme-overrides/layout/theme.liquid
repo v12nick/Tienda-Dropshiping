@@ -424,6 +424,7 @@
     {%- if settings.cart_type == 'drawer' -%}
       <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+    <script src="{{ 'mt-scripts.js' | asset_url }}" defer="defer"></script>
 
     {%- if request.page_type == 'product' -%}
       <a class="mt-contacto-chip" href="/pages/contact">¿Dudas? Escríbenos</a>

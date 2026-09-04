@@ -1,5 +1,4 @@
 {{ 'mt-styles.css' | asset_url | stylesheet_tag }}
-{{ 'mt-scripts.js' | asset_url | script_tag }}
 
 {% style %}
   #shopify-section-{{ section.id }} {
@@ -17,20 +16,18 @@
       <p class="mt-body">{{ section.settings.texto }}</p>
     </div>
     <div class="mt-comparador mt-reveal" data-mt-comparador>
-      {%- if section.settings.imagen_antes != blank -%}
-        <img src="{{ section.settings.imagen_antes | image_url: width: 1400 }}" alt="Antes" loading="lazy">
+      {%- if section.settings.imagen_despues != blank -%}
+        <img src="{{ section.settings.imagen_despues | image_url: width: 1400 }}" alt="{{ section.settings.etiqueta_despues | escape }}" loading="lazy">
       {%- else -%}
-        <img src="{{ 'mt-antes.jpg' | asset_url }}" alt="Antes" loading="lazy">
+        <img src="{{ 'mt-despues.jpg' | asset_url }}" alt="{{ section.settings.etiqueta_despues | escape }}" loading="lazy">
+      {%- endif -%}
+      {%- if section.settings.imagen_antes != blank -%}
+        <img class="mt-comparador-antes" src="{{ section.settings.imagen_antes | image_url: width: 1400 }}" alt="{{ section.settings.etiqueta_antes | escape }}" loading="lazy">
+      {%- else -%}
+        <img class="mt-comparador-antes" src="{{ 'mt-antes.jpg' | asset_url }}" alt="{{ section.settings.etiqueta_antes | escape }}" loading="lazy">
       {%- endif -%}
       <span class="mt-comparador-etq mt-izq">{{ section.settings.etiqueta_antes }}</span>
-      <div class="mt-comparador-despues" style="width:50%;">
-        {%- if section.settings.imagen_despues != blank -%}
-          <img src="{{ section.settings.imagen_despues | image_url: width: 1400 }}" alt="Después" loading="lazy">
-        {%- else -%}
-          <img src="{{ 'mt-despues.jpg' | asset_url }}" alt="Después" loading="lazy">
-        {%- endif -%}
-        <span class="mt-comparador-etq mt-der">{{ section.settings.etiqueta_despues }}</span>
-      </div>
+      <span class="mt-comparador-etq mt-der">{{ section.settings.etiqueta_despues }}</span>
       <div class="mt-comparador-linea" style="left:50%;"></div>
       <div class="mt-comparador-asa" style="left:50%;">
         <svg viewBox="0 0 24 24" fill="none" stroke="#0b0f19" stroke-width="2" stroke-linecap="round"><polyline points="8 7 3 12 8 17"/><polyline points="16 7 21 12 16 17"/></svg>
