@@ -23,7 +23,7 @@
               <img src="{{ block.settings.imagen_defecto | asset_url }}" alt="{{ block.settings.titulo | escape }}" loading="lazy">
             {%- endif -%}
           </div>
-          <span class="mt-paso-num">{{ forloop.index | prepend: '0' | slice: -2 }}</span>
+          <span class="mt-paso-num">0{{ forloop.index }}</span>
           <h3>{{ block.settings.titulo }}</h3>
           <p>{{ block.settings.texto }}</p>
         </div>
