@@ -212,6 +212,7 @@ body{ overflow-x:clip; }
   margin-top:0 !important;
   letter-spacing:normal;
 }
+.mt-powered-hide{ display:none !important; }
 .footer .footer-block__heading,
 .footer a,
 .footer .link{

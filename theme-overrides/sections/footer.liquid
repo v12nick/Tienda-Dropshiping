@@ -328,7 +328,7 @@
         <small class="copyright__content"
           >&copy; {{ 'now' | date: '%Y' }}, {% if shop.name == 'Mi tienda' or shop.name == 'My Store' %}{{ 'CleanPro360' | link_to: routes.root_url }}{% else %}{{ shop.name | link_to: routes.root_url }}{% endif -%}
         </small>
-        <small class="copyright__content mt-powered-hide">{{ powered_by_link }}</small>
+        <small class="copyright__content mt-powered-hide visually-hidden">{{ powered_by_link }}</small>
         <ul class="policies list-unstyled">
           <li><small class="copyright__content"><a href="/pages/contact#mt-envios">Envíos</a></small></li>
           <li><small class="copyright__content"><a href="/pages/contact#mt-devoluciones">Cambios</a></small></li>
