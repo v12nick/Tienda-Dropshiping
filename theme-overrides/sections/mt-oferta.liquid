@@ -1,0 +1,64 @@
+{{ 'mt-styles.css' | asset_url | stylesheet_tag }}
+{{ 'mt-scripts.js' | asset_url | script_tag }}
+
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+{% endstyle %}
+
+<section class="mt-section">
+  <div class="mt-container">
+    <div class="mt-oferta mt-reveal">
+      <div class="mt-oferta-inner">
+        {%- if section.settings.eyebrow != blank -%}<span class="mt-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+        <h2 class="mt-h2" style="font-size:{{ section.settings.titulo_size }}px;">{{ section.settings.titulo }}</h2>
+        <p>{{ section.settings.texto }}</p>
+        <div class="mt-precios">
+          <span class="mt-precio-actual">{{ section.settings.precio_actual }}</span>
+          {%- if section.settings.precio_antes != blank -%}<span class="mt-precio-antes">{{ section.settings.precio_antes }}</span>{%- endif -%}
+          {%- if section.settings.descuento_texto != blank -%}<span class="mt-precio-badge">{{ section.settings.descuento_texto }}</span>{%- endif -%}
+        </div>
+        {%- if section.settings.mostrar_contador -%}
+          <div class="mt-contador" data-mt-contador>
+            <div class="mt-contador-item"><b data-mt-h>00</b><span>Horas</span></div>
+            <div class="mt-contador-item"><b data-mt-m>00</b><span>Min</span></div>
+            <div class="mt-contador-item"><b data-mt-s>00</b><span>Seg</span></div>
+          </div>
+        {%- endif -%}
+        {%- if section.settings.mostrar_stock -%}
+          <div class="mt-stock-barra"><div class="mt-stock-barra-fill" style="width:{{ section.settings.stock_porcentaje }}%;"></div></div>
+          <p class="mt-stock-texto">{{ section.settings.stock_texto }}</p>
+        {%- endif -%}
+        <a href="{{ section.settings.boton_url | default: '#' }}" class="mt-btn mt-btn-primario">{{ section.settings.boton_texto }}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MT – Oferta",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño superior", "default": "Precio de lanzamiento" },
+    { "type": "text", "id": "titulo", "label": "Título", "default": "CleanPro360 a $99.900 COP" },
+    { "type": "range", "id": "titulo_size", "label": "Tamaño del título (px)", "min": 24, "max": 56, "step": 2, "unit": "px", "default": 36 },
+    { "type": "textarea", "id": "texto", "label": "Texto", "default": "Precio de lanzamiento frente a $149.900. El envío se calcula al checkout, según tu ciudad." },
+    { "type": "text", "id": "precio_actual", "label": "Precio actual", "default": "$99.900" },
+    { "type": "text", "id": "precio_antes", "label": "Precio antes (opcional)", "default": "$149.900" },
+    { "type": "text", "id": "descuento_texto", "label": "Texto del badge de descuento", "default": "-33%" },
+    { "type": "checkbox", "id": "mostrar_contador", "label": "Mostrar contador de horas", "default": false },
+    { "type": "checkbox", "id": "mostrar_stock", "label": "Mostrar barra de stock", "default": false },
+    { "type": "range", "id": "stock_porcentaje", "label": "Porcentaje de stock restante", "min": 5, "max": 95, "step": 5, "unit": "%", "default": 25 },
+    { "type": "text", "id": "stock_texto", "label": "Texto bajo la barra de stock", "default": "Quedan pocas unidades al precio de hoy" },
+    { "type": "text", "id": "boton_texto", "label": "Texto del botón", "default": "Aprovechar la oferta" },
+    { "type": "url", "id": "boton_url", "label": "Enlace del botón" },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 96 }
+  ],
+  "presets": [ { "name": "MT – Oferta" } ]
+}
+{% endschema %}

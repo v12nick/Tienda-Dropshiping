@@ -1,0 +1,79 @@
+{{ 'mt-styles.css' | asset_url | stylesheet_tag }}
+{{ 'mt-scripts.js' | asset_url | script_tag }}
+
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: {{ section.settings.color_fondo }};
+  }
+{% endstyle %}
+
+<section class="mt-section">
+  <div class="mt-container">
+    <div class="mt-pasos-head mt-reveal" style="max-width:680px;">
+      {%- if section.settings.eyebrow != blank -%}<span class="mt-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      <h2 class="mt-h2" style="font-size:{{ section.settings.titulo_size }}px;">{{ section.settings.titulo }}</h2>
+    </div>
+    <div class="mt-escena" data-mt-escena>
+      <div class="mt-escena-visual mt-reveal">
+        {%- for block in section.blocks -%}
+          {%- if block.settings.imagen != blank -%}
+            <img src="{{ block.settings.imagen | image_url: width: 1200 }}" alt="{{ block.settings.titulo | escape }}" loading="lazy">
+          {%- else -%}
+            <img src="{{ block.settings.imagen_defecto | asset_url }}" alt="{{ block.settings.titulo | escape }}" loading="lazy">
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+      <div class="mt-escena-lista">
+        {%- for block in section.blocks -%}
+          <div class="mt-escena-item" {{ block.shopify_attributes }}>
+            <span class="mt-tag">{{ block.settings.etiqueta }}</span>
+            <h3>{{ block.settings.titulo }}</h3>
+            <p>{{ block.settings.texto }}</p>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MT – Escena de detalle",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño superior", "default": "Diseño al detalle" },
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Cada pieza, pensada para durar" },
+    { "type": "range", "id": "titulo_size", "label": "Tamaño del título (px)", "min": 24, "max": 56, "step": 2, "unit": "px", "default": 38 },
+    { "type": "color", "id": "color_fondo", "label": "Color de fondo", "default": "#ffffff" },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 96 }
+  ],
+  "blocks": [
+    {
+      "type": "escena",
+      "name": "Escena",
+      "settings": [
+        { "type": "image_picker", "id": "imagen", "label": "Foto" },
+        { "type": "text", "id": "imagen_defecto", "label": "Nombre de archivo por defecto (no tocar)", "default": "mt-angulo-frontal.jpg" },
+        { "type": "text", "id": "etiqueta", "label": "Etiqueta pequeña", "default": "Diseño" },
+        { "type": "text", "id": "titulo", "label": "Título", "default": "Silueta compacta" },
+        { "type": "textarea", "id": "texto", "label": "Texto", "default": "Un cuerpo ergonómico pensado para sostenerse con una sola mano durante toda la limpieza." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MT – Escena de detalle",
+      "blocks": [
+        { "type": "escena", "settings": { "imagen_defecto": "mt-angulo-frontal.jpg", "etiqueta": "Diseño", "titulo": "Silueta compacta y ergonómica", "texto": "Un cuerpo pensado para sostenerse cómodamente con una sola mano durante toda la limpieza, sin fatiga en la muñeca." } },
+        { "type": "escena", "settings": { "imagen_defecto": "mt-angulo-lateral.jpg", "etiqueta": "Autonomía", "titulo": "Carga rápida por USB-C", "texto": "Olvídate de pilas: una carga completa por USB te da autonomía para limpiar toda la casa." } },
+        { "type": "escena", "settings": { "imagen_defecto": "mt-detalle-panel.jpg", "etiqueta": "Control", "titulo": "Panel de un solo toque", "texto": "Pantalla LED que indica batería y velocidad, con un botón grande fácil de pulsar incluso con las manos mojadas." } },
+        { "type": "escena", "settings": { "imagen_defecto": "mt-detalle-kit.jpg", "etiqueta": "Versatilidad", "titulo": "8 cabezales para cada tarea", "texto": "Cambia de cabezal en segundos: cerdas para azulejos, esponjas para cocina y almohadillas para superficies delicadas." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

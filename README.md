@@ -1,7 +1,17 @@
-# Mi tienda (CleanPro360)
+# CleanPro360 (mm0afk-rw)
 
 Storefront: https://mm0afk-rw.myshopify.com
 
-Homepage custom: banner estrecho con copy a la izquierda, 3 pasos con foto propia, galería de ángulos y spotlight. Fotos de estudio sin texto incrustado; el copy vive en bloques. Producto con panel blanco y acentos azules.
+Live theme: **CleanPro360 (Claude)** `#151107371052` (Dawn + secciones `mt-*`). Horizon queda unpublished.
 
-Custom files live in `theme-overrides/` (sections, assets, templates, locales).
+Custom files live in `theme-overrides/` and are pushed to the live Dawn theme. Do not import leftover USD gadget catalogs. The store is Colombia / COP.
+
+Product: CleanPro360 – Cepillo Eléctrico Multiusos (`cleanpro360-cepillo-electrico-multiusos`), 99900 COP.
+
+Push live:
+
+```bash
+shopify theme pull --store mm0afk-rw.myshopify.com --theme 151107371052 --path ./theme-live
+# copy updated files from theme-overrides into theme-live, then:
+shopify theme push --store mm0afk-rw.myshopify.com --theme 151107371052 --allow-live --path ./theme-live
+```

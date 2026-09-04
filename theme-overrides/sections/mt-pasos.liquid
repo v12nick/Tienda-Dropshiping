@@ -1,0 +1,74 @@
+{{ 'mt-styles.css' | asset_url | stylesheet_tag }}
+
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: {{ section.settings.color_fondo }};
+  }
+{% endstyle %}
+
+<section class="mt-pasos mt-section">
+  <div class="mt-container">
+    <div class="mt-pasos-head mt-reveal">
+      {%- if section.settings.eyebrow != blank -%}<span class="mt-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      <h2 class="mt-h2" style="font-size:{{ section.settings.titulo_size }}px;">{{ section.settings.titulo }}</h2>
+      <p class="mt-body">{{ section.settings.texto }}</p>
+    </div>
+    <div class="mt-pasos-grid mt-stagger">
+      {%- for block in section.blocks -%}
+        <div class="mt-paso mt-reveal" style="--mt-i:{{ forloop.index0 }};" {{ block.shopify_attributes }}>
+          <div class="mt-paso-img">
+            <span class="mt-paso-num">{{ forloop.index }}</span>
+            {%- if block.settings.imagen != blank -%}
+              <img src="{{ block.settings.imagen | image_url: width: 900 }}" alt="{{ block.settings.titulo | escape }}" loading="lazy">
+            {%- else -%}
+              <img src="{{ block.settings.imagen_defecto | asset_url }}" alt="{{ block.settings.titulo | escape }}" loading="lazy">
+            {%- endif -%}
+          </div>
+          <h3>{{ block.settings.titulo }}</h3>
+          <p>{{ block.settings.texto }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MT – 3 pasos",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño superior", "default": "Fácil de usar" },
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Limpieza profesional en 3 pasos" },
+    { "type": "range", "id": "titulo_size", "label": "Tamaño del título (px)", "min": 24, "max": 56, "step": 2, "unit": "px", "default": 38 },
+    { "type": "textarea", "id": "texto", "label": "Texto", "default": "Sin esfuerzo, sin agacharte, sin manchas de por medio." },
+    { "type": "color", "id": "color_fondo", "label": "Color de fondo", "default": "#f2f6fc" },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 96 }
+  ],
+  "blocks": [
+    {
+      "type": "paso",
+      "name": "Paso",
+      "settings": [
+        { "type": "image_picker", "id": "imagen", "label": "Foto del paso" },
+        { "type": "text", "id": "imagen_defecto", "label": "Nombre de archivo por defecto (no tocar)", "default": "mt-paso-1-cabezal.jpg" },
+        { "type": "text", "id": "titulo", "label": "Título", "default": "Elige el cabezal" },
+        { "type": "textarea", "id": "texto", "label": "Texto", "default": "Selecciona entre 8 cabezales según la superficie que vayas a limpiar." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MT – 3 pasos",
+      "blocks": [
+        { "type": "paso", "settings": { "imagen_defecto": "mt-paso-1-cabezal.jpg", "titulo": "Elige el cabezal", "texto": "Selecciona entre 8 cabezales intercambiables según la superficie: azulejos, cristal, tapicería o llantas." } },
+        { "type": "paso", "settings": { "imagen_defecto": "mt-paso-2-mango.jpg", "titulo": "Ajusta el mango", "texto": "Extiende el mango telescópico hasta 130 cm y llega a cada rincón sin agacharte ni estirarte." } },
+        { "type": "paso", "settings": { "imagen_defecto": "mt-paso-3-esfuerzo.jpg", "titulo": "Enciende y listo", "texto": "El motor gira a hasta 450 RPM y hace el trabajo pesado por ti, incluso en las esquinas más difíciles." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

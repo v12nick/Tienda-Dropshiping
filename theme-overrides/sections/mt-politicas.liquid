@@ -1,0 +1,52 @@
+{{ 'mt-styles.css' | asset_url | stylesheet_tag }}
+
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: {{ section.settings.color_fondo }};
+  }
+{% endstyle %}
+
+<section class="mt-section" id="mt-politicas">
+  <div class="mt-container">
+    <div class="mt-pasos-head mt-reveal">
+      {%- if section.settings.eyebrow != blank -%}<span class="mt-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      <h2 class="mt-h2" style="font-size:{{ section.settings.titulo_size }}px;">{{ section.settings.titulo }}</h2>
+      {%- if section.settings.texto != blank -%}<p class="mt-body" style="max-width:62ch;margin:0 auto;">{{ section.settings.texto }}</p>{%- endif -%}
+    </div>
+
+    <article class="mt-politica mt-reveal" id="mt-envios">
+      <h3>Envíos</h3>
+      {{ section.settings.envios }}
+    </article>
+    <article class="mt-politica mt-reveal" id="mt-devoluciones">
+      <h3>Cambios, retracto y fallas</h3>
+      {{ section.settings.devoluciones }}
+    </article>
+    <article class="mt-politica mt-reveal" id="mt-terminos">
+      <h3>Términos del servicio</h3>
+      {{ section.settings.terminos }}
+    </article>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MT – Políticas",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño superior", "default": "Antes de pagar" },
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Envíos, cambios y términos" },
+    { "type": "range", "id": "titulo_size", "label": "Tamaño del título (px)", "min": 24, "max": 56, "step": 2, "unit": "px", "default": 38 },
+    { "type": "textarea", "id": "texto", "label": "Introducción", "default": "CleanPro360 vende en Colombia. Estas son las reglas reales de la tienda. Si algo no está escrito aquí, pregúntanos antes de comprar." },
+    { "type": "richtext", "id": "envios", "label": "Envíos", "default": "<p>Enviamos a toda Colombia. El costo y el transportador se confirman en el checkout, según tu ciudad y el peso del paquete. No prometemos envío gratis automático.</p><p>Plazos estimados luego del despacho:</p><ul><li>Ciudades principales: 2 a 7 días hábiles.</li><li>Resto del país: 5 a 12 días hábiles.</li></ul><p>El despacho suele hacerse en 1 a 2 días hábiles después de confirmar el pago. Un día hábil no incluye sábados, domingos ni festivos colombianos. Si hay retraso del transportador, te avisamos por el correo del pedido.</p>" },
+    { "type": "richtext", "id": "devoluciones", "label": "Devoluciones", "default": "<p>Compras a distancia: tienes 5 días hábiles de retracto desde la entrega, según la Ley 1480 de 2011. El producto debe volver en buen estado, con accesorios y empaque razonable.</p><p>Si llega dañado, incompleto o no funciona, avísanos dentro de 30 días con fotos del pedido y lo reponemos, reparamos o reembolsamos.</p><p>El retracto no cubre uso excesivo ni daños causados por carga rápida u otro mal uso. Escríbenos desde la página de contacto con tu número de pedido.</p>" },
+    { "type": "richtext", "id": "terminos", "label": "Términos", "default": "<p>Al comprar en esta tienda aceptas el precio en pesos colombianos (COP), el checkout de Shopify y las políticas de envío y retracto publicadas aquí.</p><p>CleanPro360 es el cepillo eléctrico 8 en 1 que vendemos. Las fotos muestran el producto real (cuerpo blanco, panel negro, LEDs de batería). El rendimiento depende de la suciedad y de usar el cabezal correcto.</p><p>No inventamos reseñas ni contadores de stock. Los medios de pago disponibles aparecen al checkout. El tratamiento de datos personales está en la política de privacidad de la tienda.</p>" },
+    { "type": "color", "id": "color_fondo", "label": "Color de fondo", "default": "#ffffff" },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 48 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 96 }
+  ],
+  "presets": [{ "name": "MT – Políticas" }]
+}
+{% endschema %}

@@ -1,0 +1,62 @@
+{{ 'mt-styles.css' | asset_url | stylesheet_tag }}
+{{ 'mt-scripts.js' | asset_url | script_tag }}
+
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: {{ section.settings.color_fondo }};
+  }
+{% endstyle %}
+
+<section class="mt-section">
+  <div class="mt-container">
+    <div class="mt-pasos-head mt-reveal">
+      {%- if section.settings.eyebrow != blank -%}<span class="mt-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      <h2 class="mt-h2" style="font-size:{{ section.settings.titulo_size }}px;">{{ section.settings.titulo }}</h2>
+      <p class="mt-body">{{ section.settings.texto }}</p>
+    </div>
+    <div class="mt-comparador mt-reveal" data-mt-comparador>
+      {%- if section.settings.imagen_antes != blank -%}
+        <img src="{{ section.settings.imagen_antes | image_url: width: 1400 }}" alt="Antes" loading="lazy">
+      {%- else -%}
+        <img src="{{ 'mt-antes.jpg' | asset_url }}" alt="Antes" loading="lazy">
+      {%- endif -%}
+      <span class="mt-comparador-etq mt-izq">{{ section.settings.etiqueta_antes }}</span>
+      <div class="mt-comparador-despues" style="width:50%;">
+        {%- if section.settings.imagen_despues != blank -%}
+          <img src="{{ section.settings.imagen_despues | image_url: width: 1400 }}" alt="Después" loading="lazy">
+        {%- else -%}
+          <img src="{{ 'mt-despues.jpg' | asset_url }}" alt="Después" loading="lazy">
+        {%- endif -%}
+        <span class="mt-comparador-etq mt-der">{{ section.settings.etiqueta_despues }}</span>
+      </div>
+      <div class="mt-comparador-linea" style="left:50%;"></div>
+      <div class="mt-comparador-asa" style="left:50%;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#0b0f19" stroke-width="2" stroke-linecap="round"><polyline points="8 7 3 12 8 17"/><polyline points="16 7 21 12 16 17"/></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MT – Antes y después",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño superior", "default": "Resultados reales" },
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Desliza y compruébalo tú mismo" },
+    { "type": "range", "id": "titulo_size", "label": "Tamaño del título (px)", "min": 24, "max": 56, "step": 2, "unit": "px", "default": 38 },
+    { "type": "textarea", "id": "texto", "label": "Texto", "default": "Moho, cal y grasa incrustada desaparecen en segundos." },
+    { "type": "image_picker", "id": "imagen_antes", "label": "Foto \"antes\"" },
+    { "type": "text", "id": "etiqueta_antes", "label": "Etiqueta \"antes\"", "default": "Antes" },
+    { "type": "image_picker", "id": "imagen_despues", "label": "Foto \"después\"" },
+    { "type": "text", "id": "etiqueta_despues", "label": "Etiqueta \"después\"", "default": "Después" },
+    { "type": "color", "id": "color_fondo", "label": "Color de fondo", "default": "#ffffff" },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 96 }
+  ],
+  "presets": [ { "name": "MT – Antes y después" } ]
+}
+{% endschema %}

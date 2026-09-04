@@ -1,0 +1,72 @@
+{{ 'mt-styles.css' | asset_url | stylesheet_tag }}
+
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: {{ section.settings.color_fondo }};
+  }
+{% endstyle %}
+
+<section class="mt-section">
+  <div class="mt-container">
+    <div class="mt-uso mt-reveal">
+      <div class="mt-uso-texto">
+        {%- if section.settings.eyebrow != blank -%}<span class="mt-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+        <h2 class="mt-h2" style="font-size:{{ section.settings.titulo_size }}px;">{{ section.settings.titulo }}</h2>
+        <p>{{ section.settings.texto }}</p>
+        <ul class="mt-uso-lista">
+          {%- for block in section.blocks -%}
+            <li {{ block.shopify_attributes }}>
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>{{ block.settings.texto }}</span>
+            </li>
+          {%- endfor -%}
+        </ul>
+        <div style="margin-top:32px;">
+          <a href="{{ section.settings.boton_url | default: '#' }}" class="mt-btn mt-btn-primario">{{ section.settings.boton_texto }}</a>
+        </div>
+      </div>
+      <div class="mt-uso-img">
+        {%- if section.settings.imagen != blank -%}
+          <img src="{{ section.settings.imagen | image_url: width: 1200 }}" alt="{{ section.settings.titulo | escape }}" loading="lazy">
+        {%- else -%}
+          <img src="{{ 'mt-uso-cocina.jpg' | asset_url }}" alt="{{ section.settings.titulo | escape }}" loading="lazy">
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MT – Uso en casa",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño superior", "default": "En cualquier rincón de la casa" },
+    { "type": "text", "id": "titulo", "label": "Título", "default": "De la cocina al baño, sin cambiar de herramienta" },
+    { "type": "range", "id": "titulo_size", "label": "Tamaño del título (px)", "min": 22, "max": 48, "step": 2, "unit": "px", "default": 34 },
+    { "type": "textarea", "id": "texto", "label": "Texto", "default": "Un solo cepillo para fregaderos, encimeras, azulejos, bañeras y hasta las llantas del coche." },
+    { "type": "image_picker", "id": "imagen", "label": "Foto" },
+    { "type": "text", "id": "boton_texto", "label": "Texto del botón", "default": "Ver todos los usos" },
+    { "type": "url", "id": "boton_url", "label": "Enlace del botón" },
+    { "type": "color", "id": "color_fondo", "label": "Color de fondo", "default": "#ffffff" },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 96 }
+  ],
+  "blocks": [
+    { "type": "punto", "name": "Punto", "settings": [ { "type": "text", "id": "texto", "label": "Texto", "default": "Ideal para cocina" } ] }
+  ],
+  "presets": [
+    {
+      "name": "MT – Uso en casa",
+      "blocks": [
+        { "type": "punto", "settings": { "texto": "Fregaderos y encimeras sin restos de grasa" } },
+        { "type": "punto", "settings": { "texto": "Azulejos y juntas de baño, sin agacharte" } },
+        { "type": "punto", "settings": { "texto": "Llantas y tapicería del coche" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
