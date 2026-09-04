@@ -130,9 +130,9 @@ body{ overflow-x:clip; }
   color:var(--mt-color-acento);
 }
 .mt-btn-ghost{
-  background:transparent;
+  background:rgba(255,255,255,.14);
   color:#fff;
-  border-color:rgba(255,255,255,.32);
+  border-color:rgba(255,255,255,.5);
 }
 .mt-btn-ghost:hover{
   background:rgba(255,255,255,.08);
