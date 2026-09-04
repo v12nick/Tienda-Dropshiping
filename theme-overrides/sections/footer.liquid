@@ -27,7 +27,33 @@
   }
 {%- endstyle -%}
 
-<footer class="footer color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+<footer class="footer color-{{ section.settings.color_scheme }} section-{{ section.id }}-padding">
+  {%- liquid
+    if shop.name == 'Mi tienda' or shop.name == 'My Store'
+      assign mt_footer_brand = 'CleanPro360'
+    else
+      assign mt_footer_brand = shop.name
+    endif
+  -%}
+  <div class="mt-footer page-width">
+    <div class="mt-footer-brand">
+      <p class="mt-footer-logo-text">{{ mt_footer_brand }}</p>
+      <p class="mt-footer-tag">Cepillo eléctrico multiusos. Limpieza inteligente para el hogar.</p>
+    </div>
+    <nav class="mt-footer-nav" aria-label="Tienda">
+      <p class="mt-footer-heading">Tienda</p>
+      <a href="{{ routes.root_url }}">Inicio</a>
+      <a href="/products/cleanpro360-cepillo-electrico-multiusos">CleanPro360</a>
+      <a href="/pages/contact">Contacto</a>
+    </nav>
+    <nav class="mt-footer-nav" aria-label="Información">
+      <p class="mt-footer-heading">Información</p>
+      <a href="/pages/contact#mt-envios">Envíos</a>
+      <a href="/pages/contact#mt-devoluciones">Cambios y retracto</a>
+      <a href="/pages/contact#mt-terminos">Términos</a>
+      <a href="/policies/privacy-policy">Privacidad</a>
+    </nav>
+  </div>
   {%- liquid
     assign has_social_icons = true
     if settings.social_facebook_link == blank and settings.social_instagram_link == blank and settings.social_youtube_link == blank and settings.social_tiktok_link == blank and settings.social_twitter_link == blank and settings.social_pinterest_link == blank and settings.social_snapchat_link == blank and settings.social_tumblr_link == blank and settings.social_vimeo_link == blank
@@ -191,18 +217,18 @@
                       {% elsif form.posted_successfully? %}
                         aria-describedby="ContactFooter-success"
                       {% endif %}
-                      placeholder="{{ 'newsletter.label' | t }}"
+                      placeholder="Tu correo electrónico"
                       required
                     >
                     <label class="field__label" for="NewsletterForm--{{ section.id }}">
-                      {{ 'newsletter.label' | t }}
+                      Correo electrónico
                     </label>
                     <button
                       type="submit"
                       class="newsletter-form__button field__button"
                       name="commit"
                       id="Subscribe"
-                      aria-label="{{ 'newsletter.button_label' | t }}"
+                      aria-label="Suscribirse"
                     >
                       <span class="svg-wrapper">
                         {{- 'icon-arrow.svg' | inline_asset_content -}}
@@ -302,7 +328,7 @@
         <small class="copyright__content"
           >&copy; {{ 'now' | date: '%Y' }}, {% if shop.name == 'Mi tienda' or shop.name == 'My Store' %}{{ 'CleanPro360' | link_to: routes.root_url }}{% else %}{{ shop.name | link_to: routes.root_url }}{% endif -%}
         </small>
-        <small class="copyright__content">{{ powered_by_link }}</small>
+        <small class="copyright__content mt-powered-hide">{{ powered_by_link }}</small>
         <ul class="policies list-unstyled">
           <li><small class="copyright__content"><a href="/pages/contact#mt-envios">Envíos</a></small></li>
           <li><small class="copyright__content"><a href="/pages/contact#mt-devoluciones">Cambios</a></small></li>

@@ -12,8 +12,9 @@
     "mt-hero": {
       "type": "mt-hero",
       "settings": {
-        "badge": "Nuevo en Colombia · 8 cabezales · IPX7",
+        "badge": "Más de 12.000 hogares felices",
         "titulo": "Limpia como nunca, en la mitad de tiempo",
+        "titulo_size": 58,
         "texto": "El cepillo eléctrico giratorio que elimina grasa, moho y suciedad incrustada. Inalámbrico, resistente al agua y con 8 cabezales para cada rincón de tu casa.",
         "boton_texto": "Quiero el mío",
         "boton_url": "/products/cleanpro360-cepillo-electrico-multiusos",
@@ -28,6 +29,7 @@
           "type": "beneficio",
           "settings": {
             "icono": "rayo",
+            "spec": "450 RPM",
             "titulo": "3 velocidades",
             "texto": "Hasta 450 RPM para adaptarte a cualquier superficie, de lo más delicado a lo más incrustado."
           }
@@ -36,7 +38,8 @@
           "type": "beneficio",
           "settings": {
             "icono": "gota",
-            "titulo": "Resistente al agua IPX7",
+            "spec": "IPX7",
+            "titulo": "Resistente al agua",
             "texto": "Úsalo con total libertad, incluso en la ducha, sin miedo a salpicaduras."
           }
         },
@@ -44,7 +47,8 @@
           "type": "beneficio",
           "settings": {
             "icono": "engranaje",
-            "titulo": "8 cabezales intercambiables",
+            "spec": "8 cabezales",
+            "titulo": "Intercambiables",
             "texto": "Uno para cada superficie: azulejos, sartenes, llantas del coche y más."
           }
         },
@@ -52,7 +56,8 @@
           "type": "beneficio",
           "settings": {
             "icono": "bateria",
-            "titulo": "100% inalámbrico",
+            "spec": "Inalámbrico",
+            "titulo": "Batería USB",
             "texto": "Batería recargable por USB de larga duración, sin cables que estorben."
           }
         }
@@ -161,26 +166,41 @@
         "u1": {
           "type": "punto",
           "settings": {
-            "texto": "Fregaderos y encimeras sin restos de grasa"
+            "titulo": "Cocina",
+            "texto": "Fregaderos y encimeras sin restos de grasa",
+            "imagen_defecto": "mt-uso-cocina.jpg"
           }
         },
         "u2": {
           "type": "punto",
           "settings": {
-            "texto": "Azulejos y juntas de baño, sin agacharte"
+            "titulo": "Baño",
+            "texto": "Azulejos y juntas de baño, sin agacharte",
+            "imagen_defecto": "cp-step-bano.jpg"
           }
         },
         "u3": {
           "type": "punto",
           "settings": {
-            "texto": "Llantas y tapicería del coche"
+            "titulo": "Auto",
+            "texto": "Llantas y tapicería del coche",
+            "imagen_defecto": "cp-step-auto.jpg"
+          }
+        },
+        "u4": {
+          "type": "punto",
+          "settings": {
+            "titulo": "Superficies",
+            "texto": "Un solo cepillo para cada rincón",
+            "imagen_defecto": "mt-detalle-kit.jpg"
           }
         }
       },
       "block_order": [
         "u1",
         "u2",
-        "u3"
+        "u3",
+        "u4"
       ],
       "settings": {
         "titulo": "De la cocina al baño, sin cambiar de herramienta",
@@ -224,12 +244,15 @@
       "settings": {
         "eyebrow": "Precio de lanzamiento",
         "titulo": "CleanPro360 a $99.900 COP",
-        "texto": "Precio de lanzamiento frente a $149.900. El envío se calcula al checkout, según tu ciudad.",
+        "texto": "Pide hoy y recibe envío gratis a todo Colombia. Precio de lanzamiento frente a $149.900.",
         "precio_actual": "$99.900",
         "precio_antes": "$149.900",
-        "descuento_texto": "Lanzamiento",
-        "mostrar_contador": false,
-        "mostrar_stock": false,
+        "descuento_texto": "-33%",
+        "chip_envio": "Envío gratis",
+        "mostrar_contador": true,
+        "mostrar_stock": true,
+        "stock_porcentaje": 25,
+        "stock_texto": "Stock limitado · quedan pocas unidades al precio de hoy",
         "boton_texto": "Pedir el mío",
         "boton_url": "/products/cleanpro360-cepillo-electrico-multiusos"
       }

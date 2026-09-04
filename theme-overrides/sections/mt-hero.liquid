@@ -1,5 +1,3 @@
-{{ 'mt-styles.css' | asset_url | stylesheet_tag }}
-
 {% style %}
   #shopify-section-{{ section.id }} {
     padding-top: {{ section.settings.padding_top }}px;
@@ -24,7 +22,7 @@
     <div class="mt-hero-ctas mt-reveal">
       <a href="{{ section.settings.boton_url | default: '#' }}" class="mt-btn mt-btn-primario">{{ section.settings.boton_texto }}</a>
       {%- if section.settings.boton2_texto != blank -%}
-        <a href="{{ section.settings.boton2_url | default: '#' }}" class="mt-btn mt-btn-secundario" style="background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.3);">{{ section.settings.boton2_texto }}</a>
+        <a href="{{ section.settings.boton2_url | default: '#' }}" class="mt-btn mt-btn-ghost">{{ section.settings.boton2_texto }}</a>
       {%- endif -%}
     </div>
     <div class="mt-hero-stats mt-reveal">
@@ -46,9 +44,9 @@
   "name": "MT – Hero",
   "tag": "section",
   "settings": [
-    { "type": "text", "id": "badge", "label": "Texto de la insignia", "default": "Nuevo en Colombia · 8 cabezales · IPX7" },
+    { "type": "text", "id": "badge", "label": "Texto de la insignia", "default": "Más de 12.000 hogares felices" },
     { "type": "text", "id": "titulo", "label": "Título", "default": "Limpia como nunca, en la mitad de tiempo" },
-    { "type": "range", "id": "titulo_size", "label": "Tamaño del título (px)", "min": 28, "max": 76, "step": 2, "unit": "px", "default": 52 },
+    { "type": "range", "id": "titulo_size", "label": "Tamaño del título (px)", "min": 28, "max": 76, "step": 2, "unit": "px", "default": 58 },
     { "type": "textarea", "id": "texto", "label": "Texto", "default": "El cepillo eléctrico giratorio que elimina grasa, moho y suciedad incrustada en segundos. Inalámbrico, resistente al agua y con 8 cabezales para cada rincón de tu casa." },
     { "type": "image_picker", "id": "imagen_fondo", "label": "Imagen de fondo" },
     { "type": "text", "id": "boton_texto", "label": "Texto botón principal", "default": "Quiero el mío" },

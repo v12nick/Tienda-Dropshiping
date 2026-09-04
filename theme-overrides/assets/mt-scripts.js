@@ -10,6 +10,7 @@
     initMarquesina();
     initFaq();
     initCountUp();
+    initContador();
     initVariantes();
   }
 
@@ -121,10 +122,13 @@
         it.classList.remove('mt-abierta');
         var r = it.querySelector('.mt-faq-respuesta');
         if (r) r.style.maxHeight = null;
+        var b = it.querySelector('.mt-faq-pregunta');
+        if (b) b.setAttribute('aria-expanded', 'false');
       });
       if (!abierta && resp) {
         item.classList.add('mt-abierta');
         resp.style.maxHeight = resp.scrollHeight + 'px';
+        btn.setAttribute('aria-expanded', 'true');
       }
     });
   }
@@ -151,6 +155,31 @@
       });
     }, { threshold: 0.5 });
     els.forEach(function (el) { obs.observe(el); });
+  }
+
+  function initContador() {
+    var els = document.querySelectorAll('[data-mt-contador]');
+    if (!els.length) return;
+    function pad(n) { return n < 10 ? '0' + n : String(n); }
+    function tick() {
+      var now = new Date();
+      var end = new Date();
+      end.setHours(23, 59, 59, 999);
+      var diff = Math.max(0, end - now);
+      var h = Math.floor(diff / 3600000);
+      var m = Math.floor((diff % 3600000) / 60000);
+      var s = Math.floor((diff % 60000) / 1000);
+      els.forEach(function (el) {
+        var hb = el.querySelector('[data-mt-h]');
+        var mb = el.querySelector('[data-mt-m]');
+        var sb = el.querySelector('[data-mt-s]');
+        if (hb) hb.textContent = pad(h);
+        if (mb) mb.textContent = pad(m);
+        if (sb) sb.textContent = pad(s);
+      });
+    }
+    tick();
+    setInterval(tick, 1000);
   }
 
   function initVariantes() {

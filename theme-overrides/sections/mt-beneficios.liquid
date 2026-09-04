@@ -1,5 +1,3 @@
-{{ 'mt-styles.css' | asset_url | stylesheet_tag }}
-
 {% style %}
   #shopify-section-{{ section.id }} {
     padding-top: {{ section.settings.padding_top }}px;
@@ -32,6 +30,9 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/></svg>
             {%- endcase -%}
           </div>
+          {%- if block.settings.spec != blank -%}
+            <p class="mt-beneficio-spec">{{ block.settings.spec }}</p>
+          {%- endif -%}
           <h3>{{ block.settings.titulo }}</h3>
           <p>{{ block.settings.texto }}</p>
         </div>
@@ -65,6 +66,7 @@
           {"value":"engranaje","label":"Engranaje (ajustable)"},
           {"value":"bateria","label":"Batería"}
         ], "default": "rayo" },
+        { "type": "text", "id": "spec", "label": "Dato destacado", "default": "450 RPM" },
         { "type": "text", "id": "titulo", "label": "Título", "default": "3 velocidades" },
         { "type": "textarea", "id": "texto", "label": "Texto", "default": "Hasta 450 RPM para adaptarte a cualquier superficie, de lo más delicado a lo más incrustado." }
       ]
@@ -74,10 +76,10 @@
     {
       "name": "MT – Beneficios",
       "blocks": [
-        { "type": "beneficio", "settings": { "icono": "rayo", "titulo": "3 velocidades", "texto": "Hasta 450 RPM para adaptarte a cualquier superficie, de lo más delicado a lo más incrustado." } },
-        { "type": "beneficio", "settings": { "icono": "gota", "titulo": "Resistente al agua IPX7", "texto": "Úsalo con total libertad, incluso en la ducha, sin miedo a salpicaduras." } },
-        { "type": "beneficio", "settings": { "icono": "engranaje", "titulo": "8 cabezales intercambiables", "texto": "Uno para cada superficie: azulejos, sartenes, llantas del coche y más." } },
-        { "type": "beneficio", "settings": { "icono": "bateria", "titulo": "100% inalámbrico", "texto": "Batería recargable por USB de larga duración, sin cables que estorben." } }
+        { "type": "beneficio", "settings": { "icono": "rayo", "spec": "450 RPM", "titulo": "3 velocidades", "texto": "Hasta 450 RPM para adaptarte a cualquier superficie, de lo más delicado a lo más incrustado." } },
+        { "type": "beneficio", "settings": { "icono": "gota", "spec": "IPX7", "titulo": "Resistente al agua", "texto": "Úsalo con total libertad, incluso en la ducha, sin miedo a salpicaduras." } },
+        { "type": "beneficio", "settings": { "icono": "engranaje", "spec": "8 cabezales", "titulo": "Intercambiables", "texto": "Uno para cada superficie: azulejos, sartenes, llantas del coche y más." } },
+        { "type": "beneficio", "settings": { "icono": "bateria", "spec": "Inalámbrico", "titulo": "Batería USB", "texto": "Batería recargable por USB de larga duración, sin cables que estorben." } }
       ]
     }
   ]
