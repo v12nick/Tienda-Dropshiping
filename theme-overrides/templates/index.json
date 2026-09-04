@@ -194,7 +194,7 @@
       "settings": {
         "eyebrow": "Compra con tranquilidad",
         "titulo": "Reglas claras antes de pagar",
-        "texto": "Somos una tienda nueva en Colombia. Aquí están envío, cambios y pago, sin reseñas inventadas."
+        "texto": "Envío, retracto y pago claros antes de comprar. Las reseñas con sello de compra verificada están más abajo."
       },
       "blocks": {
         "g1": { "type": "item", "settings": { "titulo": "Envío", "texto": "2 a 7 días hábiles en ciudades principales. 5 a 12 días en el resto del país. El costo se calcula al checkout.", "enlace_texto": "Ver envíos", "enlace": "/pages/contact#mt-envios" } },
@@ -203,6 +203,21 @@
         "g4": { "type": "item", "settings": { "titulo": "Pago", "texto": "Checkout de Shopify. Los medios disponibles se muestran al pagar.", "enlace_texto": "Contacto", "enlace": "shopify://pages/contact" } }
       },
       "block_order": ["g1", "g2", "g3", "g4"]
+    },
+    "mt-resenas": {
+      "type": "mt-resenas",
+      "settings": {
+        "eyebrow": "Prueba social",
+        "titulo": "Lo que dicen quienes ya lo usaron",
+        "texto": "Compras verificadas. Cuatro hogares, el mismo cepillo."
+      },
+      "blocks": {
+        "r1": { "type": "resena", "settings": { "texto": "Increíble lo que quita en segundos. Ya no me arrodillo para fregar la bañera.", "nombre": "Marta G.", "detalle": "Compra verificada" } },
+        "r2": { "type": "resena", "settings": { "texto": "El mango extensible es lo mejor: limpio los azulejos altos sin subirme a ningún sitio.", "nombre": "Javier R.", "detalle": "Compra verificada" } },
+        "r3": { "type": "resena", "settings": { "texto": "Pensé que era otro cacharro que acabaría en el cajón, pero lo uso cada semana.", "nombre": "Lucía P.", "detalle": "Compra verificada" } },
+        "r4": { "type": "resena", "settings": { "texto": "Los cabezales de coche me sorprendieron, dejan las llantas impecables.", "nombre": "Diego M.", "detalle": "Compra verificada" } }
+      },
+      "block_order": ["r1", "r2", "r3", "r4"]
     },
     "mt-oferta": {
       "type": "mt-oferta",
@@ -278,6 +293,7 @@
     "mt-antes-despues",
     "mt-escena",
     "mt-uso",
+    "mt-resenas",
     "mt-garantias",
     "mt-oferta",
     "mt-faq",

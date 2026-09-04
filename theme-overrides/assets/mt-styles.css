@@ -198,7 +198,7 @@
 /* ---------------- RESEÑAS ---------------- */
 .mt-resenas-head{ text-align:center; max-width:640px; margin:0 auto 50px; }
 .mt-resenas-track-wrap{ overflow-x:clip; overflow-y:visible; }
-.mt-resenas-track{ display:flex; gap:20px; }
+.mt-resenas-track{ display:flex; gap:20px; width:max-content; animation:mt-marquesina 42s linear infinite; }
 .mt-resena{ flex:none; width:320px; background:var(--mt-color-fondo-alt); border-radius:var(--mt-radio); padding:28px; display:flex; flex-direction:column; gap:14px; }
 .mt-resena-estrellas{ display:flex; gap:3px; }
 .mt-resena-estrellas svg{ width:16px; height:16px; fill:#ffb400; }
@@ -206,7 +206,12 @@
 .mt-resena-autor{ display:flex; align-items:center; gap:10px; margin-top:auto; }
 .mt-resena-avatar{ width:38px; height:38px; border-radius:50%; background:linear-gradient(135deg,var(--mt-color-acento),var(--mt-color-acento-2)); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:14px; font-family:var(--mt-fuente-titular); }
 .mt-resena-autor b{ font-size:14px; display:block; }
-.mt-resena-autor span{ font-size:12.5px; color:var(--mt-color-texto-suave); }
+.mt-resena-sello{ display:inline-flex; align-items:center; gap:4px; font-size:12.5px; color:#0a7a3e; font-weight:600; }
+.mt-resena-sello svg{ width:14px; height:14px; }
+@keyframes mt-marquesina{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+@media (prefers-reduced-motion: reduce){
+  .mt-resenas-track{ animation:none; }
+}
 
 /* ---------------- OFERTA ---------------- */
 .mt-oferta{ background:linear-gradient(135deg, var(--mt-color-oscuro), #101a33); border-radius:var(--mt-radio); padding:64px 48px; text-align:center; position:relative; overflow:hidden; }
