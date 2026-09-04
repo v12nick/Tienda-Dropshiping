@@ -99,6 +99,7 @@
   }
 
   function initMarquesina() {
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     var tracks = document.querySelectorAll('[data-mt-marquesina]');
     tracks.forEach(function (track) {
       if (track.dataset.mtDuplicado) return;

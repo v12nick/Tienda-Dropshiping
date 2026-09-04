@@ -194,7 +194,7 @@
       "settings": {
         "eyebrow": "Compra con tranquilidad",
         "titulo": "Reglas claras antes de pagar",
-        "texto": "Envío, retracto y pago claros antes de comprar. Las reseñas con sello de compra verificada están más abajo."
+        "texto": "Envío, retracto y pago claros antes de comprar. Las reseñas con sello de compra verificada están más arriba."
       },
       "blocks": {
         "g1": { "type": "item", "settings": { "titulo": "Envío", "texto": "2 a 7 días hábiles en ciudades principales. 5 a 12 días en el resto del país. El costo se calcula al checkout.", "enlace_texto": "Ver envíos", "enlace": "/pages/contact#mt-envios" } },
