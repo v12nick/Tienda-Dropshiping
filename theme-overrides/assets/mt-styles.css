@@ -370,18 +370,39 @@ body{ overflow-x:clip; }
   font-size:12.5px;
 }
 @media (max-width:989px){
-  .mt-hero{ min-height:auto; padding:8px 0 28px; }
-  .mt-hero-bg{ object-position:78% center; min-height:420px; }
+  .mt-hero{
+    min-height:auto;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    background:var(--mt-color-oscuro);
+  }
+  .mt-hero-bg{
+    position:relative;
+    inset:auto;
+    width:100%;
+    height:56vw;
+    min-height:260px;
+    max-height:360px;
+    object-fit:cover;
+    object-position:70% 35%;
+  }
   .mt-hero-scrim{
-    background:linear-gradient(180deg, rgba(7,11,20,.18) 0%, rgba(7,11,20,.55) 36%, rgba(7,11,20,.94) 100%);
+    position:absolute;
+    left:0; right:0; top:0;
+    height:56vw;
+    min-height:260px;
+    max-height:360px;
+    background:linear-gradient(180deg, rgba(7,11,20,.08) 30%, var(--mt-color-oscuro) 100%);
   }
   .mt-hero-inner{
     max-width:100%;
-    margin:220px var(--mt-margen) 12px;
-    padding:12px 4px 8px;
+    margin:0;
+    padding:8px var(--mt-margen) 36px;
+    background:var(--mt-color-oscuro);
   }
-  .mt-hero h1{ max-width:none; font-size:clamp(2rem, 8vw, 2.6rem) !important; }
-  .mt-hero p{ font-size:16px; }
+  .mt-hero h1{ max-width:none; font-size:clamp(1.9rem, 8vw, 2.45rem) !important; text-shadow:none; }
+  .mt-hero p{ font-size:16px; color:rgba(231,237,250,.86); text-shadow:none; }
   .mt-hero-ctas .mt-btn{ flex:1 1 160px; }
 }
 
