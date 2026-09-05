@@ -149,12 +149,25 @@
             if (!root) return;
             root.style.height = 'auto';
             root.style.minHeight = '0';
-            root.querySelectorAll('.track123_tab_form_background, .track123_track_wrapper, .track123_track_tab_wrapper, .track123_layout_left').forEach(function (el) {
+            root.querySelectorAll('.track123_tab_form_background, .track123_track_wrapper, .track123_track_tab_wrapper, .track123_layout_left, .track123_tab_form_main_wrapper, .track123_two_form_wrapper').forEach(function (el) {
               el.style.height = 'auto';
               el.style.minHeight = '0';
               el.style.maxHeight = 'none';
               el.style.width = '100%';
               el.style.float = 'none';
+              el.style.position = 'relative';
+            });
+            root.querySelectorAll('.track123_order_wrapper, .track123_order_detail_container, #track123_main_content, .track123_tracking_above, .track123_tracking_below').forEach(function (el) {
+              if (el.textContent.replace(/\s+/g, '')) {
+                el.style.removeProperty('display');
+                el.style.removeProperty('height');
+                el.style.removeProperty('padding');
+              } else {
+                el.style.display = 'none';
+                el.style.height = '0';
+                el.style.padding = '0';
+                el.style.margin = '0';
+              }
             });
           };
           var ggMountTrack = function () {
@@ -180,7 +193,7 @@
           });
           ggTrackObs.observe(document.documentElement, { childList: true, subtree: true });
           document.addEventListener('DOMContentLoaded', ggMountTrack);
-          [400, 1200, 2500].forEach(function (ms) {
+          [400, 1200, 2500, 5000].forEach(function (ms) {
             setTimeout(ggTightenTrackLayout, ms);
           });
         }
