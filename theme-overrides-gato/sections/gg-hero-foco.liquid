@@ -24,6 +24,12 @@
     assign gg_product = product
   endif
   if gg_product == blank
+    assign gg_product = all_products['control-gamesir-g7se-cable-joysticks-hall-xbox-pc']
+  endif
+  if gg_product == blank
+    assign gg_product = all_products['mando-gamesir-g7se-efecto-hall-xbox-pc-android']
+  endif
+  if gg_product == blank
     assign gg_product = all_products['gamesir-g7-se-control-xbox-hall-effect']
   endif
   if gg_product == blank and collections.frontpage.products.size > 0
@@ -36,7 +42,7 @@
     assign gg_variant = gg_product.selected_or_first_available_variant | default: gg_product.first_available_variant | default: gg_product.variants.first
     assign gg_media = gg_product.media
   endif
-  assign gg_handle = gg_product.handle | default: 'gamesir-g7-se-control-xbox-hall-effect'
+  assign gg_handle = gg_product.handle | default: 'control-gamesir-g7se-cable-joysticks-hall-xbox-pc'
 -%}
 {%- capture gg_txt_add -%}
   {%- if section.settings.boton_texto != blank -%}

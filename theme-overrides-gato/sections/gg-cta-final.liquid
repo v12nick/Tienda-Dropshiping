@@ -11,7 +11,7 @@
 {%- liquid
   assign gg_product = section.settings.producto | default: product
   if gg_product == blank
-    assign gg_product = all_products['gamesir-g7-se-control-xbox-hall-effect']
+    assign gg_product = all_products['control-gamesir-g7se-cable-joysticks-hall-xbox-pc']
   endif
   assign gg_variant = gg_product.selected_or_first_available_variant
 -%}

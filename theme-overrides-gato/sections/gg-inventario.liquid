@@ -55,7 +55,7 @@
       {%- endif -%}
     {%- endif -%}
 
-    {%- assign gg_fallback_handle = all_products['gamesir-g7-se-control-xbox-hall-effect'] -%}
+    {%- assign gg_fallback_handle = all_products['control-gamesir-g7se-cable-joysticks-hall-xbox-pc'] -%}
     {%- if gg_fallback_handle != blank and gg_seen contains gg_fallback_handle.handle -%}
     {%- elsif gg_fallback_handle != blank -%}
       {%- assign gg_seen = gg_seen | append: gg_fallback_handle.handle | append: '|' -%}

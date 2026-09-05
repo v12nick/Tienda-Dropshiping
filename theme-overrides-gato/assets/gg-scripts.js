@@ -155,7 +155,7 @@ function ggEnsureProduct(root) {
   if (root._ggProduct && root._ggProduct.variants && root._ggProduct.variants.length) {
     return Promise.resolve(root._ggProduct);
   }
-  var handle = root.getAttribute('data-gg-product-handle') || root.getAttribute('data-gg-track-product') || 'gamesir-g7-se-control-xbox-hall-effect';
+  var handle = root.getAttribute('data-gg-product-handle') || root.getAttribute('data-gg-track-product') || 'control-gamesir-g7se-cable-joysticks-hall-xbox-pc';
   root._ggProductPromise = fetch(ggCartRootUrl() + 'products/' + handle + '.js', { headers: { Accept: 'application/json' } })
     .then(function (res) { return res.ok ? res.json() : null; })
     .then(function (raw) {
@@ -263,7 +263,7 @@ function ggPendingItemFromRoot(root) {
   if (!qty || qty < 1) qty = 1;
   var titleEl = root.querySelector('.gg-buy__title');
   return {
-    handle: root.getAttribute('data-gg-product-handle') || root.getAttribute('data-gg-track-product') || 'gamesir-g7-se-control-xbox-hall-effect',
+    handle: root.getAttribute('data-gg-product-handle') || root.getAttribute('data-gg-track-product') || 'control-gamesir-g7se-cable-joysticks-hall-xbox-pc',
     title: (titleEl && titleEl.textContent.trim()) || 'GameSir G7 SE',
     color: color,
     qty: qty,

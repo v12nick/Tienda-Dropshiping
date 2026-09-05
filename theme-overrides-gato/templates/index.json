@@ -52,7 +52,7 @@
         "c_purpura"
       ],
       "settings": {
-        "producto": "gamesir-g7-se-control-xbox-hall-effect",
+        "producto": "control-gamesir-g7se-cable-joysticks-hall-xbox-pc",
         "eyebrow": "GameSir × Gato Gamer Store",
         "headline": "GameSir G7 SE: Hall Effect + Game Pass",
         "subheadline": "Control oficial para Xbox y PC. Hall Effect, 2 botones traseros y 1 mes de Xbox Game Pass Ultimate incluido.",
@@ -164,7 +164,7 @@
     "resenas_clientes": {
       "type": "gg-resenas",
       "settings": {
-        "producto": "gamesir-g7-se-control-xbox-hall-effect",
+        "producto": "control-gamesir-g7se-cable-joysticks-hall-xbox-pc",
         "titulo": "Reseñas de clientes",
         "subtitulo": "Lo que dicen nuestros clientes. Opiniones reales.",
         "text_align": "center",
@@ -690,7 +690,7 @@
     "ctafinal": {
       "type": "gg-cta-final",
       "settings": {
-        "producto": "gamesir-g7-se-control-xbox-hall-effect",
+        "producto": "control-gamesir-g7se-cable-joysticks-hall-xbox-pc",
         "imagen": "shopify://shop_images/gg-producto-g7se-angulo.jpg",
         "titulo": "Lleva el G7 SE + 1 mes de Game Pass",
         "texto": "Sticks Hall Effect para reducir el drift, botones traseros y Game Pass Ultimate. Precio en pesos colombianos, envío a Colombia.",
