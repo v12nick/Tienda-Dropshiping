@@ -32,14 +32,21 @@
     });
   }
 
-  revealReviewImages();
-  localizeJudgeme();
-  window.setTimeout(function () {
+  function refresh() {
     revealReviewImages();
     localizeJudgeme();
-  }, 800);
-  window.setTimeout(function () {
-    revealReviewImages();
-    localizeJudgeme();
-  }, 2500);
+  }
+
+  refresh();
+  window.setTimeout(refresh, 800);
+  window.setTimeout(refresh, 2500);
+
+  if (window.MutationObserver) {
+    var scheduled = 0;
+    var observer = new MutationObserver(function () {
+      window.clearTimeout(scheduled);
+      scheduled = window.setTimeout(refresh, 160);
+    });
+    observer.observe(root, { childList: true, subtree: true });
+  }
 })();
