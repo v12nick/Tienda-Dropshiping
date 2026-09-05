@@ -85,14 +85,13 @@
   flex-shrink: 0;
 }
 
-.gg-hero-banner__content {
+.gg-hero-banner .gg-hero-banner__content {
   justify-content: center;
   align-items: flex-start;
   text-align: left;
   max-width: 620px;
   margin: 0;
-  padding-top: 10%;
-  padding-bottom: 10%;
+  padding: 0 var(--gg-margen);
 }
 
 .gg-hero-banner__title,
@@ -118,12 +117,12 @@
     max-height: 480px;
   }
 
-  .gg-hero-banner__content {
+  .gg-hero-banner .gg-hero-banner__content {
     gap: 12px;
     justify-content: center;
     align-items: flex-start;
     text-align: left;
-    padding: 18% 20px 16%;
+    padding: 0 20px;
   }
 
   .gg-hero-banner__content .gg-hero__subtitle {
@@ -246,11 +245,11 @@
 }
 
 @media (min-width: 750px) {
-  .gg-hero-banner__content {
+  .gg-hero-banner .gg-hero-banner__content {
     justify-content: center;
     align-items: flex-start;
     text-align: left;
-    padding: 8% var(--gg-margen);
+    padding: 0 var(--gg-margen);
   }
 }
 

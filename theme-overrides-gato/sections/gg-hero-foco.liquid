@@ -235,7 +235,11 @@
     </div>
 
     <div class="gg-buy">
-      <p class="gg-buy__platform">{{ gg_product.vendor | default: 'GameSir' }}</p>
+      {%- assign gg_vendor = gg_product.vendor | default: '' | strip -%}
+      {%- assign gg_vendor_l = gg_vendor | downcase -%}
+      {%- if gg_vendor != blank and gg_vendor_l != 'alibaba' and gg_vendor_l != 'aliexpress' -%}
+        <p class="gg-buy__platform">{{ gg_vendor }}</p>
+      {%- endif -%}
       <p class="gg-buy__title gg-buy__title--product">{{ gg_product.title | default: section.settings.headline }}</p>
       {% render 'gg-resenas-badge', product: gg_product %}
       {%- if section.settings.para_quien != blank -%}
