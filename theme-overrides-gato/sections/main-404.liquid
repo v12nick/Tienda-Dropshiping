@@ -34,6 +34,9 @@
   Las políticas del pie aún pueden no existir como páginas en el admin.
   Shopify las sirve como 404; este HTML + JS las muestra con la URL real.
 {%- endcomment -%}
+<div hidden data-gg-track-fallback>
+  {% render 'gg-track123-page' %}
+</div>
 {%- assign gg_legal_handles = 'quienes-somos,politica-de-envios,politica-de-devoluciones,politica-de-privacidad,terminos-y-condiciones,aviso-legal' | split: ',' -%}
 {%- for gg_legal_h in gg_legal_handles -%}
   <div hidden data-gg-legal-fallback data-handle="{{ gg_legal_h }}">

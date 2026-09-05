@@ -120,12 +120,36 @@
       html[data-gg-path-legal="politica-de-privacidad"] [data-gg-legal-fallback][data-handle="politica-de-privacidad"]{display:block!important}
       html[data-gg-path-legal="terminos-y-condiciones"] [data-gg-legal-fallback][data-handle="terminos-y-condiciones"]{display:block!important}
       html[data-gg-path-legal="aviso-legal"] [data-gg-legal-fallback][data-handle="aviso-legal"]{display:block!important}
+      html[data-gg-path-track] [data-gg-404]{display:none!important}
+      html[data-gg-path-track] [data-gg-confirm="banner"]{display:none!important}
+      html[data-gg-path-track] [data-gg-track-fallback]{display:block!important}
     </style>
     <script>
       (function () {
         var path = (location.pathname || '').replace(/\/$/, '') || '/';
         if (path === '/pages/compra-confirmada') {
           document.documentElement.setAttribute('data-gg-path-confirm', '1');
+        }
+        if (path === '/pages/rastrea-tu-pedido' || path.indexOf('/apps/track123') === 0) {
+          document.documentElement.setAttribute('data-gg-path-track', '1');
+          document.title = 'Rastrea tu pedido – Gato Gamer Store';
+          var ggTrackMeta = document.querySelector('meta[name="description"]');
+          if (!ggTrackMeta) {
+            ggTrackMeta = document.createElement('meta');
+            ggTrackMeta.setAttribute('name', 'description');
+            document.head.appendChild(ggTrackMeta);
+          }
+          ggTrackMeta.setAttribute('content', 'Rastrea tu GameSir G7 SE con Track123. Envío a Colombia en 1 a 10 días hábiles. Gato Gamer Store.');
+          if (path.indexOf('/apps/track123') === 0) {
+            document.addEventListener('DOMContentLoaded', function () {
+              var main = document.getElementById('MainContent');
+              if (!main || document.querySelector('.gg-track__hero--proxy')) return;
+              var hero = document.createElement('div');
+              hero.className = 'gg-container gg-track__hero gg-track__hero--proxy';
+              hero.innerHTML = '<span class="gg-hero__eyebrow">Gato Gamer Store</span><h1 class="gg-track__title">Rastrea tu pedido</h1><p class="gg-track__subtitle">Sigue tu GameSir G7 SE con Track123. Envío a Colombia en 1 a 10 días hábiles después del despacho.</p>';
+              main.insertBefore(hero, main.firstChild);
+            });
+          }
         }
         var ggLegal = {
           '/pages/quienes-somos': { handle: 'quienes-somos', title: 'Quiénes somos – Gato Gamer Store', desc: 'Gato Gamer Store es la tienda en Colombia del mando GameSir G7 SE para Xbox y PC: Hall Effect, botones traseros y 1 mes de Game Pass Ultimate.' },
@@ -366,6 +390,7 @@
 
     <link rel="stylesheet" href="{{ 'gg-styles.css' | asset_url }}">
     {{ 'gg-cro.css' | asset_url | stylesheet_tag }}
+    {{ 'gg-track123.css' | asset_url | stylesheet_tag }}
     {%- if template.name == 'blog' or template.name == 'article' -%}
       {{ 'gg-blog.css' | asset_url | stylesheet_tag }}
     {%- endif -%}
