@@ -85,25 +85,47 @@
   flex-shrink: 0;
 }
 
+.gg-hero-banner {
+  --gg-hero-title: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px 40px;
+  min-height: 0;
+  max-height: none;
+  aspect-ratio: auto;
+  padding: 28px var(--gg-margen) 8px;
+}
+
 .gg-hero-banner .gg-hero-banner__content {
+  position: relative;
+  z-index: 2;
+  flex: 1 1 52%;
   justify-content: center;
   align-items: flex-start;
   text-align: left;
-  max-width: 620px;
+  max-width: 34rem;
   margin: 0;
-  padding: 0 var(--gg-margen);
-}
-
-.gg-hero-banner {
-  min-height: 300px;
-  max-height: 460px;
+  padding: 0;
+  height: auto;
 }
 
 .gg-hero-banner__media {
-  inset: 20px 28px 20px 38%;
+  position: relative;
+  z-index: 1;
+  inset: auto;
+  flex: 0 1 40%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 0;
 }
 
 .gg-hero-banner__media img {
+  width: auto;
+  height: auto;
+  max-width: min(100%, calc(var(--gg-hero-title) * 10));
+  max-height: calc(var(--gg-hero-title) * 6.75);
   object-fit: contain;
   object-position: right center;
   animation: none !important;
@@ -132,17 +154,17 @@
 
 @media (max-width: 749px) {
   .gg-hero-banner {
-    aspect-ratio: 4 / 3;
-    min-height: 280px;
-    max-height: 380px;
+    --gg-hero-title: 26px;
+    aspect-ratio: auto;
+    min-height: 0;
+    max-height: none;
+    gap: 12px;
+    padding: 20px 16px 4px;
   }
 
   .gg-hero-banner__media {
-    inset: 24px 16px 24px 18%;
-  }
-
-  .gg-hero-banner__media img {
-    object-position: 85% center;
+    inset: auto;
+    flex-basis: 38%;
   }
 
   .gg-hero-banner + #gg-comprar {
@@ -150,11 +172,13 @@
   }
 
   .gg-hero-banner .gg-hero-banner__content {
-    gap: 12px;
+    flex-basis: 58%;
+    max-width: none;
+    gap: 10px;
     justify-content: center;
     align-items: flex-start;
     text-align: left;
-    padding: 0 20px;
+    padding: 0;
   }
 
   .gg-hero-banner__content .gg-hero__subtitle {
@@ -278,20 +302,18 @@
 
 @media (min-width: 750px) {
   .gg-hero-banner {
-    aspect-ratio: 21 / 9;
-    min-height: 360px;
-    max-height: 460px;
-  }
-
-  .gg-hero-banner__media {
-    inset: 24px 40px 24px 40%;
+    --gg-hero-title: 40px;
+    aspect-ratio: auto;
+    min-height: 0;
+    max-height: none;
+    padding: 32px var(--gg-margen) 8px;
   }
 
   .gg-hero-banner .gg-hero-banner__content {
     justify-content: center;
     align-items: flex-start;
     text-align: left;
-    padding: 0 var(--gg-margen);
+    padding: 0;
   }
 }
 
