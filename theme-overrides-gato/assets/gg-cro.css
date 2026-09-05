@@ -135,9 +135,104 @@
     color: #e8e8e8;
   }
 
+  .gg-buy {
+    font-size: 14px;
+  }
+
+  .gg-buy__platform {
+    font-size: 11px;
+    margin-bottom: 4px;
+  }
+
+  .gg-buy__title,
+  .gg-buy__title--product {
+    font-size: 20px;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    margin: 0 0 8px;
+  }
+
+  .gg-buy .gg-resenas-badge {
+    margin: 0 0 8px;
+    font-size: 12.5px;
+  }
+
+  .gg-buy__subtitle {
+    font-size: 13px;
+    line-height: 1.45;
+    margin: 0 0 12px;
+  }
+
+  .gg-buy__prices {
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .gg-buy__price {
+    font-size: 22px;
+    line-height: 1.15;
+    white-space: nowrap;
+  }
+
+  .gg-buy__compare {
+    font-size: 14px;
+  }
+
+  .gg-buy__badge {
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+
+  .gg-buy__pack {
+    margin: 0 0 12px;
+    font-size: 12.5px;
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--gg-text-muted);
+  }
+
+  .gg-option {
+    margin-bottom: 12px;
+  }
+
+  .gg-option__label {
+    font-size: 12px;
+    margin-bottom: 6px;
+  }
+
+  .gg-swatch {
+    padding: 7px 12px;
+    font-size: 12px;
+  }
+
+  .gg-buy__ship {
+    margin: 0 0 12px;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .gg-qty {
+    margin-bottom: 12px;
+  }
+
+  .gg-qty__btn {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+
+  .gg-qty__input {
+    width: 44px;
+    height: 36px;
+    font-size: 14px;
+  }
+
   .gg-buy__add {
     min-height: 48px;
     font-size: 15px;
+    padding: 14px 16px;
   }
 
   .gg-alex-fab {
