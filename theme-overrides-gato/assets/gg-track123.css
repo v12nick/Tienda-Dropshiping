@@ -400,7 +400,15 @@ html[data-gg-path-track] [data-gg-confirm="banner"] {
 
 html[data-gg-path-track] .track123_order_progress_container,
 html[data-gg-path-track] .track123_order_step_line_wrapper {
-  display: none !important;
+  position: absolute !important;
+  left: 0 !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
 }
 
 html[data-gg-path-track] .track123_order_status_container + .gg-track__timeline {

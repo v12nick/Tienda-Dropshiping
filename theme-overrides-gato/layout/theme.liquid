@@ -247,7 +247,7 @@
                 ggSyncTrackSteps();
               } catch (err) {}
               ggTrackBusy = false;
-            }, 160);
+            }, 180);
           };
           var ggMountTrack = function () {
             var app = document.getElementById('track123-app');
@@ -272,7 +272,15 @@
           });
           ggTrackObs.observe(document.documentElement, { childList: true, subtree: true });
           document.addEventListener('DOMContentLoaded', ggQueueTrackWork);
-          [500, 1600, 3200].forEach(function (ms) {
+          document.addEventListener('click', function (ev) {
+            var btn = ev.target && ev.target.closest ? ev.target.closest('#track123_submit_button, .track123_form_button') : null;
+            if (btn) {
+              [400, 1200, 2400, 4000].forEach(function (ms) {
+                setTimeout(ggQueueTrackWork, ms);
+              });
+            }
+          }, true);
+          [400, 1200, 2500, 5000, 8000].forEach(function (ms) {
             setTimeout(ggQueueTrackWork, ms);
           });
         }
