@@ -11,6 +11,46 @@
   "sections": {
     "hero": {
       "type": "gg-hero-foco",
+      "blocks": {
+        "c_blanco": {
+          "type": "color",
+          "settings": {
+            "nombre": "Blanco",
+            "hex": "#f4f4f4",
+            "imagen_asset": "gg-g7se-blanco.webp"
+          }
+        },
+        "c_azul": {
+          "type": "color",
+          "settings": {
+            "nombre": "Azul Dinámico",
+            "hex": "#4aa3e8",
+            "imagen_asset": "gg-g7se-azul.webp"
+          }
+        },
+        "c_naranja": {
+          "type": "color",
+          "settings": {
+            "nombre": "Naranja Vibrante",
+            "hex": "#ff6a1a",
+            "imagen_asset": "gg-g7se-naranja.webp"
+          }
+        },
+        "c_purpura": {
+          "type": "color",
+          "settings": {
+            "nombre": "Púrpura Radiante",
+            "hex": "#c48ad4",
+            "imagen_asset": "gg-g7se-purpura.webp"
+          }
+        }
+      },
+      "block_order": [
+        "c_blanco",
+        "c_azul",
+        "c_naranja",
+        "c_purpura"
+      ],
       "settings": {
         "producto": "gamesir-g7-se-control-xbox-hall-effect",
         "eyebrow": "GameSir × Gato Gamer Store",
@@ -647,38 +687,6 @@
         "padding_bottom": 56
       }
     },
-    "inventario": {
-      "type": "gg-inventario",
-      "blocks": {
-        "g7se": {
-          "type": "vitrina",
-          "settings": {
-            "etiqueta": "GameSir",
-            "titulo": "GameSir G7 SE",
-            "precio": "",
-            "texto": "Hall Effect + 1 mes de Game Pass Ultimate. Envío a Colombia.",
-            "enlace": "#gg-comprar",
-            "boton": "Ver producto"
-          }
-        }
-      },
-      "block_order": [
-        "g7se"
-      ],
-      "settings": {
-        "titulo": "En inventario",
-        "subtitulo": "Productos disponibles ahora, con envío a Colombia.",
-        "text_align": "left",
-        "producto_principal": "gamesir-g7-se-control-xbox-hall-effect",
-        "ver_todo_texto": "Ver todo",
-        "limite": 12,
-        "empty_titulo": "Catálogo en camino",
-        "empty_texto": "El GameSir G7 SE está disponible. Escríbenos por WhatsApp o pulsa Comprar ahora arriba para pedir el tuyo.",
-        "heading_size": 30,
-        "padding_top": 48,
-        "padding_bottom": 48
-      }
-    },
     "ctafinal": {
       "type": "gg-cta-final",
       "settings": {
@@ -702,7 +710,6 @@
     "comparativa",
     "comofunciona",
     "video",
-    "inventario",
     "faq",
     "resenas_clientes",
     "showcase",

@@ -121,42 +121,104 @@
 <section class="gg-section gg-container" id="gg-comprar" data-gg-product-root data-gg-track-product="{{ gg_product.handle }}" data-shop-currency="{{ shop.currency }}">
   <div class="gg-producto">
     <div class="gg-gallery">
-      <div class="gg-gallery__viewport">
-        <div class="gg-gallery__track" data-gg-track>
-          {%- for media in gg_media -%}
-            {%- liquid
-              if forloop.first
-                assign gg_slide_loading = 'eager'
-                assign gg_slide_priority = 'auto'
-              else
-                assign gg_slide_loading = 'lazy'
-                assign gg_slide_priority = 'low'
-              endif
-              assign gg_media_alt = media.alt | default: gg_product.title
-            -%}
-            <div class="gg-gallery__slide" data-gg-slide data-media-id="{{ media.id }}">
-              {% render 'gg-responsive-image',
-                image: media,
-                alt: gg_media_alt,
-                max_width: 1600,
-                sizes: '(min-width: 990px) 560px, 100vw',
-                loading: gg_slide_loading,
-                fetchpriority: gg_slide_priority,
-                width: 1600,
-                height: 1600
-              %}
-            </div>
+      {%- liquid
+        assign gg_color_count = 0
+        for block in section.blocks
+          if block.type == 'color'
+            assign gg_color_count = gg_color_count | plus: 1
+          endif
+        endfor
+      -%}
+      {%- if gg_color_count > 0 -%}
+        <div class="gg-color-mosaic" data-gg-color-mosaic>
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'color' -%}
+              {%- liquid
+                assign gg_color_name = block.settings.nombre
+                assign gg_color_asset = block.settings.imagen_asset | default: 'gg-g7se-blanco.webp'
+                assign gg_tile_loading = 'lazy'
+                if forloop.first
+                  assign gg_tile_loading = 'eager'
+                endif
+              -%}
+              <button
+                type="button"
+                class="gg-color-tile{% if forloop.first %} gg-active{% endif %}"
+                data-gg-color="{{ gg_color_name | escape }}"
+                aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}"
+                {{ block.shopify_attributes }}
+              >
+                {%- if block.settings.imagen != blank -%}
+                  <img
+                    src="{{ block.settings.imagen | image_url: width: 720 }}"
+                    alt="{{ gg_color_name | escape }}"
+                    width="720"
+                    height="720"
+                    loading="{{ gg_tile_loading }}"
+                  >
+                {%- else -%}
+                  <img
+                    src="{{ gg_color_asset | asset_url }}"
+                    alt="{{ gg_color_name | escape }}"
+                    width="768"
+                    height="768"
+                    loading="{{ gg_tile_loading }}"
+                  >
+                {%- endif -%}
+                <span class="gg-color-tile__name">{{ gg_color_name }}</span>
+              </button>
+            {%- endif -%}
           {%- endfor -%}
         </div>
+      {%- elsif gg_media.size > 0 -%}
+        <div class="gg-gallery__viewport">
+          <div class="gg-gallery__track" data-gg-track>
+            {%- for media in gg_media -%}
+              {%- liquid
+                if forloop.first
+                  assign gg_slide_loading = 'eager'
+                  assign gg_slide_priority = 'auto'
+                else
+                  assign gg_slide_loading = 'lazy'
+                  assign gg_slide_priority = 'low'
+                endif
+                assign gg_media_alt = media.alt | default: gg_product.title
+              -%}
+              <div class="gg-gallery__slide" data-gg-slide data-media-id="{{ media.id }}">
+                {% render 'gg-responsive-image',
+                  image: media,
+                  alt: gg_media_alt,
+                  max_width: 1600,
+                  sizes: '(min-width: 990px) 560px, 100vw',
+                  loading: gg_slide_loading,
+                  fetchpriority: gg_slide_priority,
+                  width: 1600,
+                  height: 1600
+                %}
+              </div>
+            {%- endfor -%}
+          </div>
+          {%- if gg_media.size > 1 -%}
+            <button type="button" class="gg-gallery__nav gg-gallery__nav--prev" data-gg-gallery-prev aria-label="{{ 'products.product.previous_image' | t | default: 'Anterior' }}">{% render 'gg-icon', name: 'chevron-left' %}</button>
+            <button type="button" class="gg-gallery__nav gg-gallery__nav--next" data-gg-gallery-next aria-label="{{ 'products.product.next_image' | t | default: 'Siguiente' }}">{% render 'gg-icon', name: 'chevron-right' %}</button>
+          {%- endif -%}
+        </div>
         {%- if gg_media.size > 1 -%}
-          <button type="button" class="gg-gallery__nav gg-gallery__nav--prev" data-gg-gallery-prev aria-label="{{ 'products.product.previous_image' | t | default: 'Anterior' }}">{% render 'gg-icon', name: 'chevron-left' %}</button>
-          <button type="button" class="gg-gallery__nav gg-gallery__nav--next" data-gg-gallery-next aria-label="{{ 'products.product.next_image' | t | default: 'Siguiente' }}">{% render 'gg-icon', name: 'chevron-right' %}</button>
+          <div class="gg-gallery__dots" data-gg-dots>
+            {%- for media in gg_media -%}
+              <button type="button" class="gg-gallery__dot {% if forloop.first %}gg-active{% endif %}" data-gg-dot aria-label="Imagen {{ forloop.index }} de {{ gg_media.size }}"{% if forloop.first %} aria-current="true"{% endif %}></button>
+            {%- endfor -%}
+          </div>
         {%- endif -%}
-      </div>
-      {%- if gg_media.size > 1 -%}
-        <div class="gg-gallery__dots" data-gg-dots>
-          {%- for media in gg_media -%}
-            <button type="button" class="gg-gallery__dot {% if forloop.first %}gg-active{% endif %}" data-gg-dot aria-label="Imagen {{ forloop.index }} de {{ gg_media.size }}"{% if forloop.first %} aria-current="true"{% endif %}></button>
+      {%- else -%}
+        <div class="gg-color-mosaic" data-gg-color-mosaic>
+          {%- assign gg_fallback_colors = 'Blanco|gg-g7se-blanco.webp,Azul Dinámico|gg-g7se-azul.webp,Naranja Vibrante|gg-g7se-naranja.webp,Púrpura Radiante|gg-g7se-purpura.webp' | split: ',' -%}
+          {%- for item in gg_fallback_colors -%}
+            {%- assign gg_parts = item | split: '|' -%}
+            <button type="button" class="gg-color-tile{% if forloop.first %} gg-active{% endif %}" data-gg-color="{{ gg_parts[0] | escape }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}">
+              <img src="{{ gg_parts[1] | asset_url }}" alt="{{ gg_parts[0] | escape }}" width="768" height="768" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}">
+              <span class="gg-color-tile__name">{{ gg_parts[0] }}</span>
+            </button>
           {%- endfor -%}
         </div>
       {%- endif -%}
@@ -178,6 +240,39 @@
         </div>
       {%- endif -%}
       <p class="gg-buy__pack">{% render 'gg-t', text: 'Este precio incluye el mando GameSir G7 SE y 1 mes de Xbox Game Pass Ultimate.' %}</p>
+
+      {%- liquid
+        assign gg_color_ui = 0
+        assign gg_first_color = 'Blanco'
+        for block in section.blocks
+          if block.type == 'color' and block.settings.nombre != blank
+            assign gg_color_ui = gg_color_ui | plus: 1
+            if gg_color_ui == 1
+              assign gg_first_color = block.settings.nombre
+            endif
+          endif
+        endfor
+      -%}
+      {%- if gg_color_ui > 0 or gg_color_count > 0 -%}
+        <div class="gg-option gg-option--colores" data-gg-color-panel>
+          <span class="gg-option__label">{% render 'gg-t', text: 'Colores' %} · <span data-gg-color-label>{{ gg_first_color }}</span></span>
+          <div class="gg-option__values">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'color' -%}
+                <button
+                  type="button"
+                  class="gg-swatch gg-swatch--color{% if forloop.first %} gg-active{% endif %}"
+                  data-gg-color="{{ block.settings.nombre | escape }}"
+                  aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}"
+                >
+                  <span class="gg-swatch__dot" style="background:{{ block.settings.hex | default: '#F5F5F5' }}"></span>
+                  {{ block.settings.nombre }}
+                </button>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
       <ul class="gg-buy__specs">
         <li>{% render 'gg-icon', name: 'check' %}<span>Hall Effect</span></li>
         <li>{% render 'gg-icon', name: 'check' %}<span>{% render 'gg-t', text: '2 botones traseros' %}</span></li>
@@ -204,6 +299,8 @@
 
         {%- unless gg_product.has_only_default_variant -%}
           {%- for option in gg_product.options_with_values -%}
+            {%- assign gg_oname = option.name | downcase -%}
+            {%- unless gg_oname contains 'color' or gg_oname contains 'colour' -%}
             <div class="gg-option">
               <span class="gg-option__label">{{ option.name }}</span>
               <div class="gg-option__values">
@@ -219,6 +316,7 @@
                 {%- endfor -%}
               </div>
             </div>
+            {%- endunless -%}
           {%- endfor -%}
         {%- endunless -%}
 
@@ -251,7 +349,13 @@
       {% endform %}
       {%- else -%}
         <div class="gg-buy__actions">
-          <a class="gg-btn gg-btn--accent gg-buy__add" href="https://wa.me/573112333744">{% render 'gg-t', text: 'Escríbenos por WhatsApp' %}</a>
+          <a
+            class="gg-btn gg-btn--accent gg-buy__add"
+            href="https://wa.me/573112333744?text={{ 'Hola Gato Gamer Store, quiero el GameSir G7 SE en color Blanco' | url_encode }}"
+            data-gg-wa-color
+            data-gg-wa-base="https://wa.me/573112333744"
+            data-gg-wa-msg="Hola Gato Gamer Store, quiero el GameSir G7 SE en color"
+          >{% render 'gg-t', text: 'Escríbenos por WhatsApp' %}</a>
         </div>
       {%- endif -%}
 
@@ -361,6 +465,18 @@
     { "type": "header", "content": "Espaciado" },
     { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 120, "step": 4, "default": 32 },
     { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 120, "step": 4, "default": 40 }
+  ],
+  "blocks": [
+    {
+      "type": "color",
+      "name": "Color de catálogo",
+      "settings": [
+        { "type": "text", "id": "nombre", "label": "Nombre", "default": "Blanco" },
+        { "type": "color", "id": "hex", "label": "Muestra", "default": "#F4F4F4" },
+        { "type": "image_picker", "id": "imagen", "label": "Foto del color" },
+        { "type": "text", "id": "imagen_asset", "label": "Foto del tema (archivo)", "default": "gg-g7se-blanco.webp" }
+      ]
+    }
   ],
   "presets": [ { "name": "GG – Hero de producto" } ]
 }
