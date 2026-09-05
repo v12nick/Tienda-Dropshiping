@@ -374,6 +374,7 @@ function ggMountPendingCart(item) {
   }
   host.hidden = false;
   host.innerHTML = ggPendingCartMarkup(item);
+  document.body.classList.add('gg-has-pending-cart');
   var emptyText = document.querySelector('.cart__empty-text');
   if (emptyText) emptyText.hidden = true;
   var continueBtn = document.querySelector('.cart__warnings .button');

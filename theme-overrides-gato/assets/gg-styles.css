@@ -87,3 +87,5 @@
 .gg-pending-cart__meta{margin:0;color:#a6a6a6;font-size:14px}
 .gg-pending-cart__pay{width:100%;min-height:48px}
 .gg-pending-cart__error{margin:12px 0 0;color:#ff6b73;font-size:13px;line-height:1.4}
+body.gg-has-pending-cart cart-items.is-empty .cart__warnings > :not([data-gg-pending-cart]){display:none!important}
+body.gg-has-pending-cart cart-items.is-empty .title-wrapper-with-link .underlined-link{display:none!important}
