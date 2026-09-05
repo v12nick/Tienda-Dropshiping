@@ -39,6 +39,7 @@
   class="gg-section gg-container gg-resenas"
   id="gg-resenas"
   data-gg-resenas
+  data-gg-imported="true"
   data-gg-product-id="{{ gg_product.id }}"
   data-gg-product-handle="{{ gg_product.handle }}"
 >
@@ -56,6 +57,7 @@
   </div>
 
   <div class="gg-resenas__apps">
+    {% render 'gg-aliexpress-reviews', product: gg_product %}
     {% render 'gg-judgeme-reviews', product: gg_product %}
     {%- for block in section.blocks -%}
       {% render block %}

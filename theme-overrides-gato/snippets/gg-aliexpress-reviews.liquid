@@ -1,0 +1,53 @@
+{% doc %}
+Renders AliExpress reviews imported for the GameSir G7 SE into the Gato reviews slot.
+@param {object} product - Product currently shown in the reviews section
+@example
+{% render 'gg-aliexpress-reviews', product: product %}
+{% enddoc %}
+
+{%- liquid
+  assign gg_ae_raw = 'gg-aliexpress-reviews.json' | inline_asset_content
+  assign gg_ae = gg_ae_raw | parse_json
+  assign gg_show = false
+  if gg_ae and gg_ae.reviews.size > 0
+    if product == blank
+      assign gg_show = true
+    elsif gg_ae.product_handles contains product.handle
+      assign gg_show = true
+    endif
+  endif
+-%}
+{%- if gg_show -%}
+  <div class="gg-ae-reviews" data-gg-ae-reviews data-gg-ae-rating="{{ gg_ae.rating }}" data-gg-ae-count="{{ gg_ae.count }}">
+    <p class="gg-ae-reviews__note">Opiniones de compradores del mismo GameSir G7 SE en AliExpress. Quienes compren aquí reciben el correo de Judge.me después del pedido.</p>
+    <ul class="gg-ae-reviews__list">
+      {%- for rev in gg_ae.reviews -%}
+        <li class="gg-ae-reviews__item">
+          <div class="gg-ae-reviews__head">
+            <div class="gg-ae-reviews__stars" aria-label="{{ rev.rating }} de 5">
+              {%- for i in (1..5) -%}
+                <span class="gg-resenas-badge__star{% if i <= rev.rating %} is-on{% endif %}">{% render 'gg-icon', name: 'star' %}</span>
+              {%- endfor -%}
+            </div>
+            <div class="gg-ae-reviews__meta">
+              <strong>{{ rev.name | escape }}</strong>
+              {%- if rev.date != blank -%}
+                <span>{{ rev.date | escape }}</span>
+              {%- endif -%}
+            </div>
+          </div>
+          <p class="gg-ae-reviews__body">{{ rev.body | escape | newline_to_br }}</p>
+          {%- if rev.images.size > 0 -%}
+            <div class="gg-ae-reviews__photos">
+              {%- for img in rev.images -%}
+                <a class="gg-ae-reviews__photo" href="{{ img }}" target="_blank" rel="nofollow noopener">
+                  <img src="{{ img }}" alt="Foto de la reseña" loading="lazy" decoding="async" width="96" height="96">
+                </a>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+{%- endif -%}
