@@ -95,8 +95,23 @@
 }
 
 .gg-hero-banner {
-  min-height: 260px;
-  max-height: 380px;
+  min-height: 300px;
+  max-height: 460px;
+}
+
+.gg-hero-banner__media {
+  inset: 20px 28px 20px 38%;
+}
+
+.gg-hero-banner__media img {
+  object-fit: contain;
+  object-position: right center;
+  animation: none !important;
+  transform: none !important;
+}
+
+.gg-hero-banner + #gg-comprar {
+  padding-top: 40px !important;
 }
 
 .gg-hero-banner__title,
@@ -118,8 +133,20 @@
 @media (max-width: 749px) {
   .gg-hero-banner {
     aspect-ratio: 4 / 3;
-    min-height: 220px;
-    max-height: 300px;
+    min-height: 280px;
+    max-height: 380px;
+  }
+
+  .gg-hero-banner__media {
+    inset: 24px 16px 24px 18%;
+  }
+
+  .gg-hero-banner__media img {
+    object-position: 85% center;
+  }
+
+  .gg-hero-banner + #gg-comprar {
+    padding-top: 28px !important;
   }
 
   .gg-hero-banner .gg-hero-banner__content {
@@ -251,9 +278,13 @@
 
 @media (min-width: 750px) {
   .gg-hero-banner {
-    aspect-ratio: 3 / 1;
-    min-height: 260px;
-    max-height: 380px;
+    aspect-ratio: 21 / 9;
+    min-height: 360px;
+    max-height: 460px;
+  }
+
+  .gg-hero-banner__media {
+    inset: 24px 40px 24px 40%;
   }
 
   .gg-hero-banner .gg-hero-banner__content {
