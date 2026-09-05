@@ -1,0 +1,367 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: var(--gg-bg);
+  }
+  #shopify-section-{{ section.id }} .gg-hero-banner__title {
+    font-size: {{ section.settings.title_size_mobile }}px;
+    text-align: left;
+  }
+  #shopify-section-{{ section.id }} .gg-hero-banner__content {
+    text-align: left;
+  }
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .gg-hero-banner__title {
+      font-size: {{ section.settings.title_size }}px;
+    }
+  }
+{% endstyle %}
+
+{%- liquid
+  assign gg_product = section.settings.producto
+  if gg_product == blank
+    assign gg_product = product
+  endif
+  if gg_product == blank
+    assign gg_product = all_products['gamesir-g7-se-control-xbox-hall-effect']
+  endif
+  if gg_product == blank and collections.all.products.size > 0
+    assign gg_product = collections.all.products.first
+  endif
+  if gg_product != blank
+    assign gg_variant = gg_product.selected_or_first_available_variant | default: gg_product.first_available_variant | default: gg_product.variants.first
+    assign gg_media = gg_product.media
+  endif
+-%}
+{%- capture gg_txt_add -%}
+  {%- if section.settings.boton_texto != blank -%}
+    {%- render 'gg-t', text: section.settings.boton_texto -%}
+  {%- else -%}
+    {{- 'gg.add_to_cart' | t -}}
+  {%- endif -%}
+{%- endcapture -%}
+{%- capture gg_txt_soldout -%}
+  {%- if section.settings.boton_agotado_texto != blank -%}
+    {%- render 'gg-t', text: section.settings.boton_agotado_texto -%}
+  {%- else -%}
+    {{- 'gg.sold_out' | t -}}
+  {%- endif -%}
+{%- endcapture -%}
+{%- capture gg_txt_in_stock -%}
+  {%- if section.settings.texto_en_stock != blank -%}
+    {%- render 'gg-t', text: section.settings.texto_en_stock -%}
+  {%- else -%}
+    {{- 'gg.in_stock' | t -}}
+  {%- endif -%}
+{%- endcapture -%}
+{%- capture gg_txt_out_stock -%}
+  {%- if section.settings.texto_agotado != blank -%}
+    {%- render 'gg-t', text: section.settings.texto_agotado -%}
+  {%- else -%}
+    {{- 'gg.out_of_stock' | t -}}
+  {%- endif -%}
+{%- endcapture -%}
+{%- capture gg_txt_sticky -%}
+  {%- if section.settings.sticky_boton_texto != blank -%}
+    {%- render 'gg-t', text: section.settings.sticky_boton_texto -%}
+  {%- else -%}
+    {%- render 'gg-t', text: 'Comprar ahora' -%}
+  {%- endif -%}
+{%- endcapture -%}
+{%- liquid
+  assign gg_txt_add = gg_txt_add | strip
+  assign gg_txt_soldout = gg_txt_soldout | strip
+  assign gg_txt_in_stock = gg_txt_in_stock | strip
+  assign gg_txt_out_stock = gg_txt_out_stock | strip
+  assign gg_txt_sticky = gg_txt_sticky | strip
+-%}
+<div class="gg-hero-banner">
+  <div class="gg-hero-banner__media">
+    {%- if section.settings.banner_imagen != blank -%}
+      {% render 'gg-responsive-image',
+        image: section.settings.banner_imagen,
+        alt: section.settings.headline,
+        max_width: 2000,
+        sizes: '100vw',
+        loading: 'eager',
+        fetchpriority: 'high',
+        width: 1600,
+        height: 1067
+      %}
+    {%- else -%}
+      <img
+        src="{{ 'gg-ia-hero-800.webp' | asset_url }}"
+        srcset="
+          {{ 'gg-ia-hero-800.webp' | asset_url }} 800w,
+          {{ 'gg-ia-hero-1200.webp' | asset_url }} 1200w,
+          {{ 'gg-ia-hero-1600.webp' | asset_url }} 1600w
+        "
+        sizes="100vw"
+        alt="{{ section.settings.headline | escape }}"
+        width="1536"
+        height="1024"
+        loading="eager"
+        fetchpriority="high"
+        decoding="sync"
+      >
+    {%- endif -%}
+  </div>
+  <div class="gg-hero-banner__scrim"></div>
+  <div class="gg-hero-banner__content">
+    {%- if section.settings.eyebrow != blank -%}<span class="gg-hero__eyebrow">{% render 'gg-t', text: section.settings.eyebrow %}</span>{%- endif -%}
+    <h1 class="gg-hero-banner__title">{% render 'gg-t', text: section.settings.headline %}</h1>
+    {%- if section.settings.subheadline != blank -%}<p class="gg-hero__subtitle">{% render 'gg-t', text: section.settings.subheadline %}</p>{%- endif -%}
+    {%- if section.settings.gamepass_texto != blank -%}
+      <div class="gg-gp-badge gg-hero-banner__badge">{% render 'gg-icon', name: 'gamepad' %}<span>{% render 'gg-t', text: section.settings.gamepass_texto %}</span></div>
+    {%- endif -%}
+  </div>
+</div>
+
+<section class="gg-section gg-container" id="gg-comprar" data-gg-product-root data-gg-track-product="{{ gg_product.handle }}" data-shop-currency="{{ shop.currency }}">
+  <div class="gg-producto">
+    <div class="gg-gallery">
+      <div class="gg-gallery__viewport">
+        <div class="gg-gallery__track" data-gg-track>
+          {%- for media in gg_media -%}
+            {%- liquid
+              if forloop.first
+                assign gg_slide_loading = 'eager'
+                assign gg_slide_priority = 'auto'
+              else
+                assign gg_slide_loading = 'lazy'
+                assign gg_slide_priority = 'low'
+              endif
+              assign gg_media_alt = media.alt | default: gg_product.title
+            -%}
+            <div class="gg-gallery__slide" data-gg-slide data-media-id="{{ media.id }}">
+              {% render 'gg-responsive-image',
+                image: media,
+                alt: gg_media_alt,
+                max_width: 1600,
+                sizes: '(min-width: 990px) 560px, 100vw',
+                loading: gg_slide_loading,
+                fetchpriority: gg_slide_priority,
+                width: 1600,
+                height: 1600
+              %}
+            </div>
+          {%- endfor -%}
+        </div>
+        {%- if gg_media.size > 1 -%}
+          <button type="button" class="gg-gallery__nav gg-gallery__nav--prev" data-gg-gallery-prev aria-label="{{ 'products.product.previous_image' | t | default: 'Anterior' }}">{% render 'gg-icon', name: 'chevron-left' %}</button>
+          <button type="button" class="gg-gallery__nav gg-gallery__nav--next" data-gg-gallery-next aria-label="{{ 'products.product.next_image' | t | default: 'Siguiente' }}">{% render 'gg-icon', name: 'chevron-right' %}</button>
+        {%- endif -%}
+      </div>
+      {%- if gg_media.size > 1 -%}
+        <div class="gg-gallery__dots" data-gg-dots>
+          {%- for media in gg_media -%}
+            <button type="button" class="gg-gallery__dot {% if forloop.first %}gg-active{% endif %}" data-gg-dot aria-label="Imagen {{ forloop.index }} de {{ gg_media.size }}"{% if forloop.first %} aria-current="true"{% endif %}></button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="gg-buy">
+      <p class="gg-buy__platform">{{ gg_product.vendor | default: 'GameSir' }}</p>
+      <p class="gg-buy__title gg-buy__title--product">{{ gg_product.title | default: section.settings.headline }}</p>
+      {% render 'gg-resenas-badge', product: gg_product %}
+      {%- if section.settings.para_quien != blank -%}
+        <p class="gg-buy__subtitle">{% render 'gg-t', text: section.settings.para_quien %}</p>
+      {%- endif -%}
+
+      {%- if gg_variant != blank and gg_variant.price != blank -%}
+        <div class="gg-buy__prices">
+          <span class="gg-buy__price" data-gg-price>{{ gg_variant.price | money_without_trailing_zeros }}{% if shop.currency == 'COP' %} COP{% endif %}</span>
+          <span class="gg-buy__compare" data-gg-compare {% unless gg_variant.compare_at_price > gg_variant.price %}hidden{% endunless %}>{{ gg_variant.compare_at_price | money_without_trailing_zeros }}{% if shop.currency == 'COP' %} COP{% endif %}</span>
+          <span class="gg-buy__badge" data-gg-badge hidden></span>
+        </div>
+      {%- endif -%}
+      <p class="gg-buy__pack">{% render 'gg-t', text: 'Este precio incluye el mando GameSir G7 SE y 1 mes de Xbox Game Pass Ultimate.' %}</p>
+      <ul class="gg-buy__specs">
+        <li>{% render 'gg-icon', name: 'check' %}<span>Hall Effect</span></li>
+        <li>{% render 'gg-icon', name: 'check' %}<span>{% render 'gg-t', text: '2 botones traseros' %}</span></li>
+        <li>{% render 'gg-icon', name: 'check' %}<span>Hair Trigger</span></li>
+        <li>{% render 'gg-icon', name: 'check' %}<span>Xbox Series X|S</span></li>
+        <li>{% render 'gg-icon', name: 'check' %}<span>Xbox One</span></li>
+        <li>{% render 'gg-icon', name: 'check' %}<span>PC</span></li>
+        <li>{% render 'gg-icon', name: 'check' %}<span>{% render 'gg-t', text: 'Game Pass incluido' %}</span></li>
+      </ul>
+      <p class="gg-buy__ship">
+        {% render 'gg-t', text: 'Envío a Colombia. El costo se confirma al pagar.' %}
+        <a href="/pages/politica-de-envios">{% render 'gg-t', text: 'Tiempos de envío' %}</a>
+        ·
+        <a href="/pages/politica-de-devoluciones">{% render 'gg-t', text: 'Devoluciones' %}</a>
+      </p>
+      {%- if gg_variant != blank -%}
+        {% render 'gg-precio-cop', price: gg_variant.price %}
+        <div data-gg-puntos-wrap data-puntos-por-dolar="{{ settings.gg_puntos_por_dolar }}" {% if gg_product.tags contains 'sin-puntos' %}data-sin-puntos="true"{% endif %}>{% render 'gg-precio-puntos', price: gg_variant.price, product: gg_product %}</div>
+      {%- endif -%}
+
+      {%- if gg_product != blank -%}
+      {% form 'product', gg_product %}
+        <input type="hidden" name="id" value="{{ gg_variant.id }}" data-gg-variant-id>
+
+        {%- unless gg_product.has_only_default_variant -%}
+          {%- for option in gg_product.options_with_values -%}
+            <div class="gg-option">
+              <span class="gg-option__label">{{ option.name }}</span>
+              <div class="gg-option__values">
+                {%- for value in option.values -%}
+                  <button
+                    type="button"
+                    class="gg-swatch {% if value == option.selected_value %}gg-active{% endif %}"
+                    data-gg-swatch
+                    data-option-name="{{ option.name | escape }}"
+                    data-option-value="{{ value | escape }}"
+                    aria-pressed="{% if value == option.selected_value %}true{% else %}false{% endif %}"
+                  >{{ value }}</button>
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- endunless -%}
+
+        <div class="gg-qty" data-gg-qty>
+          <button type="button" class="gg-qty__btn" data-gg-qty-minus aria-label="{{ 'gg.qty_minus' | t }}">−</button>
+          <input type="number" name="quantity" value="1" min="1" inputmode="numeric" class="gg-qty__input" data-gg-qty-input aria-label="{{ 'products.product.quantity.label' | t | default: 'Cantidad' }}">
+          <button type="button" class="gg-qty__btn" data-gg-qty-plus aria-label="{{ 'gg.qty_plus' | t }}">+</button>
+        </div>
+
+        <div class="gg-buy__actions">
+          <button
+            type="submit"
+            name="add"
+            class="gg-btn gg-btn--accent gg-buy__add"
+            data-gg-buy-add
+            data-label-add="{{ gg_txt_add }}"
+            data-label-sold-out="{{ gg_txt_soldout }}"
+            {% unless gg_variant.available %}disabled{% endunless %}
+          >{% if gg_variant.available %}{{ gg_txt_add }}{% else %}{{ gg_txt_soldout }}{% endif %}</button>
+
+          <button type="button" class="gg-wish-btn" data-gg-wish="{{ gg_product.handle }}" aria-label="{{ 'gg.wishlist_add' | t }}">
+            {% render 'gg-icon', name: 'heart' %}
+          </button>
+        </div>
+        {% render 'gg-buy-help' %}
+
+        <p class="gg-buy__stock {% if gg_variant.available %}gg-ok{% endif %}" data-gg-stock data-label-in-stock="{{ gg_txt_in_stock }}" data-label-out-stock="{{ gg_txt_out_stock }}">
+          {%- if gg_variant.available -%}{{ gg_txt_in_stock }}{%- else -%}{{ gg_txt_out_stock }}{%- endif -%}
+        </p>
+      {% endform %}
+      {%- else -%}
+        <div class="gg-buy__actions">
+          <a class="gg-btn gg-btn--accent gg-buy__add" href="https://wa.me/573112333744">{% render 'gg-t', text: 'Escríbenos por WhatsApp' %}</a>
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.compat_1 != blank or section.settings.compat_2 != blank or section.settings.compat_3 != blank -%}
+        <div class="gg-compat">
+          {%- if section.settings.compat_1 != blank -%}<span class="gg-compat__item">{% render 'gg-icon', name: 'gamepad' %}{% render 'gg-t', text: section.settings.compat_1 %}</span>{%- endif -%}
+          {%- if section.settings.compat_2 != blank -%}<span class="gg-compat__item">{% render 'gg-icon', name: 'monitor' %}{% render 'gg-t', text: section.settings.compat_2 %}</span>{%- endif -%}
+          {%- if section.settings.compat_3 != blank -%}<span class="gg-compat__item">{% render 'gg-icon', name: 'plug' %}{% render 'gg-t', text: section.settings.compat_3 %}</span>{%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <div class="gg-trust">
+        <div class="gg-trust__item">{% render 'gg-icon', name: 'truck' %}<span>{% render 'gg-t', text: section.settings.confianza_1 %}</span></div>
+        <div class="gg-trust__item">{% render 'gg-icon', name: 'lock' %}<span>{% render 'gg-t', text: section.settings.confianza_2 %}</span></div>
+        <div class="gg-trust__item">{% render 'gg-icon', name: 'shield' %}<span>{% render 'gg-t', text: section.settings.confianza_3 %}</span></div>
+      </div>
+
+      {% render 'gg-pay-icons', label: section.settings.metodos_pago_texto | default: 'Métodos de pago aceptados' %}
+
+      {%- if section.settings.despues_compra_texto != blank -%}
+        <p class="gg-buy__aftertext">
+          {% render 'gg-icon', name: 'shield' %}
+          {% render 'gg-t', text: section.settings.despues_compra_texto %}
+          <a href="/pages/rastrea-tu-pedido">{% render 'gg-t', text: section.settings.despues_compra_link_texto | default: 'Rastrea tu pedido aquí' %}</a>
+        </p>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- if gg_product != blank -%}
+  <script type="application/json" data-gg-product-json>
+    {
+      "handle": {{ gg_product.handle | json }},
+      "options": {{ gg_product.options | json }},
+      "variants": [
+        {%- for v in gg_product.variants -%}
+          {
+            "id": {{ v.id | json }},
+            "price": {{ v.price | json }},
+            "compare_at_price": {{ v.compare_at_price | json }},
+            "available": {{ v.available | json }},
+            "options": {{ v.options | json }},
+            "media_id": {%- if v.featured_media -%}{{ v.featured_media.id | json }}{%- else -%}null{%- endif -%}
+          }{%- unless forloop.last -%},{%- endunless -%}
+        {%- endfor -%}
+      ]
+    }
+  </script>
+  {%- endif -%}
+</section>
+
+{%- if gg_product != blank -%}
+<div class="gg-sticky-cart" data-gg-sticky-cart>
+  <div class="gg-sticky-cart__img">
+    {%- if gg_product.featured_image != blank -%}
+      <img src="{{ gg_product.featured_image | image_url: width: 100 }}" alt="{{ gg_product.title | escape }}" width="44" height="44" loading="lazy">
+    {%- endif -%}
+  </div>
+  <div class="gg-sticky-cart__info">
+    <p class="gg-sticky-cart__title">{{ gg_product.title | truncate: 34 }}</p>
+    <p class="gg-sticky-cart__price" data-gg-sticky-price>{{ gg_variant.price | money_without_trailing_zeros }}{% if shop.currency == 'COP' %} COP{% endif %}</p>
+  </div>
+  <button type="button" class="gg-btn gg-btn--accent gg-sticky-cart__btn" data-gg-sticky-add {% unless gg_variant.available %}disabled{% endunless %}>
+    {{ gg_txt_sticky }}
+  </button>
+</div>
+{%- endif -%}
+
+{%- if template.name == 'index' and gg_product != blank -%}
+  {% render 'gg-product-schema', product: gg_product %}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "GG – Hero de producto",
+  "tag": "section",
+  "settings": [
+    { "type": "product", "id": "producto", "label": "Producto", "info": "En la página de producto se usa el producto de la página automáticamente si dejas esto vacío" },
+    { "type": "header", "content": "Banner principal" },
+    { "type": "image_picker", "id": "banner_imagen", "label": "Imagen del banner" },
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño superior", "default": "GameSir × Gato Gamer Store" },
+    { "type": "text", "id": "headline", "label": "Título", "default": "GameSir G7 SE: Hall Effect + Game Pass" },
+    { "type": "textarea", "id": "subheadline", "label": "Subtítulo", "default": "GameSir G7 SE oficial para Xbox y PC. Sticks magnéticos que reducen el drift, 2 botones traseros y 1 mes de Xbox Game Pass Ultimate incluido." },
+    { "type": "text", "id": "gamepass_texto", "label": "Insignia Game Pass", "default": "🎮 Incluye 1 mes de Xbox Game Pass Ultimate" },
+    { "type": "header", "content": "Ficha de producto (columna de compra)" },
+    { "type": "text", "id": "para_quien", "label": "Para quién es (línea corta bajo el título)", "default": "Ideal para gamers de Xbox Series X|S, Xbox One y PC que buscan precisión sin drift." },
+    { "type": "text", "id": "metodos_pago_texto", "label": "Texto sobre métodos de pago", "default": "Métodos de pago aceptados" },
+    { "type": "text", "id": "despues_compra_texto", "label": "Texto sobre qué pasa después de comprar", "default": "Te avisamos por correo apenas se despache tu pedido." },
+    { "type": "text", "id": "despues_compra_link_texto", "label": "Texto del enlace de seguimiento", "default": "Rastrea tu pedido aquí" },
+    { "type": "header", "content": "Compatibilidad" },
+    { "type": "text", "id": "compat_1", "label": "Compatibilidad 1", "default": "Xbox Series X|S" },
+    { "type": "text", "id": "compat_2", "label": "Compatibilidad 2", "default": "Xbox One" },
+    { "type": "text", "id": "compat_3", "label": "Compatibilidad 3", "default": "PC con Windows 10/11" },
+    { "type": "header", "content": "Botones y stock" },
+    { "type": "text", "id": "boton_texto", "label": "Texto botón comprar", "default": "Comprar ahora" },
+    { "type": "text", "id": "boton_agotado_texto", "label": "Texto botón agotado", "info": "Si se deja vacío se usa el texto traducido automáticamente" },
+    { "type": "text", "id": "texto_en_stock", "label": "Texto en stock", "info": "Si se deja vacío se usa el texto traducido automáticamente" },
+    { "type": "text", "id": "texto_agotado", "label": "Texto sin stock", "info": "Si se deja vacío se usa el texto traducido automáticamente" },
+    { "type": "text", "id": "sticky_boton_texto", "label": "Texto botón barra fija móvil", "default": "Comprar ahora" },
+    { "type": "header", "content": "Confianza" },
+    { "type": "text", "id": "confianza_1", "label": "Confianza 1", "default": "Envío a Colombia · 1 a 5 días hábiles" },
+    { "type": "text", "id": "confianza_2", "label": "Confianza 2", "default": "Pago con tarjeta, PSE y Bre-B" },
+    { "type": "text", "id": "confianza_3", "label": "Confianza 3", "default": "WhatsApp y compra protegida" },
+    { "type": "header", "content": "Tipografía" },
+    { "type": "range", "id": "title_size", "label": "Tamaño del título en escritorio (px)", "min": 24, "max": 56, "step": 2, "default": 38 },
+    { "type": "range", "id": "title_size_mobile", "label": "Tamaño del título en móvil (px)", "min": 20, "max": 40, "step": 2, "default": 26 },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 120, "step": 4, "default": 32 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 120, "step": 4, "default": 40 }
+  ],
+  "presets": [ { "name": "GG – Hero de producto" } ]
+}
+{% endschema %}

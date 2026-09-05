@@ -1,0 +1,67 @@
+<link rel="stylesheet" href="{{ 'gg-cta-final.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="{{ 'gg-cta-final.css' | asset_url }}"></noscript>
+
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+{% endstyle %}
+
+{%- liquid
+  assign gg_product = section.settings.producto | default: product
+  if gg_product == blank
+    assign gg_product = all_products['gamesir-g7-se-control-xbox-hall-effect']
+  endif
+  assign gg_variant = gg_product.selected_or_first_available_variant
+-%}
+
+<section class="gg-section gg-container">
+  <div class="gg-cta-final gg-reveal">
+    <div class="gg-cta-final__media">
+      {%- if section.settings.imagen != blank -%}
+        {% render 'gg-responsive-image',
+          image: section.settings.imagen,
+          alt: section.settings.titulo,
+          max_width: 1800,
+          sizes: '100vw',
+          loading: 'lazy',
+          width: 1800,
+          height: 1200
+        %}
+      {%- else -%}
+        <img src="{{ 'gg-ia-cta.jpg' | asset_url }}" alt="{{ section.settings.titulo | escape }}" loading="lazy" decoding="async" width="900" height="600">
+      {%- endif -%}
+      <div class="gg-cta-final__scrim"></div>
+    </div>
+    <div class="gg-cta-final__body">
+      <h2 class="gg-cta-final__title">{% render 'gg-t', text: section.settings.titulo %}</h2>
+      {%- if section.settings.texto != blank -%}
+        <p class="gg-cta-final__text">{% render 'gg-t', text: section.settings.texto %}</p>
+      {%- endif -%}
+      {%- if gg_product != blank and gg_variant != blank and gg_variant.price != blank -%}
+        <p class="gg-cta-final__price">{{ gg_variant.price | money_without_trailing_zeros }}{% if shop.currency == 'COP' %} COP{% endif %} <span>· {% render 'gg-t', text: section.settings.gamepass_texto %}</span></p>
+      {%- endif -%}
+      <a href="#gg-comprar" class="gg-btn gg-btn--accent">{% render 'gg-t', text: section.settings.boton_texto %}</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "GG – CTA final",
+  "tag": "section",
+  "settings": [
+    { "type": "product", "id": "producto", "label": "Producto", "info": "En la página de producto se usa el producto de la página automáticamente si dejas esto vacío" },
+    { "type": "image_picker", "id": "imagen", "label": "Imagen de fondo" },
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Mejora tu setup hoy" },
+    { "type": "textarea", "id": "texto", "label": "Texto", "default": "Precisión Hall Effect, botones traseros configurables y 1 mes de Xbox Game Pass Ultimate. Todo en un solo control." },
+    { "type": "text", "id": "gamepass_texto", "label": "Texto junto al precio", "default": "incluye 1 mes de Game Pass Ultimate" },
+    { "type": "text", "id": "boton_texto", "label": "Texto del botón", "default": "Comprar ahora" },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 120, "step": 4, "default": 40 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 120, "step": 4, "default": 72 }
+  ],
+  "presets": [ { "name": "GG – CTA final" } ]
+}
+{% endschema %}
