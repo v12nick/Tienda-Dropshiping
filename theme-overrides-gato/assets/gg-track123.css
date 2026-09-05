@@ -363,8 +363,49 @@ html[data-gg-path-track] [data-gg-confirm="banner"] {
   left: 8%;
   right: 8%;
   height: 2px;
-  background: #2a2a2a;
+  background: linear-gradient(to right, #e50914 var(--gg-track-progress, 0%), #2a2a2a var(--gg-track-progress, 0%));
   z-index: 0;
+}
+
+.gg-track__timeline[data-gg-state="idle"] .gg-track__step-num {
+  border-color: #3a3a3a;
+  color: #8a8a8a;
+  background: #111;
+}
+
+.gg-track__timeline[data-gg-state="idle"] .gg-track__step-label {
+  color: #8a8a8a;
+}
+
+.gg-track__timeline[data-gg-state="live"] .gg-track__step:not(.is-done):not(.is-current) {
+  opacity: 0.38;
+}
+
+.gg-track__timeline[data-gg-state="live"] .gg-track__step.is-done .gg-track__step-num,
+.gg-track__timeline[data-gg-state="live"] .gg-track__step.is-current .gg-track__step-num {
+  background: #e50914;
+  border-color: #e50914;
+  color: #fff;
+}
+
+.gg-track__timeline[data-gg-state="live"] .gg-track__step.is-current .gg-track__step-num {
+  box-shadow: 0 0 0 4px rgb(229 9 20 / 0.28);
+}
+
+.gg-track__timeline[data-gg-state="live"] .gg-track__step.is-alert .gg-track__step-num {
+  background: #111;
+  color: #e50914;
+  box-shadow: 0 0 0 4px rgb(229 9 20 / 0.2);
+}
+
+html[data-gg-path-track] .track123_order_progress_container,
+html[data-gg-path-track] .track123_order_step_line_wrapper {
+  display: none !important;
+}
+
+html[data-gg-path-track] .track123_order_status_container + .gg-track__timeline {
+  margin: 12px auto 32px;
+  max-width: 680px;
 }
 
 .gg-track--app .gg-track__step,
@@ -443,6 +484,11 @@ html[data-gg-path-track] [data-gg-confirm="banner"] {
     background: #111;
     border: 1px solid #232323;
     border-radius: 12px;
+  }
+
+  .gg-track--app .gg-track__step.is-done,
+  .gg-track--app .gg-track__step.is-current {
+    border-color: #e50914;
   }
 
   html[data-gg-path-track] .track123_form_wrapper,

@@ -8,17 +8,19 @@
     <p class="gg-track__subtitle">Escribe el número de pedido o de guía y el correo de la compra.</p>
   </div>
   <div class="gg-track__widget" data-gg-track-slot></div>
-  <div class="gg-track__timeline">
-    <h2 class="gg-track__timeline-title">Así avanza tu pedido</h2>
-    <p class="gg-track__timeline-copy">Cuando despachamos, te llega la guía al correo. Con ese número ves el estado aquí.</p>
-    <ol class="gg-track__steps">
-      <li class="gg-track__step"><span class="gg-track__step-num">1</span><span class="gg-track__step-label">Confirmado</span></li>
-      <li class="gg-track__step"><span class="gg-track__step-num">2</span><span class="gg-track__step-label">Preparado</span></li>
-      <li class="gg-track__step"><span class="gg-track__step-num">3</span><span class="gg-track__step-label">Enviado</span></li>
-      <li class="gg-track__step"><span class="gg-track__step-num">4</span><span class="gg-track__step-label">En tránsito</span></li>
-      <li class="gg-track__step"><span class="gg-track__step-num">5</span><span class="gg-track__step-label">En reparto</span></li>
-      <li class="gg-track__step"><span class="gg-track__step-num">6</span><span class="gg-track__step-label">Entregado</span></li>
-    </ol>
+  <div data-gg-timeline-home>
+    <div class="gg-track__timeline" data-gg-state="idle">
+      <h2 class="gg-track__timeline-title">Así avanza tu pedido</h2>
+      <p class="gg-track__timeline-copy" data-gg-timeline-copy data-idle="Cuando despachamos, te llega la guía al correo. Con ese número ves el estado aquí.">Cuando despachamos, te llega la guía al correo. Con ese número ves el estado aquí.</p>
+      <ol class="gg-track__steps" data-gg-steps>
+        <li class="gg-track__step" data-gg-step="1"><span class="gg-track__step-num">1</span><span class="gg-track__step-label">Confirmado</span></li>
+        <li class="gg-track__step" data-gg-step="2"><span class="gg-track__step-num">2</span><span class="gg-track__step-label">Preparado</span></li>
+        <li class="gg-track__step" data-gg-step="3"><span class="gg-track__step-num">3</span><span class="gg-track__step-label">Enviado</span></li>
+        <li class="gg-track__step" data-gg-step="4"><span class="gg-track__step-num">4</span><span class="gg-track__step-label">En tránsito</span></li>
+        <li class="gg-track__step" data-gg-step="5"><span class="gg-track__step-num">5</span><span class="gg-track__step-label">En reparto</span></li>
+        <li class="gg-track__step" data-gg-step="6"><span class="gg-track__step-num">6</span><span class="gg-track__step-label">Entregado</span></li>
+      </ol>
+    </div>
   </div>
   <p class="gg-track__help">
     ¿No tienes la guía? Revisa el correo y el spam. Si ya pasaron más de 10 días hábiles,
