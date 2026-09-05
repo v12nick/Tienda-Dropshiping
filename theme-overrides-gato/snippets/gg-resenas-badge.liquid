@@ -28,16 +28,19 @@ Shows a product rating badge that links to the customer reviews section.
     endif
   endif
   if gg_count == 0 or gg_count == blank or gg_rating == blank
-    assign gg_ae_raw = 'gg-aliexpress-reviews.json' | inline_asset_content
-    if gg_ae_raw != blank
-      assign gg_ae = gg_ae_raw | parse_json
-      if gg_ae and gg_ae.product_handles contains product.handle
-        if gg_rating == blank
-          assign gg_rating = gg_ae.rating
-        endif
-        if gg_count == 0 or gg_count == blank
-          assign gg_count = gg_ae.count
-        endif
+    assign gg_is_g7se = false
+    if product.handle == 'control-gamesir-g7se-cable-joysticks-hall-xbox-pc'
+      assign gg_is_g7se = true
+    endif
+    if product.handle == 'mando-gamesir-g7se-efecto-hall-xbox-pc-android'
+      assign gg_is_g7se = true
+    endif
+    if gg_is_g7se
+      if gg_rating == blank
+        assign gg_rating = 4.9
+      endif
+      if gg_count == 0 or gg_count == blank
+        assign gg_count = 190
       endif
     endif
   endif
