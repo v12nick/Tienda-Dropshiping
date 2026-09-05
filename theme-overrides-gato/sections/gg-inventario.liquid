@@ -1,0 +1,220 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: var(--gg-bg);
+  }
+  #shopify-section-{{ section.id }} .gg-section-title {
+    font-size: {{ section.settings.heading_size }}px;
+    text-align: {{ section.settings.text_align }};
+  }
+  {% if section.settings.text_align == 'center' %}
+  #shopify-section-{{ section.id }} .gg-section-sub {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+  {% endif %}
+{% endstyle %}
+
+{%- liquid
+  assign gg_limit = section.settings.limite | default: 12
+  assign gg_seen = '|'
+  assign gg_shown = 0
+  assign gg_col = section.settings.coleccion
+  if gg_col == blank or gg_col.products_count == 0
+    assign gg_col = collections.frontpage
+  endif
+  if gg_col == blank or gg_col.products_count == 0
+    assign gg_col = collections.all
+  endif
+-%}
+
+<section class="gg-section gg-container" id="gg-inventario">
+  <div class="gg-section-head gg-reveal">
+    <div>
+      {%- if section.settings.titulo != blank -%}
+        <h2 class="gg-section-title">{% render 'gg-t', text: section.settings.titulo %}</h2>
+      {%- endif -%}
+      {%- if section.settings.subtitulo != blank -%}
+        <p class="gg-section-sub">{% render 'gg-t', text: section.settings.subtitulo %}</p>
+      {%- endif -%}
+    </div>
+    {%- if gg_col != blank and gg_col.products_count > 0 -%}
+      <a href="{{ gg_col.url }}" class="gg-section-link">{% render 'gg-t', text: section.settings.ver_todo_texto | default: 'Ver todo' %} →</a>
+    {%- endif -%}
+  </div>
+
+  <div class="gg-products-grid gg-reveal">
+    {%- if section.settings.producto_principal != blank -%}
+      {%- assign gg_featured = section.settings.producto_principal -%}
+      {%- if gg_featured != blank and gg_featured.handle != blank -%}
+        {%- assign gg_seen = gg_seen | append: gg_featured.handle | append: '|' -%}
+        {%- assign gg_shown = gg_shown | plus: 1 -%}
+        {% render 'gg-product-card', product: gg_featured %}
+      {%- endif -%}
+    {%- endif -%}
+
+    {%- assign gg_fallback_handle = all_products['gamesir-g7-se-control-xbox-hall-effect'] -%}
+    {%- if gg_fallback_handle != blank and gg_seen contains gg_fallback_handle.handle -%}
+    {%- elsif gg_fallback_handle != blank -%}
+      {%- assign gg_seen = gg_seen | append: gg_fallback_handle.handle | append: '|' -%}
+      {%- assign gg_shown = gg_shown | plus: 1 -%}
+      {% render 'gg-product-card', product: gg_fallback_handle %}
+    {%- endif -%}
+
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'producto' and block.settings.producto != blank -%}
+        {%- assign gg_block_product = block.settings.producto -%}
+        {%- assign gg_token = '|' | append: gg_block_product.handle | append: '|' -%}
+        {%- unless gg_seen contains gg_token -%}
+          {%- assign gg_seen = gg_seen | append: gg_block_product.handle | append: '|' -%}
+          {%- assign gg_shown = gg_shown | plus: 1 -%}
+          {% render 'gg-product-card', product: gg_block_product %}
+        {%- endunless -%}
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- if section.settings.productos != blank -%}
+      {%- for product in section.settings.productos -%}
+        {%- if gg_shown >= gg_limit -%}{%- break -%}{%- endif -%}
+        {%- assign gg_token = '|' | append: product.handle | append: '|' -%}
+        {%- unless gg_seen contains gg_token -%}
+          {%- assign gg_seen = gg_seen | append: product.handle | append: '|' -%}
+          {%- assign gg_shown = gg_shown | plus: 1 -%}
+          {% render 'gg-product-card', product: product %}
+        {%- endunless -%}
+      {%- endfor -%}
+    {%- endif -%}
+
+    {%- if gg_col != blank -%}
+      {%- for product in gg_col.products limit: gg_limit -%}
+        {%- if gg_shown >= gg_limit -%}{%- break -%}{%- endif -%}
+        {%- assign gg_token = '|' | append: product.handle | append: '|' -%}
+        {%- unless gg_seen contains gg_token -%}
+          {%- assign gg_seen = gg_seen | append: product.handle | append: '|' -%}
+          {%- assign gg_shown = gg_shown | plus: 1 -%}
+          {% render 'gg-product-card', product: product %}
+        {%- endunless -%}
+      {%- endfor -%}
+    {%- endif -%}
+
+    {%- if collections.all != blank -%}
+      {%- for product in collections.all.products limit: gg_limit -%}
+        {%- if gg_shown >= gg_limit -%}{%- break -%}{%- endif -%}
+        {%- assign gg_token = '|' | append: product.handle | append: '|' -%}
+        {%- unless gg_seen contains gg_token -%}
+          {%- assign gg_seen = gg_seen | append: product.handle | append: '|' -%}
+          {%- assign gg_shown = gg_shown | plus: 1 -%}
+          {% render 'gg-product-card', product: product %}
+        {%- endunless -%}
+      {%- endfor -%}
+    {%- endif -%}
+
+    {%- if gg_shown == 0 -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'vitrina' -%}
+          {%- assign gg_shown = gg_shown | plus: 1 -%}
+          {%- assign gg_vitrina_url = block.settings.enlace | default: '#gg-comprar' -%}
+          <div class="gg-carrusel__item" {{ block.shopify_attributes }}>
+            <div class="gg-card">
+              <a href="{{ gg_vitrina_url }}" class="gg-card__media">
+                {%- if block.settings.imagen != blank -%}
+                  <img
+                    src="{{ block.settings.imagen | image_url: width: 600 }}"
+                    srcset="{{ block.settings.imagen | image_url: width: 300 }} 300w, {{ block.settings.imagen | image_url: width: 600 }} 600w"
+                    sizes="(max-width: 749px) 45vw, 260px"
+                    alt="{{ block.settings.titulo | escape }}"
+                    loading="lazy"
+                    width="600"
+                    height="600"
+                  >
+                {%- endif -%}
+              </a>
+              <a href="{{ gg_vitrina_url }}" style="text-decoration:none;color:inherit;">
+                <div class="gg-card__body">
+                  {%- if block.settings.etiqueta != blank -%}<span class="gg-card__platform">{% render 'gg-t', text: block.settings.etiqueta %}</span>{%- endif -%}
+                  <p class="gg-card__title">{% render 'gg-t', text: block.settings.titulo %}</p>
+                  {%- if block.settings.precio != blank -%}
+                    <div class="gg-card__prices">
+                      <span class="gg-card__price">{% render 'gg-t', text: block.settings.precio %}</span>
+                    </div>
+                  {%- endif -%}
+                  {%- if block.settings.texto != blank -%}
+                    <p class="gg-section-sub">{% render 'gg-t', text: block.settings.texto %}</p>
+                  {%- endif -%}
+                </div>
+              </a>
+              <div class="gg-card__foot">
+                <a href="{{ gg_vitrina_url }}" class="gg-card__add">
+                  {% render 'gg-icon', name: 'cart' %}
+                  {% render 'gg-t', text: block.settings.boton | default: 'Ver producto' %}
+                </a>
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+
+  {%- if gg_shown == 0 -%}
+    <div class="gg-empty gg-reveal">
+      <strong>{% render 'gg-t', text: section.settings.empty_titulo | default: 'Catálogo en camino' %}</strong>
+      <p>{% render 'gg-t', text: section.settings.empty_texto | default: 'El GameSir G7 SE está disponible. Escríbenos por WhatsApp o pulsa Comprar ahora arriba para pedir el tuyo.' %}</p>
+      <p>
+        <a class="gg-btn gg-btn--accent" href="#gg-comprar">{% render 'gg-t', text: 'Ver el GameSir G7 SE' %}</a>
+      </p>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "GG – Inventario",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "titulo", "label": "Título", "default": "En inventario" },
+    { "type": "textarea", "id": "subtitulo", "label": "Subtítulo", "default": "Productos disponibles ahora, con envío a Colombia." },
+    { "type": "select", "id": "text_align", "label": "Alineación", "options": [
+      { "value": "left", "label": "Izquierda" },
+      { "value": "center", "label": "Centro" }
+    ], "default": "left" },
+    { "type": "product", "id": "producto_principal", "label": "Producto principal", "info": "Se muestra primero. Debe estar publicado en el canal Tienda online." },
+    { "type": "product_list", "id": "productos", "label": "Productos del inventario", "limit": 12 },
+    { "type": "collection", "id": "coleccion", "label": "Colección", "info": "Si se deja vacía, se usan Destacados y luego todos los productos publicados." },
+    { "type": "text", "id": "ver_todo_texto", "label": "Texto ver todo", "default": "Ver todo" },
+    { "type": "range", "id": "limite", "label": "Máximo de productos", "min": 4, "max": 24, "step": 1, "default": 12 },
+    { "type": "text", "id": "empty_titulo", "label": "Título si no hay productos", "default": "Catálogo en camino" },
+    { "type": "textarea", "id": "empty_texto", "label": "Texto si no hay productos", "default": "El GameSir G7 SE está disponible. Escríbenos por WhatsApp o pulsa Comprar ahora arriba para pedir el tuyo." },
+    { "type": "range", "id": "heading_size", "label": "Tamaño del título (px)", "min": 20, "max": 44, "step": 2, "default": 30 },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 120, "step": 4, "default": 48 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 120, "step": 4, "default": 48 }
+  ],
+  "blocks": [
+    {
+      "type": "producto",
+      "name": "Producto publicado",
+      "settings": [
+        { "type": "product", "id": "producto", "label": "Producto" }
+      ]
+    },
+    {
+      "type": "vitrina",
+      "name": "Tarjeta de vitrina",
+      "settings": [
+        { "type": "image_picker", "id": "imagen", "label": "Imagen" },
+        { "type": "text", "id": "etiqueta", "label": "Etiqueta", "default": "GameSir" },
+        { "type": "text", "id": "titulo", "label": "Título", "default": "GameSir G7 SE" },
+        { "type": "text", "id": "precio", "label": "Precio (opcional)" },
+        { "type": "textarea", "id": "texto", "label": "Texto", "default": "Hall Effect + 1 mes de Game Pass Ultimate" },
+        { "type": "url", "id": "enlace", "label": "Enlace" },
+        { "type": "text", "id": "boton", "label": "Texto del botón", "default": "Ver producto" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "GG – Inventario" }
+  ]
+}
+{% endschema %}

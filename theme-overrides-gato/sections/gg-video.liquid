@@ -8,6 +8,34 @@
     font-size: {{ section.settings.heading_size }}px;
     text-align: {{ section.settings.text_align }};
   }
+  #shopify-section-{{ section.id }} .gg-video {
+    position: relative;
+    width: min(100%, 420px);
+    max-width: 420px;
+    margin: 0 auto;
+    aspect-ratio: 9 / 16;
+    overflow: hidden;
+    background: #000;
+  }
+  #shopify-section-{{ section.id }} .gg-video__el {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    max-height: none !important;
+    aspect-ratio: unset !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    display: block;
+    background: #000;
+  }
+  #shopify-section-{{ section.id }} .gg-video__play {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    z-index: 2;
+  }
 {% endstyle %}
 
 <section class="gg-section gg-container">
@@ -24,8 +52,9 @@
       playsinline
       controls
       preload="none"
-      width="1600"
-      height="900"
+      width="576"
+      height="1024"
+      style="width:100%;height:100%;object-fit:cover;aspect-ratio:auto"
       {%- if section.settings.poster != blank %}
       poster="{{ section.settings.poster | image_url: width: 900 }}"
       {%- else -%}
