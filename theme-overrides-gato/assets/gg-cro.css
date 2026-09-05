@@ -95,8 +95,8 @@
 }
 
 .gg-hero-banner {
-  min-height: 320px;
-  max-height: 460px;
+  min-height: 260px;
+  max-height: 380px;
 }
 
 .gg-hero-banner__title,
@@ -117,9 +117,9 @@
 
 @media (max-width: 749px) {
   .gg-hero-banner {
-    aspect-ratio: 5 / 4;
-    min-height: 260px;
-    max-height: 360px;
+    aspect-ratio: 4 / 3;
+    min-height: 220px;
+    max-height: 300px;
   }
 
   .gg-hero-banner .gg-hero-banner__content {
@@ -251,9 +251,9 @@
 
 @media (min-width: 750px) {
   .gg-hero-banner {
-    aspect-ratio: 2.6 / 1;
-    min-height: 320px;
-    max-height: 460px;
+    aspect-ratio: 3 / 1;
+    min-height: 260px;
+    max-height: 380px;
   }
 
   .gg-hero-banner .gg-hero-banner__content {
