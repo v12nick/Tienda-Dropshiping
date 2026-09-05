@@ -79,3 +79,11 @@
 .gg-option--colores{margin-top:4px}
 @media (max-width:540px){.gg-color-tile__name{font-size:11px;padding:4px 6px}}
 .gg-buy__error{margin:10px 0 0;color:#ff6b73;font-size:13px;line-height:1.4}
+.gg-pending-cart{max-width:720px;margin:24px auto;padding:20px;border:1px solid #232323;border-radius:18px;background:#111;color:#f5f5f5}
+.gg-pending-cart__kicker{margin:0 0 14px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#a6a6a6}
+.gg-pending-cart__item{display:flex;gap:16px;align-items:center;margin-bottom:18px}
+.gg-pending-cart__img{width:96px;height:96px;object-fit:contain;border-radius:12px;background:#0a0a0a;flex-shrink:0}
+.gg-pending-cart__title{margin:0 0 6px;font-size:18px;font-weight:700}
+.gg-pending-cart__meta{margin:0;color:#a6a6a6;font-size:14px}
+.gg-pending-cart__pay{width:100%;min-height:48px}
+.gg-pending-cart__error{margin:12px 0 0;color:#ff6b73;font-size:13px;line-height:1.4}

@@ -26,6 +26,9 @@
   if gg_product == blank
     assign gg_product = all_products['gamesir-g7-se-control-xbox-hall-effect']
   endif
+  if gg_product == blank and collections.frontpage.products.size > 0
+    assign gg_product = collections.frontpage.products.first
+  endif
   if gg_product == blank and collections.all.products.size > 0
     assign gg_product = collections.all.products.first
   endif
@@ -297,6 +300,7 @@
       {%- if gg_product != blank -%}
       {% form 'product', gg_product, data-gg-buy-form: 'true' %}
         <input type="hidden" name="id" value="{{ gg_variant.id }}" data-gg-variant-id>
+        <input type="hidden" name="return_to" value="{{ routes.cart_url }}">
 
         {%- unless gg_product.has_only_default_variant -%}
           {%- for option in gg_product.options_with_values -%}

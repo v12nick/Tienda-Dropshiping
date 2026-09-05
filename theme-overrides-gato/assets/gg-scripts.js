@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
   initProductForm();
   initColorPicker();
   initBuyForm();
+  initPendingCart();
   initAiChatButton();
   initRewardsButton();
   initPriceCop();
@@ -223,6 +224,78 @@ function ggBuyErrorMessage(payload) {
   return payload.description || payload.message || ggBuyUnavailableMessage();
 }
 
+function ggCartPageUrl() {
+  return ggCartRootUrl().replace(/\/?$/, '/') + 'cart';
+}
+
+function ggGoToCart() {
+  window.location.assign(ggCartPageUrl());
+}
+
+function ggSavePendingCart(item) {
+  try { sessionStorage.setItem('gg_pending_cart', JSON.stringify(item)); } catch (e) {}
+}
+
+function ggReadPendingCart() {
+  try {
+    var raw = sessionStorage.getItem('gg_pending_cart');
+    return raw ? JSON.parse(raw) : null;
+  } catch (e) { return null; }
+}
+
+function ggClearPendingCart() {
+  try { sessionStorage.removeItem('gg_pending_cart'); } catch (e) {}
+}
+
+function ggEscapeHtml(s) {
+  return String(s || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function ggPendingItemFromRoot(root) {
+  var color = ggSelectedColor(root);
+  var tileImg = root.querySelector('[data-gg-color].gg-active img');
+  var qtyInput = root.querySelector('[data-gg-qty-input]');
+  var qty = qtyInput ? parseInt(qtyInput.value, 10) : 1;
+  if (!qty || qty < 1) qty = 1;
+  var titleEl = root.querySelector('.gg-buy__title');
+  return {
+    handle: root.getAttribute('data-gg-product-handle') || root.getAttribute('data-gg-track-product') || 'gamesir-g7-se-control-xbox-hall-effect',
+    title: (titleEl && titleEl.textContent.trim()) || 'GameSir G7 SE',
+    color: color,
+    qty: qty,
+    image: tileImg ? tileImg.getAttribute('src') : ''
+  };
+}
+
+function ggBumpCartCount(n) {
+  var cartIcon = document.querySelector('[data-gg-cart-count]');
+  if (!cartIcon) return;
+  var qty = parseInt(n, 10) || 1;
+  cartIcon.textContent = qty;
+  cartIcon.hidden = qty === 0;
+}
+
+function ggAddVariantToCart(variantId, qty) {
+  return fetch(ggCartRootUrl() + 'cart/add.js', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    body: JSON.stringify(ggCartAddPayload([{ id: parseInt(variantId, 10), quantity: qty }]))
+  }).then(function (res) {
+    return res.json().then(function (data) { return { ok: res.ok, data: data }; });
+  });
+}
+
+function ggFetchProductByHandle(handle) {
+  return fetch(ggCartRootUrl() + 'products/' + handle + '.js', { headers: { Accept: 'application/json' } })
+    .then(function (res) { return res.ok ? res.json() : null; })
+    .then(function (raw) { return ggNormalizeAjaxProduct(raw); })
+    .catch(function () { return null; });
+}
+
 function initBuyForm() {
   var root = document.querySelector('[data-gg-product-root]');
   if (!root) return;
@@ -240,46 +313,137 @@ function initBuyForm() {
     var btn = form.querySelector('[data-gg-buy-add]');
     if (btn && btn.disabled) return;
     ggShowBuyError(root, '');
-    var original = btn ? btn.innerHTML : '';
+    var pending = ggPendingItemFromRoot(root);
+    ggSavePendingCart(pending);
+    ggBumpCartCount(pending.qty);
     if (btn) {
       btn.disabled = true;
-      btn.textContent = (document.documentElement.lang || '').indexOf('en') === 0 ? 'Adding…' : 'Agregando…';
+      btn.textContent = (document.documentElement.lang || '').indexOf('en') === 0 ? 'Going to cart…' : 'Yendo al carrito…';
     }
-    ggEnsureProduct(root).then(function (product) {
-      ggApplyColorToVariant(root, ggSelectedColor(root));
+    ggEnsureProduct(root).then(function () {
+      ggApplyColorToVariant(root, pending.color);
       var idInput = form.querySelector('[data-gg-variant-id]');
       var variantId = idInput && idInput.value ? parseInt(idInput.value, 10) : 0;
-      if (!variantId) {
-        if (btn) { btn.disabled = false; btn.innerHTML = original; }
-        ggShowBuyError(root, ggBuyUnavailableMessage());
-        return null;
-      }
-      var qtyInput = form.querySelector('[data-gg-qty-input]');
-      var qty = qtyInput ? parseInt(qtyInput.value, 10) : 1;
-      if (!qty || qty < 1) qty = 1;
-      return fetch(ggCartRootUrl() + 'cart/add.js', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify(ggCartAddPayload([{ id: variantId, quantity: qty }]))
-      }).then(function (res) {
-        return res.json().then(function (data) { return { ok: res.ok, data: data }; });
-      });
+      if (!variantId) return null;
+      return ggAddVariantToCart(variantId, pending.qty);
     }).then(function (result) {
-      if (!result) return;
-      if (!result.ok || result.data.status) {
-        if (btn) { btn.disabled = false; btn.innerHTML = original; }
-        ggShowBuyError(root, ggBuyErrorMessage(result.data));
-        return;
+      if (result && result.ok && !result.data.status) {
+        ggClearPendingCart();
+        document.dispatchEvent(new CustomEvent('cart:refresh'));
+        document.dispatchEvent(new CustomEvent('cart:add'));
       }
-      if (btn) btn.textContent = '¡Agregado!';
-      document.dispatchEvent(new CustomEvent('cart:refresh'));
-      document.dispatchEvent(new CustomEvent('cart:add'));
-      ggUpdateCartCount();
-      window.location.href = ggCartRootUrl().replace(/\/?$/, '/') + 'cart';
+      ggGoToCart();
     }).catch(function () {
-      if (btn) { btn.disabled = false; btn.innerHTML = original; }
-      ggShowBuyError(root, ggBuyUnavailableMessage());
+      ggGoToCart();
     });
+  });
+}
+
+function ggPendingCartMarkup(item) {
+  var en = (document.documentElement.lang || '').indexOf('en') === 0;
+  var colorLine = item.color ? (en ? 'Color: ' : 'Color: ') + ggEscapeHtml(item.color) : '';
+  return (
+    '<div class="gg-pending-cart">' +
+      '<p class="gg-pending-cart__kicker">' + (en ? 'Your cart' : 'Tu carrito') + '</p>' +
+      '<div class="gg-pending-cart__item">' +
+        (item.image ? '<img class="gg-pending-cart__img" src="' + ggEscapeHtml(item.image) + '" alt="' + ggEscapeHtml(item.color || item.title) + '">' : '') +
+        '<div class="gg-pending-cart__info">' +
+          '<p class="gg-pending-cart__title">' + ggEscapeHtml(item.title) + '</p>' +
+          (colorLine ? '<p class="gg-pending-cart__meta">' + colorLine + '</p>' : '') +
+          '<p class="gg-pending-cart__meta">' + (en ? 'Qty: ' : 'Cantidad: ') + ggEscapeHtml(item.qty) + '</p>' +
+        '</div>' +
+      '</div>' +
+      '<button type="button" class="gg-btn gg-btn--accent gg-pending-cart__pay" data-gg-pending-checkout>' +
+        (en ? 'Checkout' : 'Pagar ahora') +
+      '</button>' +
+      '<p class="gg-pending-cart__error" data-gg-pending-error hidden></p>' +
+    '</div>'
+  );
+}
+
+function ggMountPendingCart(item) {
+  var host = document.querySelector('[data-gg-pending-cart]');
+  if (!host) {
+    host = document.createElement('div');
+    host.setAttribute('data-gg-pending-cart', '');
+    var warnings = document.querySelector('.cart__warnings');
+    var main = document.getElementById('MainContent');
+    if (warnings) warnings.insertBefore(host, warnings.firstChild);
+    else if (main) main.insertBefore(host, main.firstChild);
+    else document.body.insertBefore(host, document.body.firstChild);
+  }
+  host.hidden = false;
+  host.innerHTML = ggPendingCartMarkup(item);
+  var emptyText = document.querySelector('.cart__empty-text');
+  if (emptyText) emptyText.hidden = true;
+  var continueBtn = document.querySelector('.cart__warnings .button');
+  if (continueBtn) continueBtn.hidden = true;
+  ggBumpCartCount(item.qty);
+  var pay = host.querySelector('[data-gg-pending-checkout]');
+  if (pay) {
+    pay.addEventListener('click', function () {
+      ggCheckoutPending(item, host);
+    });
+  }
+}
+
+function ggCheckoutPending(item, host) {
+  var err = host.querySelector('[data-gg-pending-error]');
+  var pay = host.querySelector('[data-gg-pending-checkout]');
+  var en = (document.documentElement.lang || '').indexOf('en') === 0;
+  if (pay) {
+    pay.disabled = true;
+    pay.textContent = en ? 'Checking out…' : 'Redirigiendo…';
+  }
+  ggFetchProductByHandle(item.handle).then(function (product) {
+    var variant = product ? ggFindVariantForColor(product, item.color) : null;
+    if (!variant || !variant.id) {
+      throw new Error('no-variant');
+    }
+    return ggAddVariantToCart(variant.id, item.qty || 1);
+  }).then(function (result) {
+    if (!result || !result.ok || result.data.status) throw new Error('add-failed');
+    ggClearPendingCart();
+    window.location.assign('/checkout');
+  }).catch(function () {
+    if (pay) {
+      pay.disabled = false;
+      pay.textContent = en ? 'Checkout' : 'Pagar ahora';
+    }
+    if (err) {
+      err.hidden = false;
+      err.textContent = en
+        ? 'This product is not published to the Online Store yet, so Shopify checkout cannot start.'
+        : 'Este producto aún no está publicado en la Tienda online, así que Shopify no puede iniciar el pago.';
+    }
+  });
+}
+
+function initPendingCart() {
+  var pending = ggReadPendingCart();
+  if (pending && pending.qty) ggBumpCartCount(pending.qty);
+
+  var path = (window.location.pathname || '').replace(/\/$/, '');
+  if (path !== '/cart') return;
+  if (!pending) return;
+
+  ggFetchProductByHandle(pending.handle).then(function (product) {
+    var variant = product ? ggFindVariantForColor(product, pending.color) : null;
+    if (variant && variant.id) {
+      return ggAddVariantToCart(variant.id, pending.qty || 1).then(function (result) {
+        if (result && result.ok && !result.data.status) {
+          ggClearPendingCart();
+          window.location.reload();
+          return true;
+        }
+        return false;
+      });
+    }
+    return false;
+  }).then(function (added) {
+    if (!added) ggMountPendingCart(pending);
+  }).catch(function () {
+    ggMountPendingCart(pending);
   });
 }
 
