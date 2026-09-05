@@ -168,11 +168,10 @@
           };
           var ggSyncTrackSteps = function () {
             var root = document.getElementById('track123-app');
-            var timeline = document.querySelector('.gg-track--app .gg-track__timeline');
+            var timeline = document.querySelector('.gg-track--app [data-gg-timeline-home] .gg-track__timeline');
             if (!timeline) return;
             var steps = timeline.querySelectorAll('[data-gg-step]');
             var copy = timeline.querySelector('[data-gg-timeline-copy]');
-            var home = document.querySelector('.gg-track--app [data-gg-timeline-home]');
             var rank = 0;
             var label = '';
             var alert = false;
@@ -183,21 +182,18 @@
                 rank = Math.max(rank, ggTrackRankFromText(label));
                 alert = ggTrackIsAlert(label);
               }
-              root.querySelectorAll('.track123_order_step_line1_container, .track123_order_step_line_item').forEach(function (item) {
-                var nameEl = item.querySelector('.track123_order_step_line_status_name');
-                var timeEl = item.querySelector('.track123_order_step_line_time');
-                var process = item.querySelector('.track123_order_step_line1_process, .track123_order_step_line_process');
-                var filled = timeEl && (timeEl.textContent || '').trim();
-                if (!filled && process && /(?:^|;)\s*width:\s*(100|[6-9]\d)%/.test(process.getAttribute('style') || '')) filled = true;
-                if (!filled) return;
-                var n = (nameEl && nameEl.textContent) || '';
+              root.querySelectorAll('.track123_order_step_line_status_name').forEach(function (nameEl) {
+                var item = nameEl.closest('.track123_order_step_line1_container, .track123_order_step_line_item') || nameEl.parentNode;
+                var timeEl = item && item.querySelector ? item.querySelector('.track123_order_step_line_time') : null;
+                if (!(timeEl && (timeEl.textContent || '').trim())) return;
+                var n = nameEl.textContent || '';
                 var stepRank = ggTrackRankFromText(n);
                 if (/preparad|prepared/.test(ggTrackNorm(n))) stepRank = Math.max(stepRank, 2);
                 if (/realizado|ordered/.test(ggTrackNorm(n))) stepRank = Math.max(stepRank, 1);
                 rank = Math.max(rank, stepRank);
                 if (stepRank >= 4) rank = Math.max(rank, 3);
               });
-              var firstMsg = root.querySelector('.track123_order_tracking_details_first_msg, .track123_track_desc');
+              var firstMsg = root.querySelector('.track123_order_tracking_details_first_msg');
               if (firstMsg) rank = Math.max(rank, ggTrackRankFromText(firstMsg.textContent));
             }
             if (rank >= 4) rank = Math.max(rank, 3);
@@ -222,12 +218,6 @@
                 ? (alert ? 'Track123 reporta una incidencia. Estado: ' : 'Estado en Track123: ') + (label || fallbackLabel)
                 : (copy.getAttribute('data-idle') || copy.textContent);
             }
-            var statusBox = root && root.querySelector('.track123_order_status_container');
-            if (live && statusBox && statusBox.parentNode && timeline.parentNode !== statusBox.parentNode) {
-              statusBox.parentNode.insertBefore(timeline, statusBox.nextSibling);
-            } else if (!live && home && timeline.parentNode !== home) {
-              home.appendChild(timeline);
-            }
           };
           var ggTightenTrackLayout = function () {
             var root = document.getElementById('track123-app');
@@ -242,19 +232,22 @@
               el.style.float = 'none';
               el.style.position = 'relative';
             });
-            root.querySelectorAll('.track123_order_wrapper, .track123_order_detail_container, #track123_main_content, .track123_tracking_above, .track123_tracking_below').forEach(function (el) {
-              if (el.textContent.replace(/\s+/g, '')) {
-                el.style.removeProperty('display');
-                el.style.removeProperty('height');
-                el.style.removeProperty('padding');
-              } else {
-                el.style.display = 'none';
-                el.style.height = '0';
-                el.style.padding = '0';
-                el.style.margin = '0';
-              }
-            });
-            ggSyncTrackSteps();
+          };
+          var ggTrackBusy = false;
+          var ggTrackTimer = 0;
+          var ggQueueTrackWork = function () {
+            if (ggTrackTimer) return;
+            ggTrackTimer = setTimeout(function () {
+              ggTrackTimer = 0;
+              if (ggTrackBusy) return;
+              ggTrackBusy = true;
+              try {
+                ggMountTrack();
+                ggTightenTrackLayout();
+                ggSyncTrackSteps();
+              } catch (err) {}
+              ggTrackBusy = false;
+            }, 160);
           };
           var ggMountTrack = function () {
             var app = document.getElementById('track123-app');
@@ -270,22 +263,17 @@
               app.parentNode.insertBefore(section, app);
               slot.appendChild(app);
             }
-            var home = document.querySelector('.gg-track--app [data-gg-timeline-home]');
-            if (home && !document.querySelector('.gg-track--app .gg-track__timeline')) {
-              var fresh = tpl.content.querySelector('.gg-track__timeline');
-              if (fresh) home.appendChild(fresh.cloneNode(true));
-            }
-            ggTightenTrackLayout();
             return !!document.getElementById('track123-app');
           };
           ggMountTrack();
           var ggTrackObs = new MutationObserver(function () {
-            ggMountTrack();
+            if (ggTrackBusy) return;
+            ggQueueTrackWork();
           });
           ggTrackObs.observe(document.documentElement, { childList: true, subtree: true });
-          document.addEventListener('DOMContentLoaded', ggMountTrack);
-          [400, 1200, 2500, 5000].forEach(function (ms) {
-            setTimeout(ggTightenTrackLayout, ms);
+          document.addEventListener('DOMContentLoaded', ggQueueTrackWork);
+          [500, 1600, 3200].forEach(function (ms) {
+            setTimeout(ggQueueTrackWork, ms);
           });
         }
         document.addEventListener('DOMContentLoaded', function () {
