@@ -3,14 +3,23 @@
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
     background: var(--gg-bg);
-    min-height: 60vh;
+    min-height: 40vh;
   }
 {% endstyle %}
 
-{% render 'gg-track123-page',
-  titulo: section.settings.titulo,
-  subtitulo: section.settings.subtitulo
-%}
+<section class="gg-section gg-container gg-track">
+  <div class="gg-track__hero">
+    <span class="gg-hero__eyebrow">Gato Gamer Store</span>
+    <h1 class="gg-track__title">{% render 'gg-t', text: section.settings.titulo | default: 'Rastrea tu pedido' %}</h1>
+    <p class="gg-track__subtitle">El seguimiento está en Track123, con el diseño de Gato Gamer Store.</p>
+    <p style="margin-top:18px;">
+      <a class="gg-btn gg-btn--accent" href="/apps/track123">Abrir rastreador</a>
+    </p>
+  </div>
+</section>
+<script>
+  location.replace('/apps/track123' + (location.search || '') + (location.hash || ''));
+</script>
 
 {% schema %}
 {

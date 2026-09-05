@@ -30,6 +30,9 @@
           {%- assign url = 'col1_link_' | append: i | append: '_url' -%}
           {%- assign lbl_val = section.settings[lbl] -%}
           {%- assign url_val = section.settings[url] -%}
+          {%- if url_val contains 'rastrea-tu-pedido' -%}
+            {%- assign url_val = '/apps/track123' -%}
+          {%- endif -%}
           {%- if lbl_val != blank and url_val != blank -%}
             <a href="{{ url_val }}">{% render 'gg-t', text: lbl_val %}</a>
           {%- endif -%}

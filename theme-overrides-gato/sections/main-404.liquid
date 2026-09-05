@@ -35,7 +35,14 @@
   Shopify las sirve como 404; este HTML + JS las muestra con la URL real.
 {%- endcomment -%}
 <div hidden data-gg-track-fallback>
-  {% render 'gg-track123-page' %}
+  <section class="gg-section gg-container gg-track">
+    <div class="gg-track__hero">
+      <span class="gg-hero__eyebrow">Gato Gamer Store</span>
+      <h1 class="gg-track__title">Rastrea tu pedido</h1>
+      <p class="gg-track__subtitle">El seguimiento lo hace Track123. Te llevamos ahí.</p>
+      <p style="margin-top:18px;"><a class="gg-btn gg-btn--accent" href="/apps/track123">Abrir rastreador</a></p>
+    </div>
+  </section>
 </div>
 {%- assign gg_legal_handles = 'quienes-somos,politica-de-envios,politica-de-devoluciones,politica-de-privacidad,terminos-y-condiciones,aviso-legal' | split: ',' -%}
 {%- for gg_legal_h in gg_legal_handles -%}

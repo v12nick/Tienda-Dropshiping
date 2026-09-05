@@ -130,7 +130,11 @@
         if (path === '/pages/compra-confirmada') {
           document.documentElement.setAttribute('data-gg-path-confirm', '1');
         }
-        if (path === '/pages/rastrea-tu-pedido' || path.indexOf('/apps/track123') === 0) {
+        if (path === '/pages/rastrea-tu-pedido') {
+          document.documentElement.setAttribute('data-gg-path-track', '1');
+          location.replace('/apps/track123' + (location.search || '') + (location.hash || ''));
+        }
+        if (path.indexOf('/apps/track123') === 0) {
           document.documentElement.setAttribute('data-gg-path-track', '1');
           document.title = 'Rastrea tu pedido – Gato Gamer Store';
           var ggTrackMeta = document.querySelector('meta[name="description"]');
@@ -140,17 +144,33 @@
             document.head.appendChild(ggTrackMeta);
           }
           ggTrackMeta.setAttribute('content', 'Rastrea tu GameSir G7 SE con Track123. Envío a Colombia en 1 a 10 días hábiles. Gato Gamer Store.');
-          if (path.indexOf('/apps/track123') === 0) {
-            document.addEventListener('DOMContentLoaded', function () {
-              var main = document.getElementById('MainContent');
-              if (!main || document.querySelector('.gg-track__hero--proxy')) return;
-              var hero = document.createElement('div');
-              hero.className = 'gg-container gg-track__hero gg-track__hero--proxy';
-              hero.innerHTML = '<span class="gg-hero__eyebrow">Gato Gamer Store</span><h1 class="gg-track__title">Rastrea tu pedido</h1><p class="gg-track__subtitle">Sigue tu GameSir G7 SE con Track123. Envío a Colombia en 1 a 10 días hábiles después del despacho.</p>';
-              main.insertBefore(hero, main.firstChild);
+          var ggMountTrack = function () {
+            var app = document.getElementById('track123-app');
+            var tpl = document.getElementById('gg-track123-shell');
+            if (!app || !tpl || app.closest('.gg-track--app')) return !!app;
+            var src = tpl.content.querySelector('.gg-track');
+            if (!src || !app.parentNode) return false;
+            var section = src.cloneNode(true);
+            section.classList.add('gg-track--app');
+            var slot = section.querySelector('[data-gg-track-slot]');
+            if (!slot) return false;
+            app.parentNode.insertBefore(section, app);
+            slot.appendChild(app);
+            return true;
+          };
+          if (!ggMountTrack()) {
+            var ggTrackObs = new MutationObserver(function () {
+              if (ggMountTrack()) ggTrackObs.disconnect();
             });
+            ggTrackObs.observe(document.documentElement, { childList: true, subtree: true });
+            document.addEventListener('DOMContentLoaded', ggMountTrack);
           }
         }
+        document.addEventListener('DOMContentLoaded', function () {
+          document.querySelectorAll('a[href*="rastrea-tu-pedido"]').forEach(function (a) {
+            a.setAttribute('href', '/apps/track123');
+          });
+        });
         var ggLegal = {
           '/pages/quienes-somos': { handle: 'quienes-somos', title: 'Quiénes somos – Gato Gamer Store', desc: 'Gato Gamer Store es la tienda en Colombia del mando GameSir G7 SE para Xbox y PC: Hall Effect, botones traseros y 1 mes de Game Pass Ultimate.' },
           '/pages/politica-de-envios': { handle: 'politica-de-envios', title: 'Envíos a Colombia – Gato Gamer Store', desc: 'Envío del GameSir G7 SE a Colombia en 1 a 10 días hábiles tras el despacho. El costo se confirma al pagar y te enviamos la guía.' },
@@ -575,5 +595,8 @@
       })();
     </script>
     {% render 'gg-deferred-apps' %}
+    <template id="gg-track123-shell">
+      {% render 'gg-track123-shell' %}
+    </template>
   </body>
 </html>

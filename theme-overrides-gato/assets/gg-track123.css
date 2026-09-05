@@ -113,6 +113,29 @@ html[data-gg-path-track] .track123-body,
   margin-bottom: 8px;
 }
 
+.gg-track--app {
+  padding-top: 40px;
+  padding-bottom: 56px;
+}
+
+.gg-track--app .gg-track__widget {
+  margin: 0 auto 48px;
+  max-width: 920px;
+}
+
+#track123-app {
+  min-height: 240px;
+}
+
+html[data-gg-path-track] img[src*="traditional_bg_truck"] {
+  display: none !important;
+}
+
+html[data-gg-path-track] .gg-confirm,
+html[data-gg-path-track] [data-gg-confirm="banner"] {
+  display: none !important;
+}
+
 .gg-track__panel {
   display: grid;
   gap: 28px;

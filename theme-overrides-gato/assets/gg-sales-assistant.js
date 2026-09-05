@@ -184,7 +184,7 @@
     if (/rastre|seguimiento|guia|número de guia|numero de guia/.test(q)) {
       lastTopic = 'pedido';
       return {
-        html: 'Puedes rastrear tu pedido aquí:\n<a href="' + (cfg.trackUrl || '/pages/rastrea-tu-pedido') + '">Rastrea tu pedido</a>\nSi no te llegó el correo de despacho, un asesor te ayuda.\n' + waButton('pedido'),
+        html: 'Puedes rastrear tu pedido aquí:\n<a href="' + (cfg.trackUrl || '/apps/track123') + '">Rastrea tu pedido</a>\nSi no te llegó el correo de despacho, un asesor te ayuda.\n' + waButton('pedido'),
         intent: 'chatbot_question',
         topic: 'pedido'
       };
