@@ -144,27 +144,45 @@
             document.head.appendChild(ggTrackMeta);
           }
           ggTrackMeta.setAttribute('content', 'Rastrea tu GameSir G7 SE con Track123. Envío a Colombia en 1 a 10 días hábiles. Gato Gamer Store.');
+          var ggTightenTrackLayout = function () {
+            var root = document.getElementById('track123-app');
+            if (!root) return;
+            root.style.height = 'auto';
+            root.style.minHeight = '0';
+            root.querySelectorAll('.track123_tab_form_background, .track123_track_wrapper, .track123_track_tab_wrapper, .track123_layout_left').forEach(function (el) {
+              el.style.height = 'auto';
+              el.style.minHeight = '0';
+              el.style.maxHeight = 'none';
+              el.style.width = '100%';
+              el.style.float = 'none';
+            });
+          };
           var ggMountTrack = function () {
             var app = document.getElementById('track123-app');
             var tpl = document.getElementById('gg-track123-shell');
-            if (!app || !tpl || app.closest('.gg-track--app')) return !!app;
-            var src = tpl.content.querySelector('.gg-track');
-            if (!src || !app.parentNode) return false;
-            var section = src.cloneNode(true);
-            section.classList.add('gg-track--app');
-            var slot = section.querySelector('[data-gg-track-slot]');
-            if (!slot) return false;
-            app.parentNode.insertBefore(section, app);
-            slot.appendChild(app);
-            return true;
+            if (!app || !tpl) return !!app;
+            if (!app.closest('.gg-track--app')) {
+              var src = tpl.content.querySelector('.gg-track');
+              if (!src || !app.parentNode) return false;
+              var section = src.cloneNode(true);
+              section.classList.add('gg-track--app');
+              var slot = section.querySelector('[data-gg-track-slot]');
+              if (!slot) return false;
+              app.parentNode.insertBefore(section, app);
+              slot.appendChild(app);
+            }
+            ggTightenTrackLayout();
+            return !!document.getElementById('track123-app');
           };
-          if (!ggMountTrack()) {
-            var ggTrackObs = new MutationObserver(function () {
-              if (ggMountTrack()) ggTrackObs.disconnect();
-            });
-            ggTrackObs.observe(document.documentElement, { childList: true, subtree: true });
-            document.addEventListener('DOMContentLoaded', ggMountTrack);
-          }
+          ggMountTrack();
+          var ggTrackObs = new MutationObserver(function () {
+            ggMountTrack();
+          });
+          ggTrackObs.observe(document.documentElement, { childList: true, subtree: true });
+          document.addEventListener('DOMContentLoaded', ggMountTrack);
+          [400, 1200, 2500].forEach(function (ms) {
+            setTimeout(ggTightenTrackLayout, ms);
+          });
         }
         document.addEventListener('DOMContentLoaded', function () {
           document.querySelectorAll('a[href*="rastrea-tu-pedido"]').forEach(function (a) {

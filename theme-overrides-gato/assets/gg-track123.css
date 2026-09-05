@@ -114,17 +114,53 @@ html[data-gg-path-track] .track123-body,
 }
 
 .gg-track--app {
-  padding-top: 40px;
-  padding-bottom: 56px;
+  padding-top: 32px;
+  padding-bottom: 48px;
+}
+
+.gg-track--app .gg-track__hero {
+  max-width: 640px;
+  margin: 0 auto 28px;
+  text-align: center;
+}
+
+.gg-track--app .gg-track__title {
+  margin: 8px 0 10px;
+  font-size: clamp(28px, 4vw, 38px);
+  line-height: 1.15;
+}
+
+.gg-track--app .gg-track__subtitle {
+  margin: 0 auto;
+  max-width: 520px;
+  overflow: visible;
+  white-space: normal;
+  word-break: break-word;
+  color: var(--gg-text-muted, #a6a6a6);
+  font-size: 15px;
+  line-height: 1.55;
 }
 
 .gg-track--app .gg-track__widget {
-  margin: 0 auto 48px;
-  max-width: 920px;
+  margin: 0 auto 36px;
+  max-width: 560px;
 }
 
-#track123-app {
-  min-height: 240px;
+#track123-app,
+#track123-app > div,
+html[data-gg-path-track] .track123_track_wrapper,
+html[data-gg-path-track] .track123_track_tab_wrapper,
+html[data-gg-path-track] .track123_tab_form_background,
+html[data-gg-path-track] .track123_layout_left,
+html[data-gg-path-track] .track123_tab_form_main_wrapper {
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  float: none !important;
+  width: 100% !important;
+  max-width: 560px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 html[data-gg-path-track] img[src*="traditional_bg_truck"] {
@@ -133,22 +169,213 @@ html[data-gg-path-track] img[src*="traditional_bg_truck"] {
 
 html[data-gg-path-track] .track123_tab_form_background {
   background-image: none !important;
-  background-color: #050505 !important;
-  min-height: 0 !important;
-  height: auto !important;
-  padding: 8px 0 24px !important;
+  background-color: transparent !important;
+  padding: 0 !important;
 }
 
-html[data-gg-path-track] .track123_tab_form_background .track123_form_wrapper,
-html[data-gg-path-track] [data-track123-section="order-lookup"] .track123_form_wrapper {
+html[data-gg-path-track] .track123_form_wrapper,
+html[data-gg-path-track] .track123_tab_form_wrapper {
+  width: 100% !important;
+  max-width: 560px !important;
+  margin: 0 auto !important;
   background: #111 !important;
   border: 1px solid #232323 !important;
   border-radius: 18px !important;
+  padding: 22px 20px 24px !important;
+  box-sizing: border-box !important;
+}
+
+html[data-gg-path-track] .track123_tab.track123_show_tab,
+html[data-gg-path-track] .track123_tab {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  gap: 8px;
+  margin: 0 0 18px !important;
+  position: relative !important;
+  width: 100% !important;
+}
+
+html[data-gg-path-track] .track123_tab_bar,
+html[data-gg-path-track] .track123_tab_bar_color {
+  position: relative !important;
+  left: auto !important;
+  right: auto !important;
+  top: auto !important;
+  flex: 1 1 0 !important;
+  width: auto !important;
+  min-width: 0 !important;
+  text-align: center !important;
+  padding: 10px 8px !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  line-height: 1.25 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  color: #a6a6a6 !important;
+  border-bottom: 2px solid #232323 !important;
+  background: transparent !important;
+}
+
+html[data-gg-path-track] .track123_tab_bar_color {
+  color: #f5f5f5 !important;
+  border-bottom-color: #e50914 !important;
+}
+
+html[data-gg-path-track] .track123_tracking_line_center,
+html[data-gg-path-track] .hide_tracking_number,
+html[data-gg-path-track] .track123_loading,
+html[data-gg-path-track] [data-track123-section="settings:additional-text"],
+html[data-gg-path-track] .track123_tracking_above:empty,
+html[data-gg-path-track] .track123_tracking_below:empty,
+html[data-gg-path-track] .track123_order_wrapper:empty {
+  display: none !important;
+}
+
+html[data-gg-path-track] .track123_form_error {
+  display: none;
+}
+
+html[data-gg-path-track] .track123_form_error.track123_show,
+html[data-gg-path-track] .track123_form_error[style*="block"],
+html[data-gg-path-track] .track123_form_error[style*="visible"] {
+  display: block;
+  color: #ff6b73 !important;
+  font-size: 12px !important;
+  margin-top: 6px;
+}
+
+html[data-gg-path-track] .track123_form_label {
+  display: block !important;
+  margin: 0 0 6px !important;
+  color: #f5f5f5 !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+}
+
+html[data-gg-path-track] .track123_input_container {
+  margin-bottom: 14px !important;
+}
+
+html[data-gg-path-track] .track123_form_input,
+html[data-gg-path-track] .track123_form_field {
+  width: 100% !important;
+  min-height: 46px !important;
+  padding: 12px 14px !important;
+  box-sizing: border-box !important;
+}
+
+html[data-gg-path-track] .track123_form_container button,
+html[data-gg-path-track] .button-enter {
+  width: 100% !important;
+  margin-top: 8px !important;
+  border-radius: 999px !important;
+  background: #e50914 !important;
+  border: 0 !important;
+  color: #fff !important;
+  font-weight: 700 !important;
+  min-height: 48px !important;
 }
 
 html[data-gg-path-track] .gg-confirm,
 html[data-gg-path-track] [data-gg-confirm="banner"] {
   display: none !important;
+}
+
+.gg-track__timeline {
+  margin: 8px auto 28px;
+  max-width: 920px;
+  text-align: center;
+}
+
+.gg-track__timeline-title {
+  margin: 0 0 8px;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.gg-track__timeline-copy {
+  margin: 0 auto 22px;
+  max-width: 480px;
+  color: var(--gg-text-muted, #a6a6a6);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.gg-track__steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.gg-track__step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 14px 8px;
+  background: var(--gg-card, #111);
+  border: 1px solid var(--gg-border, #232323);
+  border-radius: 14px;
+}
+
+.gg-track__step-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(229 9 20 / .16);
+  color: #e50914;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.gg-track__step-label {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--gg-text, #f5f5f5);
+}
+
+.gg-track__help {
+  text-align: center;
+  color: var(--gg-text-muted, #a6a6a6);
+  font-size: 14px;
+  line-height: 1.6;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+@media (max-width: 749px) {
+  .gg-track--app {
+    padding-top: 20px;
+    padding-bottom: 36px;
+  }
+
+  .gg-track--app .gg-track__hero {
+    margin-bottom: 20px;
+  }
+
+  .gg-track--app .gg-track__subtitle {
+    font-size: 14px;
+  }
+
+  .gg-track__steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  html[data-gg-path-track] .track123_form_wrapper,
+  html[data-gg-path-track] .track123_tab_form_wrapper {
+    padding: 18px 14px 20px !important;
+  }
 }
 
 .gg-track__panel {
