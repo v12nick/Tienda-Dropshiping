@@ -653,7 +653,6 @@
         "g7se": {
           "type": "vitrina",
           "settings": {
-            "imagen": "shopify://shop_images/gg-producto-g7se-angulo.jpg",
             "etiqueta": "GameSir",
             "titulo": "GameSir G7 SE",
             "precio": "",

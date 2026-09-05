@@ -129,6 +129,14 @@
                     width="600"
                     height="600"
                   >
+                {%- else -%}
+                  <img
+                    src="{{ 'gg-producto-g7se-angulo.jpg' | asset_url }}"
+                    alt="{{ block.settings.titulo | escape }}"
+                    loading="lazy"
+                    width="600"
+                    height="600"
+                  >
                 {%- endif -%}
               </a>
               <a href="{{ gg_vitrina_url }}" style="text-decoration:none;color:inherit;">

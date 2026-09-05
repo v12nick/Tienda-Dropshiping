@@ -55,11 +55,11 @@
       width="576"
       height="1024"
       style="width:100%;height:100%;object-fit:cover;aspect-ratio:auto"
-      {%- if section.settings.poster != blank %}
+      {% if section.settings.poster != blank %}
       poster="{{ section.settings.poster | image_url: width: 900 }}"
-      {%- else -%}
+      {% else %}
       poster="{{ 'gg-video-poster.jpg' | asset_url }}"
-      {%- endif %}
+      {% endif %}
     >
       <source src="{{ 'gg-video-detalle.mp4' | asset_url }}" type="video/mp4">
     </video>
