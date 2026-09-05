@@ -112,12 +112,42 @@
       html[data-gg-path-confirm] [data-gg-404]{display:none!important}
       html[data-gg-path-confirm] [data-gg-confirm-fallback]{display:block!important}
       html[data-gg-path-confirm] [data-gg-confirm="banner"]{display:none!important}
+      html[data-gg-path-legal] [data-gg-404]{display:none!important}
+      html[data-gg-path-legal] [data-gg-legal-fallback]{display:none!important}
+      html[data-gg-path-legal="quienes-somos"] [data-gg-legal-fallback][data-handle="quienes-somos"]{display:block!important}
+      html[data-gg-path-legal="politica-de-envios"] [data-gg-legal-fallback][data-handle="politica-de-envios"]{display:block!important}
+      html[data-gg-path-legal="politica-de-devoluciones"] [data-gg-legal-fallback][data-handle="politica-de-devoluciones"]{display:block!important}
+      html[data-gg-path-legal="politica-de-privacidad"] [data-gg-legal-fallback][data-handle="politica-de-privacidad"]{display:block!important}
+      html[data-gg-path-legal="terminos-y-condiciones"] [data-gg-legal-fallback][data-handle="terminos-y-condiciones"]{display:block!important}
+      html[data-gg-path-legal="aviso-legal"] [data-gg-legal-fallback][data-handle="aviso-legal"]{display:block!important}
     </style>
     <script>
       (function () {
         var path = (location.pathname || '').replace(/\/$/, '') || '/';
         if (path === '/pages/compra-confirmada') {
           document.documentElement.setAttribute('data-gg-path-confirm', '1');
+        }
+        var ggLegal = {
+          '/pages/quienes-somos': { handle: 'quienes-somos', title: 'Quiénes somos – Gato Gamer Store', desc: 'Gato Gamer Store es la tienda en Colombia del mando GameSir G7 SE para Xbox y PC: Hall Effect, botones traseros y 1 mes de Game Pass Ultimate.' },
+          '/pages/politica-de-envios': { handle: 'politica-de-envios', title: 'Envíos a Colombia – Gato Gamer Store', desc: 'Envío del GameSir G7 SE a Colombia en 1 a 10 días hábiles tras el despacho. El costo se confirma al pagar y te enviamos la guía.' },
+          '/pages/politica-de-devoluciones': { handle: 'politica-de-devoluciones', title: 'Devoluciones y garantía – Gato Gamer Store', desc: 'Devoluciones del mando GameSir G7 SE en Colombia: retracto, garantía por defectos y condiciones del código de Game Pass Ultimate.' },
+          '/pages/politica-de-privacidad': { handle: 'politica-de-privacidad', title: 'Política de privacidad – Gato Gamer Store', desc: 'Cómo Gato Gamer Store trata tus datos al comprar el GameSir G7 SE en Colombia, según la Ley 1581 de 2012.' },
+          '/pages/terminos-y-condiciones': { handle: 'terminos-y-condiciones', title: 'Términos y condiciones – Gato Gamer Store', desc: 'Condiciones de compra del GameSir G7 SE y Game Pass Ultimate en Gato Gamer Store. Precios en COP y checkout de Shopify.' },
+          '/pages/aviso-legal': { handle: 'aviso-legal', title: 'Aviso legal – Gato Gamer Store', desc: 'Información legal de Gato Gamer Store, tienda en Colombia del mando GameSir G7 SE para Xbox y PC.' }
+        };
+        var ggLegalPage = ggLegal[path];
+        if (ggLegalPage) {
+          document.documentElement.setAttribute('data-gg-path-legal', ggLegalPage.handle);
+          document.title = ggLegalPage.title;
+          var ggMeta = document.querySelector('meta[name="description"]');
+          if (!ggMeta) {
+            ggMeta = document.createElement('meta');
+            ggMeta.setAttribute('name', 'description');
+            document.head.appendChild(ggMeta);
+          }
+          ggMeta.setAttribute('content', ggLegalPage.desc);
+          var ggRobots = document.querySelector('meta[name="robots"]');
+          if (ggRobots) ggRobots.remove();
         }
         document.querySelectorAll(
           'link#shopify-accelerated-checkout-styles,link[href*="wishlist-hero"]'

@@ -11,48 +11,7 @@
   "sections": {
     "hero": {
       "type": "gg-hero-foco",
-      "blocks": {
-        "c_blanco": {
-          "type": "variante",
-          "settings": {
-            "nombre": "Blanco",
-            "hex": "#f4f4f4",
-            "imagen_asset": "gg-g7se-blanco.webp"
-          }
-        },
-        "c_azul": {
-          "type": "variante",
-          "settings": {
-            "nombre": "Azul Dinámico",
-            "hex": "#4aa3e8",
-            "imagen_asset": "gg-g7se-azul.webp"
-          }
-        },
-        "c_naranja": {
-          "type": "variante",
-          "settings": {
-            "nombre": "Naranja Vibrante",
-            "hex": "#ff6a1a",
-            "imagen_asset": "gg-g7se-naranja.webp"
-          }
-        },
-        "c_purpura": {
-          "type": "variante",
-          "settings": {
-            "nombre": "Púrpura Radiante",
-            "hex": "#c48ad4",
-            "imagen_asset": "gg-g7se-purpura.webp"
-          }
-        }
-      },
-      "block_order": [
-        "c_blanco",
-        "c_azul",
-        "c_naranja",
-        "c_purpura"
-      ],
       "settings": {
-        "producto": "control-gamesir-g7se-cable-joysticks-hall-xbox-pc",
         "eyebrow": "GameSir × Gato Gamer Store",
         "headline": "GameSir G7 SE: Hall Effect + Game Pass",
         "subheadline": "Control oficial para Xbox y PC. Hall Effect, 2 botones traseros y 1 mes de Xbox Game Pass Ultimate incluido.",
@@ -64,10 +23,7 @@
         "compat_1": "Xbox Series X|S",
         "compat_2": "Xbox One",
         "compat_3": "PC con Windows 10/11",
-        "boton_texto": "Agregar al carrito",
-        "boton_agotado_texto": "",
-        "texto_en_stock": "",
-        "texto_agotado": "",
+        "boton_texto": "Comprar ahora",
         "sticky_boton_texto": "Comprar ahora",
         "confianza_1": "Envío a Colombia · 1 a 10 días hábiles",
         "confianza_2": "Pago con tarjeta, PSE y Bre-B",
@@ -161,18 +117,6 @@
         "padding_bottom": 40
       }
     },
-    "resenas_clientes": {
-      "type": "gg-resenas",
-      "settings": {
-        "producto": "control-gamesir-g7se-cable-joysticks-hall-xbox-pc",
-        "titulo": "Reseñas de clientes",
-        "subtitulo": "Lo que dicen nuestros clientes. Opiniones reales.",
-        "text_align": "center",
-        "heading_size": 30,
-        "padding_top": 56,
-        "padding_bottom": 40
-      }
-    },
     "beneficios": {
       "type": "gg-beneficios",
       "blocks": {
@@ -221,7 +165,7 @@
           "settings": {
             "icono": "bolt",
             "titulo": "Game Pass",
-            "texto": "1 mes de Xbox Game Pass Ultimate incluido: empiezas a jugar cuando activas el código."
+            "texto": "1 mes de Xbox Game Pass Ultimate incluido para empezar a jugar ya."
           }
         }
       },
@@ -235,7 +179,6 @@
       ],
       "settings": {
         "titulo": "¿Por qué este control?",
-        "subtitulo": "",
         "text_align": "center",
         "heading_size": 30,
         "padding_top": 56,
@@ -248,16 +191,14 @@
         "sc1": {
           "type": "foto",
           "settings": {
-            "imagen": "shopify://shop_images/ChatGPT_Image_28_ago_2026_12_46_04_p.m..png",
-            "imagen_defecto": "",
+            "imagen_defecto": "gg-ia-showcase-1.jpg",
             "caption": "Vista frontal"
           }
         },
         "sc2": {
           "type": "foto",
           "settings": {
-            "imagen": "shopify://shop_images/ChatGPT_Image_28_ago_2026_12_44_33_p.m..png",
-            "imagen_defecto": "",
+            "imagen_defecto": "gg-ia-showcase-2.jpg",
             "caption": "Perfil y empuñadura"
           }
         },
@@ -271,8 +212,7 @@
         "sc4": {
           "type": "foto",
           "settings": {
-            "imagen": "shopify://shop_images/ChatGPT_Image_28_ago_2026_12_52_30_p.m..png",
-            "imagen_defecto": "",
+            "imagen_defecto": "gg-ia-showcase-4.jpg",
             "caption": "Joystick Hall Effect"
           }
         },
@@ -379,7 +319,6 @@
       "disabled": true,
       "settings": {
         "titulo": "Características",
-        "subtitulo": "",
         "text_align": "center",
         "heading_size": 30,
         "padding_top": 40,
@@ -464,6 +403,69 @@
         "heading_size": 30,
         "padding_top": 56,
         "padding_bottom": 56
+      }
+    },
+    "prensa": {
+      "type": "gg-prensa",
+      "blocks": {
+        "p1": {
+          "type": "resena",
+          "settings": {
+            "cita": "Mejor que un mando oficial",
+            "medio": "Tom's Guide (traducido)",
+            "rating": ""
+          }
+        },
+        "p2": {
+          "type": "resena",
+          "settings": {
+            "cita": "Este es un control que nunca, jamás, va a desarrollar drift en los joysticks",
+            "medio": "TheSixthAxis (traducido)",
+            "rating": "8/10"
+          }
+        },
+        "p3": {
+          "type": "resena",
+          "settings": {
+            "cita": "¿El mando estándar de Xbox se volvió innecesario?",
+            "medio": "GamesRadar+ (traducido)",
+            "rating": ""
+          }
+        },
+        "p4": {
+          "type": "resena",
+          "settings": {
+            "cita": "Combate el drift con joysticks Hall Effect",
+            "medio": "9to5Toys (traducido)",
+            "rating": ""
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3",
+        "p4"
+      ],
+      "settings": {
+        "titulo": "No solo lo decimos nosotros",
+        "subtitulo": "Lo que dice la prensa especializada sobre el GameSir G7 SE.",
+        "text_align": "center",
+        "heading_size": 30,
+        "padding_top": 56,
+        "padding_bottom": 8
+      }
+    },
+    "resenas_clientes": {
+      "type": "gg-resenas",
+      "settings": {
+        "producto": "control-gamesir-g7se-cable-joysticks-hall-xbox-pc",
+        "titulo": "Reseñas de clientes",
+        "subtitulo": "Lo que dicen nuestros clientes. Opiniones reales.",
+        "text_align": "center",
+        "heading_size": 30,
+        "padding_top": 56,
+        "padding_bottom": 40
       }
     },
     "comofunciona": {
@@ -620,7 +622,7 @@
         "q12": {
           "type": "pregunta",
           "settings": {
-            "pregunta": "¿Cuánto tarda el envío en Colombia?",
+            "pregunta": "¿Cuánto tarda en llegar mi pedido?",
             "respuesta": "Envío a Colombia. Plazo estimado: 1 a 10 días hábiles una vez despachado. El costo se confirma en el checkout, antes de pagar. Te enviamos la guía por correo."
           }
         },
@@ -690,8 +692,6 @@
     "ctafinal": {
       "type": "gg-cta-final",
       "settings": {
-        "producto": "control-gamesir-g7se-cable-joysticks-hall-xbox-pc",
-        "imagen": "shopify://shop_images/gg-producto-g7se-angulo.jpg",
         "titulo": "Lleva el G7 SE + 1 mes de Game Pass",
         "texto": "Sticks Hall Effect para reducir el drift, botones traseros y Game Pass Ultimate. Precio en pesos colombianos, envío a Colombia.",
         "gamepass_texto": "incluye 1 mes de Game Pass Ultimate",
@@ -705,6 +705,7 @@
     "hero",
     "oferta",
     "confianza_tienda",
+    "prensa",
     "beneficios",
     "halleffect",
     "comparativa",

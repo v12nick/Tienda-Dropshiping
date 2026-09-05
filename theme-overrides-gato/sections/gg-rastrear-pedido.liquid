@@ -1,0 +1,138 @@
+
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: var(--gg-bg);
+    min-height: 60vh;
+  }
+{% endstyle %}
+
+<section class="gg-section gg-container gg-track">
+  <div class="gg-track__hero gg-reveal">
+    <span class="gg-hero__eyebrow">Gato Gamer Store</span>
+    <h1 class="gg-track__title">{% render 'gg-t', text: section.settings.titulo | default: 'Rastrea tu pedido' %}</h1>
+    <p class="gg-track__subtitle">{% render 'gg-t', text: section.settings.subtitulo | default: 'Consulta el estado de tu pedido y sigue tu envío en tiempo real.' %}</p>
+  </div>
+
+  <div class="gg-track__access gg-reveal">
+    <div class="gg-track__access-card">
+      {% render 'gg-icon', name: 'account' %}
+      <h2>{% render 'gg-t', text: section.settings.acceso_titulo | default: 'Consulta segura con tu cuenta' %}</h2>
+      <p>{% render 'gg-t', text: section.settings.acceso_texto | default: 'Por seguridad, el estado de tu pedido y tu número de seguimiento solo se muestran cuando inicias sesión con el correo que usaste al comprar. Así nadie más que tú puede ver esa información.' %}</p>
+      <a href="{{ routes.account_login_url }}" class="gg-btn gg-btn--accent">{% render 'gg-t', text: section.settings.boton_texto | default: 'Ver el estado de mi pedido' %}</a>
+      <p class="gg-track__access-note">{% render 'gg-t', text: section.settings.acceso_nota | default: 'Sin contraseñas complicadas: te enviamos un código de acceso a tu correo.' %}</p>
+    </div>
+    <div class="gg-track__access-card gg-track__access-card--alt">
+      {% render 'gg-icon', name: 'chat' %}
+      <h2>{% render 'gg-t', text: section.settings.correo_titulo | default: '¿Ya te llegó tu correo de envío?' %}</h2>
+      <p>{% render 'gg-t', text: section.settings.correo_texto | default: 'En cuanto despachamos tu pedido, te enviamos automáticamente un correo con tu número de seguimiento y el enlace directo del transportista. Revisa tu bandeja de entrada (y la de spam/promociones).' %}</p>
+    </div>
+  </div>
+
+  {%- if section.blocks.size > 0 -%}
+    <div class="gg-track__timeline gg-reveal">
+      <h2 class="gg-section-title" style="text-align:center; margin-bottom:8px;">{% render 'gg-t', text: section.settings.pasos_titulo | default: 'Así avanza tu pedido' %}</h2>
+      <p class="gg-desc__body" style="text-align:center; max-width:560px; margin:0 auto 32px;">{% render 'gg-t', text: section.settings.pasos_subtitulo | default: 'Una vez inicies sesión, verás en cuál de estos pasos está tu pedido. Los detalles finos (en tránsito, en reparto) los verás directo en la página del transportista al hacer clic en "Rastrear envío".' %}</p>
+      <div class="gg-track__steps">
+        {%- for block in section.blocks -%}
+          <div class="gg-track__step" {{ block.shopify_attributes }}>
+            <span class="gg-track__step-emoji">{{ block.settings.emoji }}</span>
+            <p class="gg-track__step-label">{% render 'gg-t', text: block.settings.texto %}</p>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+  <div class="gg-track__faq gg-reveal">
+    <h2 class="gg-section-title" style="text-align:center; margin-bottom:24px;">{{ section.settings.faq_titulo | default: 'Preguntas frecuentes sobre tu envío' }}</h2>
+    <div class="gg-faq">
+      <div class="gg-faq__item" data-open="false">
+        <button type="button" class="gg-faq__q" aria-expanded="false">
+          <span>¿Cuánto tarda mi pedido?</span>
+          {% render 'gg-icon', name: 'chevron-down' %}
+        </button>
+        <div class="gg-faq__a">
+          <div class="gg-faq__a-inner">El envío es nacional, entre 1 y 10 días hábiles. Te avisamos por correo en cuanto se despache, con tu número de guía.</div>
+        </div>
+      </div>
+      <div class="gg-faq__item" data-open="false">
+        <button type="button" class="gg-faq__q" aria-expanded="false">
+          <span>No encuentro el correo de envío</span>
+          {% render 'gg-icon', name: 'chevron-down' %}
+        </button>
+        <div class="gg-faq__a">
+          <div class="gg-faq__a-inner">Revisa tu carpeta de spam o promociones. Si aún no lo ves, inicia sesión con el botón de arriba usando el mismo correo de tu compra — ahí verás el estado actualizado sin depender del correo.</div>
+        </div>
+      </div>
+      <div class="gg-faq__item" data-open="false">
+        <button type="button" class="gg-faq__q" aria-expanded="false">
+          <span>¿Cómo veo el estado exacto del transportista?</span>
+          {% render 'gg-icon', name: 'chevron-down' %}
+        </button>
+        <div class="gg-faq__a">
+          <div class="gg-faq__a-inner">Dentro del detalle de tu pedido (al iniciar sesión) vas a encontrar el botón "Rastrear envío" — te lleva directo a la página oficial del transportista con el estado más actualizado.</div>
+        </div>
+      </div>
+      <div class="gg-faq__item" data-open="false">
+        <button type="button" class="gg-faq__q" aria-expanded="false">
+          <span>¿Sigues con dudas?</span>
+          {% render 'gg-icon', name: 'chevron-down' %}
+        </button>
+        <div class="gg-faq__a">
+          <div class="gg-faq__a-inner">Escríbenos por WhatsApp desde el pie de página y te ayudamos directamente.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "GG – Rastrear pedido",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Rastrea tu pedido" },
+    { "type": "textarea", "id": "subtitulo", "label": "Subtítulo", "default": "Consulta el estado de tu pedido y sigue tu envío en tiempo real." },
+    { "type": "header", "content": "Tarjeta: iniciar sesión" },
+    { "type": "text", "id": "acceso_titulo", "label": "Título", "default": "Consulta segura con tu cuenta" },
+    { "type": "textarea", "id": "acceso_texto", "label": "Texto" },
+    { "type": "text", "id": "boton_texto", "label": "Texto del botón", "default": "Ver el estado de mi pedido" },
+    { "type": "text", "id": "acceso_nota", "label": "Nota bajo el botón", "default": "Sin contraseñas complicadas: te enviamos un código de acceso a tu correo." },
+    { "type": "header", "content": "Tarjeta: correo de envío" },
+    { "type": "text", "id": "correo_titulo", "label": "Título", "default": "¿Ya te llegó tu correo de envío?" },
+    { "type": "textarea", "id": "correo_texto", "label": "Texto" },
+    { "type": "header", "content": "Línea de tiempo" },
+    { "type": "text", "id": "pasos_titulo", "label": "Título", "default": "Así avanza tu pedido" },
+    { "type": "textarea", "id": "pasos_subtitulo", "label": "Subtítulo" },
+    { "type": "text", "id": "faq_titulo", "label": "Título FAQ", "default": "Preguntas frecuentes sobre tu envío" },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 120, "step": 4, "default": 56 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 120, "step": 4, "default": 72 }
+  ],
+  "blocks": [
+    {
+      "type": "paso",
+      "name": "Paso",
+      "settings": [
+        { "type": "text", "id": "emoji", "label": "Emoji", "default": "🛒" },
+        { "type": "text", "id": "texto", "label": "Texto", "default": "Pedido confirmado" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "GG – Rastrear pedido",
+      "blocks": [
+        { "type": "paso", "settings": { "emoji": "🛒", "texto": "Pedido confirmado" } },
+        { "type": "paso", "settings": { "emoji": "📦", "texto": "Pedido preparado" } },
+        { "type": "paso", "settings": { "emoji": "🚚", "texto": "Enviado" } },
+        { "type": "paso", "settings": { "emoji": "📍", "texto": "En tránsito" } },
+        { "type": "paso", "settings": { "emoji": "🏠", "texto": "En reparto" } },
+        { "type": "paso", "settings": { "emoji": "✅", "texto": "Entregado" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
