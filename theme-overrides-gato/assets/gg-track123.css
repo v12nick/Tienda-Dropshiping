@@ -131,6 +131,21 @@ html[data-gg-path-track] img[src*="traditional_bg_truck"] {
   display: none !important;
 }
 
+html[data-gg-path-track] .track123_tab_form_background {
+  background-image: none !important;
+  background-color: #050505 !important;
+  min-height: 0 !important;
+  height: auto !important;
+  padding: 8px 0 24px !important;
+}
+
+html[data-gg-path-track] .track123_tab_form_background .track123_form_wrapper,
+html[data-gg-path-track] [data-track123-section="order-lookup"] .track123_form_wrapper {
+  background: #111 !important;
+  border: 1px solid #232323 !important;
+  border-radius: 18px !important;
+}
+
 html[data-gg-path-track] .gg-confirm,
 html[data-gg-path-track] [data-gg-confirm="banner"] {
   display: none !important;
