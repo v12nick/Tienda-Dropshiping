@@ -37,7 +37,7 @@ html,body,body.gradient,#MainContent{background:#050505!important;color:#f5f5f5}
   .gg-search{order:3;max-width:none;flex-basis:100%}
   .gg-header__logo-text{font-size:16px}
 }
-.gg-hero-banner{position:relative;overflow:clip;width:100%;aspect-ratio:1/1;min-height:380px;max-height:480px;background:#0a0a0a}
+.gg-hero-banner{position:relative;overflow:clip;width:100%;aspect-ratio:5/4;min-height:260px;max-height:360px;background:#0a0a0a}
 .gg-hero-banner__media{position:absolute;inset:0}
 .gg-hero-banner__media img{width:100%;height:100%;object-fit:cover;object-position:70% center}
 .gg-hero-banner__scrim{position:absolute;inset:0;background:linear-gradient(0deg,rgb(5 5 5 / .95) 0%,rgb(5 5 5 / .55) 32%,rgb(5 5 5 / .15) 55%,transparent 70%),linear-gradient(90deg,rgb(5 5 5 / .85) 0%,rgb(5 5 5 / .4) 45%,rgb(5 5 5 / .05) 75%)}
@@ -51,7 +51,7 @@ html,body,body.gradient,#MainContent{background:#050505!important;color:#f5f5f5}
 .gg-btn--accent{background:var(--gg-accent);color:#fff}
 .gg-gp-badge{display:inline-flex;align-items:center;gap:8px;background:rgb(229 9 20 / .12);border:1px solid rgb(229 9 20 / .4);color:var(--gg-text);border-radius:999px;padding:8px 16px;font-size:13px;font-weight:700}
 @media screen and (min-width:750px){
-  .gg-hero-banner{aspect-ratio:21/9;min-height:440px;max-height:620px}
+  .gg-hero-banner{aspect-ratio:2.6/1;min-height:320px;max-height:460px}
   .gg-hero-banner__content{padding:0 var(--gg-margen);justify-content:center;align-items:flex-start}
 }
 @media (max-width:749px){
