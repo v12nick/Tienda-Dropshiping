@@ -78,3 +78,4 @@
 .gg-swatch__dot{width:16px;height:16px;border-radius:50%;border:1px solid rgb(255 255 255 / .35);flex-shrink:0;box-shadow:inset 0 0 0 1px rgb(0 0 0 / .25)}
 .gg-option--colores{margin-top:4px}
 @media (max-width:540px){.gg-color-tile__name{font-size:11px;padding:4px 6px}}
+.gg-buy__error{margin:10px 0 0;color:#ff6b73;font-size:13px;line-height:1.4}

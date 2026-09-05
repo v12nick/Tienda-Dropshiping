@@ -33,6 +33,7 @@
     assign gg_variant = gg_product.selected_or_first_available_variant | default: gg_product.first_available_variant | default: gg_product.variants.first
     assign gg_media = gg_product.media
   endif
+  assign gg_handle = gg_product.handle | default: 'gamesir-g7-se-control-xbox-hall-effect'
 -%}
 {%- capture gg_txt_add -%}
   {%- if section.settings.boton_texto != blank -%}
@@ -118,7 +119,7 @@
   </div>
 </div>
 
-<section class="gg-section gg-container" id="gg-comprar" data-gg-product-root data-gg-track-product="{{ gg_product.handle }}" data-shop-currency="{{ shop.currency }}">
+<section class="gg-section gg-container" id="gg-comprar" data-gg-product-root data-gg-track-product="{{ gg_handle }}" data-gg-product-handle="{{ gg_handle }}" data-shop-currency="{{ shop.currency }}">
   <div class="gg-producto">
     <div class="gg-gallery">
       {%- liquid
@@ -294,13 +295,27 @@
       {%- endif -%}
 
       {%- if gg_product != blank -%}
-      {% form 'product', gg_product %}
+      {% form 'product', gg_product, data-gg-buy-form: 'true' %}
         <input type="hidden" name="id" value="{{ gg_variant.id }}" data-gg-variant-id>
 
         {%- unless gg_product.has_only_default_variant -%}
           {%- for option in gg_product.options_with_values -%}
             {%- assign gg_oname = option.name | downcase -%}
-            {%- unless gg_oname contains 'color' or gg_oname contains 'colour' -%}
+            {%- if gg_oname contains 'color' or gg_oname contains 'colour' or gg_oname contains 'colores' -%}
+              <div class="visually-hidden" data-gg-color-options>
+                {%- for value in option.values -%}
+                  <button
+                    type="button"
+                    class="gg-swatch{% if value == option.selected_value %} gg-active{% endif %}"
+                    data-gg-swatch
+                    data-option-name="{{ option.name | escape }}"
+                    data-option-value="{{ value | escape }}"
+                    aria-pressed="{% if value == option.selected_value %}true{% else %}false{% endif %}"
+                    tabindex="-1"
+                  >{{ value }}</button>
+                {%- endfor -%}
+              </div>
+            {%- else -%}
             <div class="gg-option">
               <span class="gg-option__label">{{ option.name }}</span>
               <div class="gg-option__values">
@@ -316,7 +331,7 @@
                 {%- endfor -%}
               </div>
             </div>
-            {%- endunless -%}
+            {%- endif -%}
           {%- endfor -%}
         {%- endunless -%}
 
@@ -332,8 +347,8 @@
             name="add"
             class="gg-btn gg-btn--accent gg-buy__add"
             data-gg-buy-add
-            data-label-add="{{ gg_txt_add }}"
-            data-label-sold-out="{{ gg_txt_soldout }}"
+            data-label-add="{{ gg_txt_add | strip | escape }}"
+            data-label-sold-out="{{ gg_txt_soldout | strip | escape }}"
             {% unless gg_variant.available %}disabled{% endunless %}
           >{% if gg_variant.available %}{{ gg_txt_add }}{% else %}{{ gg_txt_soldout }}{% endif %}</button>
 
@@ -342,21 +357,45 @@
           </button>
         </div>
         {% render 'gg-buy-help' %}
+        <p class="gg-buy__error" data-gg-buy-error hidden></p>
 
         <p class="gg-buy__stock {% if gg_variant.available %}gg-ok{% endif %}" data-gg-stock data-label-in-stock="{{ gg_txt_in_stock }}" data-label-out-stock="{{ gg_txt_out_stock }}">
           {%- if gg_variant.available -%}{{ gg_txt_in_stock }}{%- else -%}{{ gg_txt_out_stock }}{%- endif -%}
         </p>
       {% endform %}
       {%- else -%}
-        <div class="gg-buy__actions">
-          <a
-            class="gg-btn gg-btn--accent gg-buy__add"
-            href="https://wa.me/573112333744?text={{ 'Hola Gato Gamer Store, quiero el GameSir G7 SE en color Blanco' | url_encode }}"
-            data-gg-wa-color
-            data-gg-wa-base="https://wa.me/573112333744"
-            data-gg-wa-msg="Hola Gato Gamer Store, quiero el GameSir G7 SE en color"
-          >{% render 'gg-t', text: 'Escríbenos por WhatsApp' %}</a>
+      <form
+        action="{{ routes.cart_add_url }}"
+        method="post"
+        enctype="multipart/form-data"
+        accept-charset="UTF-8"
+        id="gg-buy-form"
+        data-gg-buy-form
+        data-gg-product-handle="{{ gg_handle }}"
+      >
+        <input type="hidden" name="form_type" value="product">
+        <input type="hidden" name="utf8" value="✓">
+        <input type="hidden" name="id" value="" data-gg-variant-id>
+
+        <div class="gg-qty" data-gg-qty>
+          <button type="button" class="gg-qty__btn" data-gg-qty-minus aria-label="{{ 'gg.qty_minus' | t }}">−</button>
+          <input type="number" name="quantity" value="1" min="1" inputmode="numeric" class="gg-qty__input" data-gg-qty-input aria-label="{{ 'products.product.quantity.label' | t | default: 'Cantidad' }}">
+          <button type="button" class="gg-qty__btn" data-gg-qty-plus aria-label="{{ 'gg.qty_plus' | t }}">+</button>
         </div>
+
+        <div class="gg-buy__actions">
+          <button
+            type="submit"
+            name="add"
+            class="gg-btn gg-btn--accent gg-buy__add"
+            data-gg-buy-add
+            data-label-add="{{ gg_txt_add | strip | escape }}"
+            data-label-sold-out="{{ gg_txt_soldout | strip | escape }}"
+          >{{ gg_txt_add }}</button>
+        </div>
+        {% render 'gg-buy-help' %}
+        <p class="gg-buy__error" data-gg-buy-error hidden></p>
+      </form>
       {%- endif -%}
 
       {%- if section.settings.compat_1 != blank or section.settings.compat_2 != blank or section.settings.compat_3 != blank -%}
@@ -385,8 +424,8 @@
     </div>
   </div>
 
-  {%- if gg_product != blank -%}
   <script type="application/json" data-gg-product-json>
+    {%- if gg_product != blank -%}
     {
       "handle": {{ gg_product.handle | json }},
       "options": {{ gg_product.options | json }},
@@ -394,6 +433,10 @@
         {%- for v in gg_product.variants -%}
           {
             "id": {{ v.id | json }},
+            "title": {{ v.title | json }},
+            "option1": {{ v.option1 | json }},
+            "option2": {{ v.option2 | json }},
+            "option3": {{ v.option3 | json }},
             "price": {{ v.price | json }},
             "compare_at_price": {{ v.compare_at_price | json }},
             "available": {{ v.available | json }},
@@ -403,8 +446,10 @@
         {%- endfor -%}
       ]
     }
+    {%- else -%}
+    {"handle": {{ gg_handle | json }}, "options": [], "variants": []}
+    {%- endif -%}
   </script>
-  {%- endif -%}
 </section>
 
 {%- if gg_product != blank -%}
@@ -450,7 +495,7 @@
     { "type": "text", "id": "compat_2", "label": "Compatibilidad 2", "default": "Xbox One" },
     { "type": "text", "id": "compat_3", "label": "Compatibilidad 3", "default": "PC con Windows 10/11" },
     { "type": "header", "content": "Botones y stock" },
-    { "type": "text", "id": "boton_texto", "label": "Texto botón comprar", "default": "Comprar ahora" },
+    { "type": "text", "id": "boton_texto", "label": "Texto botón comprar", "default": "Agregar al carrito" },
     { "type": "text", "id": "boton_agotado_texto", "label": "Texto botón agotado", "info": "Si se deja vacío se usa el texto traducido automáticamente" },
     { "type": "text", "id": "texto_en_stock", "label": "Texto en stock", "info": "Si se deja vacío se usa el texto traducido automáticamente" },
     { "type": "text", "id": "texto_agotado", "label": "Texto sin stock", "info": "Si se deja vacío se usa el texto traducido automáticamente" },

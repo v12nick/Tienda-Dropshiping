@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
   initProductGallery();
   initProductForm();
   initColorPicker();
+  initBuyForm();
   initAiChatButton();
   initRewardsButton();
   initPriceCop();
@@ -49,6 +50,237 @@ function ggCartAddPayload(items) {
   var attrs = ggUtmAttributes();
   if (attrs) payload.attributes = attrs;
   return payload;
+}
+
+function ggCartRootUrl() {
+  return window.Shopify && Shopify.routes && Shopify.routes.root ? Shopify.routes.root : '/';
+}
+
+function ggNormColor(s) {
+  return String(s || '')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
+}
+
+function ggVariantColorValues(variant) {
+  var vals = [];
+  if (!variant) return vals;
+  if (variant.options && variant.options.length) {
+    for (var i = 0; i < variant.options.length; i++) vals.push(variant.options[i]);
+  }
+  if (variant.option1) vals.push(variant.option1);
+  if (variant.option2) vals.push(variant.option2);
+  if (variant.option3) vals.push(variant.option3);
+  if (variant.title && variant.title !== 'Default Title') vals.push(variant.title);
+  return vals;
+}
+
+function ggFindVariantForColor(product, colorName) {
+  if (!product || !product.variants || !product.variants.length) return null;
+  var want = ggNormColor(colorName);
+  if (!want) return product.variants[0];
+  var i, v, vals, n, j;
+  for (i = 0; i < product.variants.length; i++) {
+    v = product.variants[i];
+    vals = ggVariantColorValues(v);
+    for (j = 0; j < vals.length; j++) {
+      n = ggNormColor(vals[j]);
+      if (n && n === want) return v;
+    }
+  }
+  for (i = 0; i < product.variants.length; i++) {
+    v = product.variants[i];
+    vals = ggVariantColorValues(v);
+    for (j = 0; j < vals.length; j++) {
+      n = ggNormColor(vals[j]);
+      if (n && (n.indexOf(want) !== -1 || want.indexOf(n) !== -1)) return v;
+    }
+  }
+  return product.variants[0];
+}
+
+function ggReadEmbeddedProduct(root) {
+  var dataEl = root.querySelector('[data-gg-product-json]');
+  if (!dataEl) return null;
+  try {
+    var product = JSON.parse(dataEl.textContent);
+    if (product && product.variants && product.variants.length) return product;
+  } catch (e) {}
+  return null;
+}
+
+function ggWriteEmbeddedProduct(root, product) {
+  var dataEl = root.querySelector('[data-gg-product-json]');
+  if (dataEl) dataEl.textContent = JSON.stringify(product);
+  root._ggProduct = product;
+}
+
+function ggNormalizeAjaxProduct(p) {
+  if (!p) return null;
+  var options = p.options || [];
+  if (options.length && typeof options[0] === 'object' && options[0].name) {
+    options = options.map(function (o) { return o.name; });
+  }
+  return {
+    handle: p.handle,
+    options: options,
+    variants: (p.variants || []).map(function (v) {
+      return {
+        id: v.id,
+        title: v.title,
+        option1: v.option1,
+        option2: v.option2,
+        option3: v.option3,
+        price: v.price,
+        compare_at_price: v.compare_at_price,
+        available: v.available,
+        options: v.options || [v.option1, v.option2, v.option3].filter(Boolean),
+        media_id: v.featured_image ? v.featured_image.id : null
+      };
+    })
+  };
+}
+
+function ggEnsureProduct(root) {
+  if (root._ggProductPromise) return root._ggProductPromise;
+  var embedded = ggReadEmbeddedProduct(root);
+  if (embedded) {
+    root._ggProduct = embedded;
+    return Promise.resolve(embedded);
+  }
+  if (root._ggProduct && root._ggProduct.variants && root._ggProduct.variants.length) {
+    return Promise.resolve(root._ggProduct);
+  }
+  var handle = root.getAttribute('data-gg-product-handle') || root.getAttribute('data-gg-track-product') || 'gamesir-g7-se-control-xbox-hall-effect';
+  root._ggProductPromise = fetch(ggCartRootUrl() + 'products/' + handle + '.js', { headers: { Accept: 'application/json' } })
+    .then(function (res) { return res.ok ? res.json() : null; })
+    .then(function (raw) {
+      var product = ggNormalizeAjaxProduct(raw);
+      if (product && product.variants.length) ggWriteEmbeddedProduct(root, product);
+      return product;
+    })
+    .catch(function () { return null; });
+  return root._ggProductPromise;
+}
+
+function ggShowBuyError(root, message) {
+  var el = root.querySelector('[data-gg-buy-error]');
+  if (!el) return;
+  if (!message) {
+    el.hidden = true;
+    el.textContent = '';
+    return;
+  }
+  el.hidden = false;
+  el.textContent = message;
+}
+
+function ggSelectedColor(root) {
+  var active = root.querySelector('[data-gg-color].gg-active');
+  return active ? active.getAttribute('data-gg-color') : '';
+}
+
+function ggApplyColorToVariant(root, colorName) {
+  var product = root._ggProduct || ggReadEmbeddedProduct(root);
+  if (!product) return;
+  var variant = ggFindVariantForColor(product, colorName);
+  if (!variant) return;
+  var idInput = root.querySelector('[data-gg-variant-id]');
+  if (idInput) idInput.value = variant.id;
+  var addBtn = root.querySelector('[data-gg-buy-add]');
+  if (addBtn) {
+    var available = variant.available !== false;
+    addBtn.disabled = !available;
+    addBtn.textContent = available
+      ? (addBtn.getAttribute('data-label-add') || addBtn.textContent)
+      : (addBtn.getAttribute('data-label-sold-out') || addBtn.textContent);
+  }
+}
+
+function ggUpdateCartCount() {
+  var cartIcon = document.querySelector('[data-gg-cart-count]');
+  if (!cartIcon) return;
+  fetch(ggCartRootUrl() + 'cart.js')
+    .then(function (r) { return r.json(); })
+    .then(function (cart) {
+      cartIcon.textContent = cart.item_count;
+      cartIcon.hidden = cart.item_count === 0;
+    })
+    .catch(function () {});
+}
+
+function ggBuyUnavailableMessage() {
+  var lang = (document.documentElement.lang || 'es').toLowerCase();
+  if (lang.indexOf('en') === 0) return 'This product is not available for online purchase yet.';
+  return 'Este producto aún no está disponible para compra online.';
+}
+
+function ggBuyErrorMessage(payload) {
+  if (!payload) return ggBuyUnavailableMessage();
+  return payload.description || payload.message || ggBuyUnavailableMessage();
+}
+
+function initBuyForm() {
+  var root = document.querySelector('[data-gg-product-root]');
+  if (!root) return;
+  var form = root.querySelector('[data-gg-buy-form]') || root.querySelector('form[action*="/cart/add"]');
+  if (!form) return;
+
+  ggEnsureProduct(root).then(function (product) {
+    if (product) ggApplyColorToVariant(root, ggSelectedColor(root));
+  });
+
+  if (form.getAttribute('data-gg-buy-bound') === 'true') return;
+  form.setAttribute('data-gg-buy-bound', 'true');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var btn = form.querySelector('[data-gg-buy-add]');
+    if (btn && btn.disabled) return;
+    ggShowBuyError(root, '');
+    var original = btn ? btn.innerHTML : '';
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = (document.documentElement.lang || '').indexOf('en') === 0 ? 'Adding…' : 'Agregando…';
+    }
+    ggEnsureProduct(root).then(function (product) {
+      ggApplyColorToVariant(root, ggSelectedColor(root));
+      var idInput = form.querySelector('[data-gg-variant-id]');
+      var variantId = idInput && idInput.value ? parseInt(idInput.value, 10) : 0;
+      if (!variantId) {
+        if (btn) { btn.disabled = false; btn.innerHTML = original; }
+        ggShowBuyError(root, ggBuyUnavailableMessage());
+        return null;
+      }
+      var qtyInput = form.querySelector('[data-gg-qty-input]');
+      var qty = qtyInput ? parseInt(qtyInput.value, 10) : 1;
+      if (!qty || qty < 1) qty = 1;
+      return fetch(ggCartRootUrl() + 'cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(ggCartAddPayload([{ id: variantId, quantity: qty }]))
+      }).then(function (res) {
+        return res.json().then(function (data) { return { ok: res.ok, data: data }; });
+      });
+    }).then(function (result) {
+      if (!result) return;
+      if (!result.ok || result.data.status) {
+        if (btn) { btn.disabled = false; btn.innerHTML = original; }
+        ggShowBuyError(root, ggBuyErrorMessage(result.data));
+        return;
+      }
+      if (btn) btn.textContent = '¡Agregado!';
+      document.dispatchEvent(new CustomEvent('cart:refresh'));
+      document.dispatchEvent(new CustomEvent('cart:add'));
+      ggUpdateCartCount();
+      window.location.href = ggCartRootUrl().replace(/\/?$/, '/') + 'cart';
+    }).catch(function () {
+      if (btn) { btn.disabled = false; btn.innerHTML = original; }
+      ggShowBuyError(root, ggBuyUnavailableMessage());
+    });
+  });
 }
 
 function initUtmCapture() {
@@ -638,6 +870,7 @@ function initColorPicker() {
       var msg = wa.getAttribute('data-gg-wa-msg') || 'Hola Gato Gamer Store, quiero el GameSir G7 SE en color';
       wa.href = base + '?text=' + encodeURIComponent(msg + ' ' + value);
     }
+    ggApplyColorToVariant(root, value);
     productSwatches.forEach(function (s) {
       if ((s.getAttribute('data-option-value') || '') === value) s.click();
     });
