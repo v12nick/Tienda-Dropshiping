@@ -63,8 +63,8 @@
     {%- endif -%}
   </div>
   {%- if gg_slide_n > 1 -%}
-    <button type="button" class="gg-gallery__nav gg-gallery__nav--prev" data-gg-gallery-prev aria-label="{{ 'products.product.previous_image' | t | default: 'Imagen anterior' }}">{% render 'gg-icon', name: 'chevron-left' %}</button>
-    <button type="button" class="gg-gallery__nav gg-gallery__nav--next" data-gg-gallery-next aria-label="{{ 'products.product.next_image' | t | default: 'Siguiente imagen' }}">{% render 'gg-icon', name: 'chevron-right' %}</button>
+    <button type="button" class="gg-gallery__nav gg-gallery__nav--prev" data-gg-gallery-prev aria-label="Imagen anterior">{% render 'gg-icon', name: 'chevron-left' %}</button>
+    <button type="button" class="gg-gallery__nav gg-gallery__nav--next" data-gg-gallery-next aria-label="Siguiente imagen">{% render 'gg-icon', name: 'chevron-right' %}</button>
   {%- endif -%}
 </div>
 {%- if gg_slide_n > 1 -%}
