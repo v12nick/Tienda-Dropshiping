@@ -283,15 +283,6 @@
           </div>
         </div>
       {%- endif -%}
-      <ul class="gg-buy__specs">
-        <li>{% render 'gg-icon', name: 'check' %}<span>Hall Effect</span></li>
-        <li>{% render 'gg-icon', name: 'check' %}<span>{% render 'gg-t', text: '2 botones traseros' %}</span></li>
-        <li>{% render 'gg-icon', name: 'check' %}<span>Hair Trigger</span></li>
-        <li>{% render 'gg-icon', name: 'check' %}<span>Xbox Series X|S</span></li>
-        <li>{% render 'gg-icon', name: 'check' %}<span>Xbox One</span></li>
-        <li>{% render 'gg-icon', name: 'check' %}<span>PC</span></li>
-        <li>{% render 'gg-icon', name: 'check' %}<span>{% render 'gg-t', text: 'Game Pass incluido' %}</span></li>
-      </ul>
       <p class="gg-buy__ship">
         {% render 'gg-t', text: 'Envío a Colombia. El costo se confirma al pagar.' %}
         <a href="/pages/politica-de-envios">{% render 'gg-t', text: 'Tiempos de envío' %}</a>
@@ -300,7 +291,6 @@
       </p>
       {%- if gg_variant != blank -%}
         {% render 'gg-precio-cop', price: gg_variant.price %}
-        <div data-gg-puntos-wrap data-puntos-por-dolar="{{ settings.gg_puntos_por_dolar }}" {% if gg_product.tags contains 'sin-puntos' %}data-sin-puntos="true"{% endif %}>{% render 'gg-precio-puntos', price: gg_variant.price, product: gg_product %}</div>
       {%- endif -%}
 
       {%- if gg_product != blank -%}
