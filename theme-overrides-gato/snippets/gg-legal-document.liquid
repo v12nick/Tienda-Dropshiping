@@ -1,5 +1,5 @@
 {%- doc -%}
-  Legal / policy page chrome: eyebrow, title, body, related links.
+  Legal / policy page chrome: eyebrow, title and body.
   @param {string} handle - Page handle
 {%- enddoc -%}
 {%- liquid
@@ -33,6 +33,5 @@
     <div class="gg-legal__body rte">
       {% render 'gg-legal-storefront', handle: gg_h %}
     </div>
-    {% render 'gg-legal-nav', handle: gg_h %}
   </div>
 </section>
