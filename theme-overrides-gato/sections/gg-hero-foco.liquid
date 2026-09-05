@@ -124,7 +124,7 @@
       {%- liquid
         assign gg_color_count = 0
         for block in section.blocks
-          if block.type == 'color'
+          if block.type == 'variante'
             assign gg_color_count = gg_color_count | plus: 1
           endif
         endfor
@@ -132,7 +132,7 @@
       {%- if gg_color_count > 0 -%}
         <div class="gg-color-mosaic" data-gg-color-mosaic>
           {%- for block in section.blocks -%}
-            {%- if block.type == 'color' -%}
+            {%- if block.type == 'variante' -%}
               {%- liquid
                 assign gg_color_name = block.settings.nombre
                 assign gg_color_asset = block.settings.imagen_asset | default: 'gg-g7se-blanco.webp'
@@ -245,7 +245,7 @@
         assign gg_color_ui = 0
         assign gg_first_color = 'Blanco'
         for block in section.blocks
-          if block.type == 'color' and block.settings.nombre != blank
+          if block.type == 'variante' and block.settings.nombre != blank
             assign gg_color_ui = gg_color_ui | plus: 1
             if gg_color_ui == 1
               assign gg_first_color = block.settings.nombre
@@ -258,7 +258,7 @@
           <span class="gg-option__label">{% render 'gg-t', text: 'Colores' %} · <span data-gg-color-label>{{ gg_first_color }}</span></span>
           <div class="gg-option__values">
             {%- for block in section.blocks -%}
-              {%- if block.type == 'color' -%}
+              {%- if block.type == 'variante' -%}
                 <button
                   type="button"
                   class="gg-swatch gg-swatch--color{% if forloop.first %} gg-active{% endif %}"
@@ -468,7 +468,7 @@
   ],
   "blocks": [
     {
-      "type": "color",
+      "type": "variante",
       "name": "Color de catálogo",
       "settings": [
         { "type": "text", "id": "nombre", "label": "Nombre", "default": "Blanco" },

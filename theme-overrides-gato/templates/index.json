@@ -13,7 +13,7 @@
       "type": "gg-hero-foco",
       "blocks": {
         "c_blanco": {
-          "type": "color",
+          "type": "variante",
           "settings": {
             "nombre": "Blanco",
             "hex": "#f4f4f4",
@@ -21,7 +21,7 @@
           }
         },
         "c_azul": {
-          "type": "color",
+          "type": "variante",
           "settings": {
             "nombre": "Azul Dinámico",
             "hex": "#4aa3e8",
@@ -29,7 +29,7 @@
           }
         },
         "c_naranja": {
-          "type": "color",
+          "type": "variante",
           "settings": {
             "nombre": "Naranja Vibrante",
             "hex": "#ff6a1a",
@@ -37,7 +37,7 @@
           }
         },
         "c_purpura": {
-          "type": "color",
+          "type": "variante",
           "settings": {
             "nombre": "Púrpura Radiante",
             "hex": "#c48ad4",
