@@ -143,7 +143,7 @@ html[data-gg-path-track] .track123-body,
 }
 
 .gg-track--app .gg-track__widget {
-  margin: 0 auto 28px;
+  margin: 0 auto 16px;
   max-width: 520px;
 }
 
@@ -178,6 +178,11 @@ html[data-gg-path-track] .track123_tab_form_background {
   position: relative !important;
   left: auto !important;
   height: auto !important;
+}
+
+html[data-gg-path-track] .track123_track_wrapper,
+html[data-gg-path-track] .track123_track_tab_wrapper {
+  padding: 0 !important;
 }
 
 html[data-gg-path-track] .track123_form_wrapper,
@@ -424,9 +429,9 @@ html[data-gg-path-track] [data-gg-confirm="banner"] {
   }
 
   .gg-track--app .gg-track__steps {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 14px 8px;
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 10px 8px;
   }
 
   .gg-track--app .gg-track__steps::before {
