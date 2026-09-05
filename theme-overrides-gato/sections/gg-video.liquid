@@ -1,0 +1,90 @@
+
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  #shopify-section-{{ section.id }} .gg-section-title {
+    font-size: {{ section.settings.heading_size }}px;
+    text-align: {{ section.settings.text_align }};
+  }
+  #shopify-section-{{ section.id }} .gg-video {
+    position: relative;
+    width: min(100%, 420px);
+    max-width: 420px;
+    margin: 0 auto;
+    aspect-ratio: 9 / 16;
+    overflow: hidden;
+    background: #000;
+  }
+  #shopify-section-{{ section.id }} .gg-video__el {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    max-height: none !important;
+    aspect-ratio: unset !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    display: block;
+    background: #000;
+  }
+  #shopify-section-{{ section.id }} .gg-video__play {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    z-index: 2;
+  }
+{% endstyle %}
+
+<section class="gg-section gg-container">
+  {%- if section.settings.titulo != blank -%}
+    <h2 class="gg-section-title gg-reveal" style="margin-bottom:8px; text-align:{{ section.settings.text_align }};">{% render 'gg-t', text: section.settings.titulo %}</h2>
+  {%- endif -%}
+  {%- if section.settings.subtitulo != blank -%}
+    <p class="gg-desc__body gg-reveal" style="margin-bottom:28px; text-align:{{ section.settings.text_align }}; {% if section.settings.text_align == 'center' %}max-width:520px;margin-left:auto;margin-right:auto;{% endif %}">{% render 'gg-t', text: section.settings.subtitulo %}</p>
+  {%- endif -%}
+
+  <div class="gg-video gg-reveal" data-gg-video>
+    <video
+      class="gg-video__el"
+      playsinline
+      controls
+      preload="none"
+      width="576"
+      height="1024"
+      style="width:100%;height:100%;object-fit:cover;aspect-ratio:auto"
+      {% if section.settings.poster != blank %}
+      poster="{{ section.settings.poster | image_url: width: 900 }}"
+      {% else %}
+      poster="{{ 'gg-video-poster.jpg' | asset_url }}"
+      {% endif %}
+    >
+      <source src="{{ 'gg-video-detalle.mp4' | asset_url }}" type="video/mp4">
+    </video>
+    <button type="button" class="gg-video__play" data-gg-video-play aria-label="{{ 'gg.play_video' | t }}">
+      {% render 'gg-icon', name: 'play' %}
+    </button>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "GG – Video de producto",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Míralo de cerca" },
+    { "type": "textarea", "id": "subtitulo", "label": "Subtítulo", "default": "Un vistazo real al detalle y la construcción del GameSir G7 SE." },
+    { "type": "select", "id": "text_align", "label": "Alineación del título", "options": [
+      {"value": "left", "label": "Izquierda"}, {"value": "center", "label": "Centro"}
+    ], "default": "center" },
+    { "type": "image_picker", "id": "poster", "label": "Miniatura del video" },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "heading_size", "label": "Tamaño del título (px)", "min": 20, "max": 48, "step": 2, "default": 30 },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 120, "step": 4, "default": 56 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 120, "step": 4, "default": 56 }
+  ],
+  "presets": [ { "name": "GG – Video de producto" } ]
+}
+{% endschema %}

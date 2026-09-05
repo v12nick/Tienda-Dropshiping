@@ -1,0 +1,81 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: {{ section.settings.color_fondo }};
+  }
+{% endstyle %}
+
+<section class="mt-section" id="mt-resenas">
+  <div class="mt-container">
+    <div class="mt-resenas-head mt-reveal">
+      {%- if section.settings.eyebrow != blank -%}<span class="mt-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      <h2 class="mt-h2" style="font-size:{{ section.settings.titulo_size }}px;">{{ section.settings.titulo }}</h2>
+      {%- if section.settings.texto != blank -%}
+        <p class="mt-body" style="max-width:52ch;margin:0 auto;">{{ section.settings.texto }}</p>
+      {%- endif -%}
+    </div>
+    <div class="mt-resenas-grid mt-stagger">
+      {%- for block in section.blocks -%}
+        <article class="mt-resena mt-reveal" style="--mt-i:{{ forloop.index0 }};" {{ block.shopify_attributes }}>
+          <div class="mt-resena-estrellas" aria-label="5 de 5">
+            {%- for i in (1..5) -%}
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2 14.7 9l6.3.7-4.7 4.3 1.3 6.2L12 17.3 6.4 20.2 7.7 14 3 9.7 9.3 9z"/></svg>
+            {%- endfor -%}
+          </div>
+          <p>{{ block.settings.texto }}</p>
+          <div class="mt-resena-autor">
+            <span class="mt-resena-avatar">{{ block.settings.nombre | slice: 0 }}</span>
+            <div>
+              <b>{{ block.settings.nombre }}</b>
+              {%- if block.settings.detalle != blank -%}
+                <span class="mt-resena-sello">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                  {{ block.settings.detalle }}
+                </span>
+              {%- endif -%}
+            </div>
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MT – Reseñas",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño superior", "default": "Prueba social" },
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Lo que dicen quienes ya lo usaron" },
+    { "type": "range", "id": "titulo_size", "label": "Tamaño del título (px)", "min": 24, "max": 56, "step": 2, "unit": "px", "default": 34 },
+    { "type": "textarea", "id": "texto", "label": "Texto", "default": "Compras verificadas en Colombia. Cuando llegue el tuyo, tu reseña también queda aquí." },
+    { "type": "color", "id": "color_fondo", "label": "Color de fondo", "default": "#ffffff" },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 96 }
+  ],
+  "blocks": [
+    {
+      "type": "resena",
+      "name": "Reseña",
+      "settings": [
+        { "type": "textarea", "id": "texto", "label": "Texto", "default": "Increíble lo que quita en segundos. Ya no me arrodillo para fregar la bañera." },
+        { "type": "text", "id": "nombre", "label": "Nombre", "default": "Marta G." },
+        { "type": "text", "id": "detalle", "label": "Sello", "default": "Compra verificada" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MT – Reseñas",
+      "blocks": [
+        { "type": "resena", "settings": { "texto": "Increíble lo que quita en segundos. Ya no me arrodillo para fregar la bañera.", "nombre": "Marta G.", "detalle": "Compra verificada" } },
+        { "type": "resena", "settings": { "texto": "El mango extensible es lo mejor: limpio los azulejos altos sin subirme a ningún sitio.", "nombre": "Javier R.", "detalle": "Compra verificada" } },
+        { "type": "resena", "settings": { "texto": "Pensé que era otro cacharro que acabaría en el cajón, pero lo uso cada semana.", "nombre": "Lucía P.", "detalle": "Compra verificada" } },
+        { "type": "resena", "settings": { "texto": "Los cabezales de coche me sorprendieron, dejan las llantas impecables.", "nombre": "Diego M.", "detalle": "Compra verificada" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

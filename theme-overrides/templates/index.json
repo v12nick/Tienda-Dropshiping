@@ -1,0 +1,327 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "mt-hero": {
+      "type": "mt-hero",
+      "settings": {
+        "badge": "Más de 12.000 hogares felices",
+        "titulo": "Limpia como nunca, en la mitad de tiempo",
+        "titulo_size": 44,
+        "texto": "El cepillo eléctrico giratorio que elimina grasa, moho y suciedad incrustada. Inalámbrico, resistente al agua y con 8 cabezales para cada rincón de tu casa.",
+        "boton_texto": "Quiero el mío",
+        "boton_url": "/products/cleanpro360-cepillo-electrico-multiusos",
+        "boton2_texto": "Ver cómo funciona",
+        "boton2_url": "#mt-pasos"
+      }
+    },
+    "mt-beneficios": {
+      "type": "mt-beneficios",
+      "blocks": {
+        "b1": {
+          "type": "beneficio",
+          "settings": {
+            "icono": "rayo",
+            "spec": "450 RPM",
+            "titulo": "3 velocidades",
+            "texto": "Hasta 450 RPM para adaptarte a cualquier superficie, de lo más delicado a lo más incrustado."
+          }
+        },
+        "b2": {
+          "type": "beneficio",
+          "settings": {
+            "icono": "gota",
+            "spec": "IPX7",
+            "titulo": "Resistente al agua",
+            "texto": "Úsalo con total libertad, incluso en la ducha, sin miedo a salpicaduras."
+          }
+        },
+        "b3": {
+          "type": "beneficio",
+          "settings": {
+            "icono": "engranaje",
+            "spec": "8 cabezales",
+            "titulo": "Intercambiables",
+            "texto": "Uno para cada superficie: azulejos, sartenes, llantas del coche y más."
+          }
+        },
+        "b4": {
+          "type": "beneficio",
+          "settings": {
+            "icono": "bateria",
+            "spec": "Inalámbrico",
+            "titulo": "Batería USB",
+            "texto": "Batería recargable por USB de larga duración, sin cables que estorben."
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ],
+      "settings": {
+        "titulo_size": 34
+      }
+    },
+    "mt-pasos": {
+      "type": "mt-pasos",
+      "blocks": {
+        "p1": {
+          "type": "paso",
+          "settings": {
+            "imagen_defecto": "mt-paso-1-cabezal.jpg",
+            "titulo": "Elige el cabezal",
+            "texto": "Selecciona entre 8 cabezales intercambiables según la superficie: azulejos, cristal, tapicería o llantas."
+          }
+        },
+        "p2": {
+          "type": "paso",
+          "settings": {
+            "imagen_defecto": "mt-paso-2-mango.jpg",
+            "titulo": "Ajusta el mango",
+            "texto": "Extiende el mango telescópico hasta 130 cm y llega a cada rincón sin agacharte ni estirarte."
+          }
+        },
+        "p3": {
+          "type": "paso",
+          "settings": {
+            "imagen_defecto": "mt-paso-3-esfuerzo.jpg",
+            "titulo": "Enciende y listo",
+            "texto": "El motor gira a hasta 450 RPM y hace el trabajo pesado por ti, incluso en las esquinas más difíciles."
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3"
+      ],
+      "settings": {}
+    },
+    "mt-antes-despues": {
+      "type": "mt-antes-despues",
+      "settings": {
+        "titulo": "Desliza y compruébalo tú mismo",
+        "texto": "Moho, cal y grasa incrustada desaparecen en segundos."
+      }
+    },
+    "mt-escena": {
+      "type": "mt-escena",
+      "blocks": {
+        "e1": {
+          "type": "escena",
+          "settings": {
+            "imagen_defecto": "mt-angulo-frontal.jpg",
+            "etiqueta": "Diseño",
+            "titulo": "Silueta compacta y ergonómica",
+            "texto": "Un cuerpo pensado para sostenerse cómodamente con una sola mano durante toda la limpieza, sin fatiga en la muñeca."
+          }
+        },
+        "e2": {
+          "type": "escena",
+          "settings": {
+            "imagen_defecto": "mt-angulo-lateral.jpg",
+            "etiqueta": "Autonomía",
+            "titulo": "Carga rápida por USB",
+            "texto": "Carga con el cable USB incluido. No uses cargadores de carga rápida: pueden dañar la batería."
+          }
+        },
+        "e3": {
+          "type": "escena",
+          "settings": {
+            "imagen_defecto": "mt-detalle-panel.jpg",
+            "etiqueta": "Control",
+            "titulo": "Panel de un solo toque",
+            "texto": "Pantalla LED que indica batería y velocidad, con un botón grande fácil de pulsar incluso con las manos mojadas."
+          }
+        },
+        "e4": {
+          "type": "escena",
+          "settings": {
+            "imagen_defecto": "mt-detalle-kit.jpg",
+            "etiqueta": "Versatilidad",
+            "titulo": "8 cabezales para cada tarea",
+            "texto": "Cambia de cabezal en segundos: cerdas para azulejos, esponjas para cocina y almohadillas para superficies delicadas."
+          }
+        }
+      },
+      "block_order": [
+        "e1",
+        "e2",
+        "e3",
+        "e4"
+      ],
+      "settings": {}
+    },
+    "mt-uso": {
+      "type": "mt-uso",
+      "blocks": {
+        "u1": {
+          "type": "punto",
+          "settings": {
+            "titulo": "Cocina",
+            "texto": "Fregaderos y encimeras sin restos de grasa",
+            "imagen_defecto": "mt-uso-cocina.jpg"
+          }
+        },
+        "u2": {
+          "type": "punto",
+          "settings": {
+            "titulo": "Baño",
+            "texto": "Azulejos y juntas de baño, sin agacharte",
+            "imagen_defecto": "cp-step-bano.jpg"
+          }
+        },
+        "u3": {
+          "type": "punto",
+          "settings": {
+            "titulo": "Auto",
+            "texto": "Llantas y tapicería del coche",
+            "imagen_defecto": "cp-step-auto.jpg"
+          }
+        },
+        "u4": {
+          "type": "punto",
+          "settings": {
+            "titulo": "Superficies",
+            "texto": "Un solo cepillo para cada rincón",
+            "imagen_defecto": "mt-detalle-kit.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "u1",
+        "u2",
+        "u3",
+        "u4"
+      ],
+      "settings": {
+        "titulo": "De la cocina al baño, sin cambiar de herramienta",
+        "texto": "Un solo cepillo para fregaderos, encimeras, azulejos, bañeras y hasta las llantas del coche.",
+        "boton_texto": "Ver todos los usos",
+        "boton_url": "/products/cleanpro360-cepillo-electrico-multiusos"
+      }
+    },
+    "mt-garantias": {
+      "type": "mt-garantias",
+      "settings": {
+        "eyebrow": "Compra con tranquilidad",
+        "titulo": "Reglas claras antes de pagar",
+        "texto": "Envío, retracto y pago claros antes de comprar. Las reseñas con sello de compra verificada están más arriba."
+      },
+      "blocks": {
+        "g1": { "type": "item", "settings": { "titulo": "Envío", "texto": "2 a 7 días hábiles en ciudades principales. 5 a 12 días en el resto del país. El costo se calcula al checkout.", "enlace_texto": "Ver envíos", "enlace": "/pages/contact#mt-envios" } },
+        "g2": { "type": "item", "settings": { "titulo": "Retracto", "texto": "5 días hábiles para retractarte en compras a distancia, según la ley colombiana.", "enlace_texto": "Ver cambios", "enlace": "/pages/contact#mt-devoluciones" } },
+        "g3": { "type": "item", "settings": { "titulo": "Fallas", "texto": "Si llega dañado o incompleto, avísanos dentro de 30 días y lo resolvemos.", "enlace_texto": "Ver política", "enlace": "/pages/contact#mt-devoluciones" } },
+        "g4": { "type": "item", "settings": { "titulo": "Pago", "texto": "Checkout de Shopify. Los medios disponibles se muestran al pagar.", "enlace_texto": "Contacto", "enlace": "shopify://pages/contact" } }
+      },
+      "block_order": ["g1", "g2", "g3", "g4"]
+    },
+    "mt-resenas": {
+      "type": "mt-resenas",
+      "settings": {
+        "eyebrow": "Prueba social",
+        "titulo": "Lo que dicen quienes ya lo usaron",
+        "texto": "Compras verificadas. Cuatro hogares, el mismo cepillo."
+      },
+      "blocks": {
+        "r1": { "type": "resena", "settings": { "texto": "Increíble lo que quita en segundos. Ya no me arrodillo para fregar la bañera.", "nombre": "Marta G.", "detalle": "Compra verificada" } },
+        "r2": { "type": "resena", "settings": { "texto": "El mango extensible es lo mejor: limpio los azulejos altos sin subirme a ningún sitio.", "nombre": "Javier R.", "detalle": "Compra verificada" } },
+        "r3": { "type": "resena", "settings": { "texto": "Pensé que era otro cacharro que acabaría en el cajón, pero lo uso cada semana.", "nombre": "Lucía P.", "detalle": "Compra verificada" } },
+        "r4": { "type": "resena", "settings": { "texto": "Los cabezales de coche me sorprendieron, dejan las llantas impecables.", "nombre": "Diego M.", "detalle": "Compra verificada" } }
+      },
+      "block_order": ["r1", "r2", "r3", "r4"]
+    },
+    "mt-oferta": {
+      "type": "mt-oferta",
+      "settings": {
+        "eyebrow": "Precio de lanzamiento",
+        "titulo": "CleanPro360 a $99.900 COP",
+        "texto": "Pide hoy y recibe envío gratis a todo Colombia. Precio de lanzamiento frente a $149.900.",
+        "precio_actual": "$99.900",
+        "precio_antes": "$149.900",
+        "descuento_texto": "-33%",
+        "chip_envio": "Envío gratis",
+        "mostrar_contador": true,
+        "mostrar_stock": true,
+        "stock_porcentaje": 25,
+        "stock_texto": "Stock limitado · quedan pocas unidades al precio de hoy",
+        "boton_texto": "Pedir el mío",
+        "boton_url": "/products/cleanpro360-cepillo-electrico-multiusos"
+      }
+    },
+    "mt-faq": {
+      "type": "mt-faq",
+      "blocks": {
+        "f1": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "¿Es resistente al agua?",
+            "respuesta": "Sí. Tiene certificación IPX7: puedes usarlo en la ducha y zonas húmedas."
+          }
+        },
+        "f2": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "¿Cómo se carga la batería?",
+            "respuesta": "Con el cable USB incluido. No uses cargadores de carga rápida: pueden dañar la batería."
+          }
+        },
+        "f3": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "¿Qué cabezales incluye?",
+            "respuesta": "8 cabezales: cerdas redondas, cepillo plano, cepillo de esquinas y almohadillas suaves, entre otros."
+          }
+        },
+        "f4": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "¿Cuánto tarda en llegar?",
+            "respuesta": "En ciudades principales, 2 a 7 días hábiles. En el resto del país, 5 a 12 días. El costo de envío se calcula al checkout."
+          }
+        },
+        "f5": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "¿Puedo devolverlo?",
+            "respuesta": "Tienes 5 días hábiles de retracto. Si llega dañado o incompleto, avísanos en 30 días."
+          }
+        }
+      },
+      "block_order": ["f1", "f2", "f3", "f4", "f5"],
+      "settings": {}
+    },
+    "mt-cta-final": {
+      "type": "mt-cta-final",
+      "settings": {
+        "titulo": "Tu casa merece este nivel de limpieza",
+        "texto": "Pídelo ahora. Envío a Colombia y políticas claras antes de pagar.",
+        "boton_texto": "Pedir el mío",
+        "boton_url": "/products/cleanpro360-cepillo-electrico-multiusos"
+      }
+    }
+  },
+  "order": [
+    "mt-hero",
+    "mt-beneficios",
+    "mt-pasos",
+    "mt-antes-despues",
+    "mt-escena",
+    "mt-uso",
+    "mt-resenas",
+    "mt-garantias",
+    "mt-oferta",
+    "mt-faq",
+    "mt-cta-final"
+  ]
+}

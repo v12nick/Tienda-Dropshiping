@@ -1,0 +1,34 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+{% endstyle %}
+
+<section class="mt-section">
+  <div class="mt-container">
+    <div class="mt-cta-final mt-reveal">
+      <h2 class="mt-h2" style="font-size:{{ section.settings.titulo_size }}px;">{{ section.settings.titulo }}</h2>
+      <p>{{ section.settings.texto }}</p>
+      <a href="{{ section.settings.boton_url | default: '#' }}" class="mt-btn mt-btn-primario">{{ section.settings.boton_texto }}</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MT – CTA final",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Tu casa merece este nivel de limpieza" },
+    { "type": "range", "id": "titulo_size", "label": "Tamaño del título (px)", "min": 24, "max": 56, "step": 2, "unit": "px", "default": 34 },
+    { "type": "textarea", "id": "texto", "label": "Texto", "default": "Pídelo ahora. Envío a Colombia y políticas claras antes de pagar." },
+    { "type": "text", "id": "boton_texto", "label": "Texto del botón", "default": "Comprar ahora" },
+    { "type": "url", "id": "boton_url", "label": "Enlace del botón" },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 96 }
+  ],
+  "presets": [ { "name": "MT – CTA final" } ]
+}
+{% endschema %}

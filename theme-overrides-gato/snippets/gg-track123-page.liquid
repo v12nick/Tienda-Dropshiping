@@ -1,0 +1,60 @@
+{%- doc -%}
+  Branded Track123 tracking page: form, widget, shipping steps and FAQ.
+  @param {string} [titulo] - Page title
+  @param {string} [subtitulo] - Lead copy
+{%- enddoc -%}
+{%- liquid
+  assign gg_titulo = titulo | default: 'Rastrea tu pedido'
+  assign gg_subtitulo = subtitulo | default: 'Ingresa tu número de guía o de pedido y el correo con el que compraste. Te mostramos el estado en Track123, con los colores de Gato Gamer Store.'
+-%}
+<section class="gg-section gg-container gg-track">
+  <div class="gg-track__hero">
+    <span class="gg-hero__eyebrow">Gato Gamer Store</span>
+    <h1 class="gg-track__title">{% render 'gg-t', text: gg_titulo %}</h1>
+    <p class="gg-track__subtitle">{% render 'gg-t', text: gg_subtitulo %}</p>
+  </div>
+
+  <div class="gg-track__panel">
+    <form class="gg-track__form" action="/apps/track123" method="get" autocomplete="on">
+      <label class="gg-track__label" for="gg-track-nums">Número de guía o de pedido</label>
+      <input
+        class="gg-track__input"
+        id="gg-track-nums"
+        name="nums"
+        type="text"
+        required
+        placeholder="Ej. número de pedido de Shopify o guía"
+        autocomplete="off"
+      >
+      <label class="gg-track__label" for="gg-track-email">Correo de la compra</label>
+      <input
+        class="gg-track__input"
+        id="gg-track-email"
+        name="email"
+        type="email"
+        placeholder="el mismo correo del checkout"
+        autocomplete="email"
+      >
+      <button type="submit" class="gg-btn gg-btn--accent gg-track__submit">Rastrear pedido</button>
+      <p class="gg-track__form-note">El seguimiento lo procesa Track123. El envío a Colombia tarda de 1 a 10 días hábiles después del despacho.</p>
+    </form>
+  </div>
+
+  <div class="gg-track__timeline">
+    <h2 class="gg-section-title" style="text-align:center;margin-bottom:8px;">Así avanza tu pedido</h2>
+    <p class="gg-track__subtitle" style="max-width:560px;margin:0 auto 32px;text-align:center;">Cuando despachamos te llega la guía al correo. Con ese número ves el estado en Track123.</p>
+    <div class="gg-track__steps">
+      <div class="gg-track__step"><span class="gg-track__step-emoji">🛒</span><p class="gg-track__step-label">Pedido confirmado</p></div>
+      <div class="gg-track__step"><span class="gg-track__step-emoji">📦</span><p class="gg-track__step-label">Pedido preparado</p></div>
+      <div class="gg-track__step"><span class="gg-track__step-emoji">🚚</span><p class="gg-track__step-label">Enviado</p></div>
+      <div class="gg-track__step"><span class="gg-track__step-emoji">📍</span><p class="gg-track__step-label">En tránsito</p></div>
+      <div class="gg-track__step"><span class="gg-track__step-emoji">🏠</span><p class="gg-track__step-label">En reparto</p></div>
+      <div class="gg-track__step"><span class="gg-track__step-emoji">✅</span><p class="gg-track__step-label">Entregado</p></div>
+    </div>
+  </div>
+
+  <p class="gg-track__help">
+    ¿No tienes la guía todavía? Revisa el correo (y spam). Si ya pasaron más de 10 días hábiles,
+    <a href="https://wa.me/573112333744?text={{ 'Hola Gato Gamer Store, quiero rastrear mi pedido' | url_encode }}" rel="noopener" target="_blank">escríbenos por WhatsApp</a>.
+  </p>
+</section>

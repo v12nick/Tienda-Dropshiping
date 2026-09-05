@@ -1,0 +1,89 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  #shopify-section-{{ section.id }} .gg-section-title {
+    font-size: {{ section.settings.heading_size }}px;
+    text-align: {{ section.settings.text_align }};
+  }
+{% endstyle %}
+
+<section class="gg-section gg-container">
+  {%- if section.settings.titulo != blank -%}
+    <h2 class="gg-section-title gg-reveal" style="margin-bottom:32px;">{% render 'gg-t', text: section.settings.titulo %}</h2>
+  {%- endif -%}
+
+  <div class="gg-pasos gg-reveal gg-visible">
+    {%- for block in section.blocks -%}
+      <div class="gg-paso" {{ block.shopify_attributes }} style="transition-delay: {{ forloop.index0 | times: 80 }}ms;">
+        <div class="gg-paso__media">
+          {%- if block.settings.imagen != blank -%}
+            {% render 'gg-responsive-image',
+              image: block.settings.imagen,
+              alt: block.settings.titulo,
+              max_width: 800,
+              sizes: '(min-width: 750px) 220px, 46vw',
+              loading: 'lazy',
+              width: 800,
+              height: 800
+            %}
+          {%- else -%}
+            <img src="{{ block.settings.imagen_defecto | asset_url }}" alt="{% render 'gg-t', text: block.settings.titulo %}" loading="lazy" decoding="async" width="400" height="400">
+          {%- endif -%}
+          <span class="gg-paso__num">{{ forloop.index }}</span>
+        </div>
+        <p class="gg-paso__title">{% render 'gg-t', text: block.settings.titulo %}</p>
+        <p class="gg-paso__text">{% render 'gg-t', text: block.settings.texto %}</p>
+      </div>
+    {%- endfor -%}
+  </div>
+
+  {%- if section.settings.boton_texto != blank -%}
+    <div class="gg-cta-repeat">
+      <a href="#gg-comprar" class="gg-btn gg-btn--accent">{% render 'gg-t', text: section.settings.boton_texto %}</a>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "GG – Cómo funciona",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Cómo funciona" },
+    { "type": "select", "id": "text_align", "label": "Alineación del título", "options": [
+      {"value": "left", "label": "Izquierda"}, {"value": "center", "label": "Centro"}
+    ], "default": "center" },
+    { "type": "text", "id": "boton_texto", "label": "Texto del botón (opcional)", "default": "Comprar mi GameSir" },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "heading_size", "label": "Tamaño del título (px)", "min": 20, "max": 48, "step": 2, "default": 30 },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 120, "step": 4, "default": 56 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 120, "step": 4, "default": 56 }
+  ],
+  "blocks": [
+    {
+      "type": "paso",
+      "name": "Paso",
+      "settings": [
+        { "type": "image_picker", "id": "imagen", "label": "Imagen" },
+        { "type": "text", "id": "imagen_defecto", "label": "Imagen por defecto (nombre de archivo)", "default": "gg-ia-paso-1.jpg", "info": "Se usa solo si no eliges una imagen arriba" },
+        { "type": "text", "id": "titulo", "label": "Título", "default": "Paso" },
+        { "type": "textarea", "id": "texto", "label": "Texto" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "GG – Cómo funciona",
+      "blocks": [
+        { "type": "paso", "settings": { "imagen_defecto": "gg-ia-paso-1.jpg", "titulo": "Elige tu GameSir", "texto": "Confirma color y cantidad." } },
+        { "type": "paso", "settings": { "imagen_defecto": "gg-ia-paso-2.jpg", "titulo": "Realiza tu compra", "texto": "Pago seguro en el checkout de Shopify." } },
+        { "type": "paso", "settings": { "imagen_defecto": "gg-ia-paso-3.jpg", "titulo": "Recibe tu control", "texto": "Envío nacional: 1 a 10 días hábiles. Te avisamos con el número de guía." } },
+        { "type": "paso", "settings": { "imagen_defecto": "gg-ia-paso-4.jpg", "titulo": "Activa tu Game Pass", "texto": "Redime el código de Xbox Game Pass Ultimate que te llega y actívalo en tu cuenta." } },
+        { "type": "paso", "settings": { "imagen_defecto": "gg-ia-paso-5.jpg", "titulo": "Conecta y juega", "texto": "Plug and play: sin pilas, sin emparejar." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

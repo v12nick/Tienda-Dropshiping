@@ -1,0 +1,82 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: {{ section.settings.color_fondo }};
+  }
+{% endstyle %}
+
+<section class="mt-section">
+  <div class="mt-container">
+    <div class="mt-pasos-head mt-reveal">
+      {%- if section.settings.eyebrow != blank -%}<span class="mt-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      <h2 class="mt-h2" style="font-size:{{ section.settings.titulo_size }}px;">{{ section.settings.titulo }}</h2>
+    </div>
+    <div class="mt-faq-wrap mt-reveal">
+      {%- for block in section.blocks -%}
+        <div class="mt-faq-item" {{ block.shopify_attributes }}>
+          <button type="button" class="mt-faq-pregunta" aria-expanded="false">
+            <span>{{ block.settings.pregunta }}</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="mt-faq-respuesta">
+            <div class="mt-faq-respuesta-inner">{{ block.settings.respuesta }}</div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {%- for block in section.blocks -%}
+      {
+        "@type": "Question",
+        "name": {{ block.settings.pregunta | json }},
+        "acceptedAnswer": { "@type": "Answer", "text": {{ block.settings.respuesta | json }} }
+      }{% unless forloop.last %},{% endunless %}
+    {%- endfor -%}
+  ]
+}
+</script>
+
+{% schema %}
+{
+  "name": "MT – Preguntas frecuentes",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño superior", "default": "Dudas frecuentes" },
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Todo lo que quieres saber" },
+    { "type": "range", "id": "titulo_size", "label": "Tamaño del título (px)", "min": 24, "max": 56, "step": 2, "unit": "px", "default": 34 },
+    { "type": "color", "id": "color_fondo", "label": "Color de fondo", "default": "#ffffff" },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 96 }
+  ],
+  "blocks": [
+    {
+      "type": "pregunta",
+      "name": "Pregunta",
+      "settings": [
+        { "type": "text", "id": "pregunta", "label": "Pregunta", "default": "¿Es resistente al agua?" },
+        { "type": "textarea", "id": "respuesta", "label": "Respuesta", "default": "Sí, cuenta con certificación IPX7, por lo que puedes usarlo en la ducha o zonas húmedas sin problema." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MT – Preguntas frecuentes",
+      "blocks": [
+        { "type": "pregunta", "settings": { "pregunta": "¿Es resistente al agua?", "respuesta": "Sí, cuenta con certificación IPX7, por lo que puedes usarlo en la ducha o zonas húmedas sin problema." } },
+        { "type": "pregunta", "settings": { "pregunta": "¿Cómo se carga la batería?", "respuesta": "Con el cable USB incluido. No uses cargadores de carga rápida: pueden dañar la batería." } },
+        { "type": "pregunta", "settings": { "pregunta": "¿Qué cabezales incluye?", "respuesta": "8 cabezales: cerdas redondas, cepillo plano, cepillo de esquinas y almohadillas suaves, entre otros." } },
+        { "type": "pregunta", "settings": { "pregunta": "¿Cuánto tarda en llegar?", "respuesta": "En ciudades principales, 2 a 7 días hábiles. En el resto del país, 5 a 12 días. El costo se calcula al checkout." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

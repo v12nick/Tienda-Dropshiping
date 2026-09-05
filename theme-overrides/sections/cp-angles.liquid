@@ -1,0 +1,118 @@
+{%- assign product = section.settings.product -%}
+<section class="cp-angles" id="cp-angles-{{ section.id }}">
+  <header class="cp-head">
+    {%- if section.settings.kicker != blank -%}
+      <p class="cp-kicker cp-kicker--ink">{{ section.settings.kicker }}</p>
+    {%- endif -%}
+    {%- if section.settings.heading != blank -%}
+      <h2 class="cp-head__title">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {%- if section.settings.subheading != blank -%}
+      <p class="cp-head__sub">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+  </header>
+  <div class="cp-bento">
+    {%- assign fallbacks = 'cp-angle-front.jpg,cp-angle-kit.jpg,cp-angle-side.jpg,cp-angle-extend.jpg' | split: ',' -%}
+    {%- for block in section.blocks -%}
+      {%- assign fb = fallbacks[forloop.index0] | default: fallbacks[0] -%}
+      {%- assign media_image = nil -%}
+      {%- if product != blank -%}
+        {%- for media in product.media -%}
+          {%- if media.media_type == 'image' and forloop.index == block.settings.media_index -%}
+            {%- assign media_image = media -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
+      <figure class="cp-bento__item cp-bento__item--{{ forloop.index }}" {{ block.shopify_attributes }}>
+        {%- if block.settings.image != blank -%}
+          {{ block.settings.image | image_url: width: 1200 | image_tag: class: 'cp-bento__photo', loading: 'lazy', alt: block.settings.alt }}
+        {%- elsif media_image != blank -%}
+          {{ media_image | image_url: width: 1200 | image_tag: class: 'cp-bento__photo', loading: 'lazy', alt: block.settings.alt }}
+        {%- else -%}
+          <img class="cp-bento__photo" src="{{ fb | asset_url }}" alt="{{ block.settings.alt | escape }}" width="1024" height="1024" loading="lazy">
+        {%- endif -%}
+      </figure>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% stylesheet %}
+.cp-angles {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 36px 16px 12px;
+}
+.cp-head__sub {
+  margin: 8px 0 0;
+  color: #46607a;
+  max-width: 46ch;
+  line-height: 1.5;
+}
+.cp-bento {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 260px 260px;
+  gap: 14px;
+  margin-top: 22px;
+}
+.cp-bento__item {
+  margin: 0;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #eaf3fb;
+}
+.cp-bento__photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.cp-bento__item:hover .cp-bento__photo { transform: scale(1.05); }
+@media (max-width: 749px) {
+  .cp-bento {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 200px 200px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cp-bento__photo { transition: none; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "CP Angulos",
+  "tag": "section",
+  "class": "cp-section",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "product", "id": "product", "label": "Producto (fotos de la ficha)" },
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "El objeto" },
+    { "type": "text", "id": "heading", "label": "Titulo", "default": "Un mismo set. Varios ángulos." },
+    { "type": "textarea", "id": "subheading", "label": "Subtitulo", "default": "Las fotos de la ficha del producto, en la home." }
+  ],
+  "blocks": [
+    {
+      "type": "shot",
+      "name": "Foto",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Foto (vacío = foto del producto)" },
+        { "type": "range", "id": "media_index", "label": "Nº de foto del producto", "min": 1, "max": 12, "step": 1, "default": 1 },
+        { "type": "text", "id": "alt", "label": "Texto alternativo", "default": "CleanPro360" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "CP Angulos",
+      "category": "CleanPro",
+      "blocks": [
+        { "type": "shot", "settings": { "alt": "Frente" } },
+        { "type": "shot", "settings": { "alt": "Kit de cabezales" } },
+        { "type": "shot", "settings": { "alt": "Perfil" } },
+        { "type": "shot", "settings": { "alt": "Extension" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

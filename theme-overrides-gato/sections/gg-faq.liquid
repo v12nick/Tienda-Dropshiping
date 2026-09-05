@@ -1,0 +1,97 @@
+
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  #shopify-section-{{ section.id }} .gg-section-title {
+    font-size: {{ section.settings.heading_size }}px;
+    text-align: {{ section.settings.text_align }};
+  }
+{% endstyle %}
+
+<section class="gg-section gg-container">
+  {%- if section.settings.titulo != blank -%}
+    <h2 class="gg-section-title gg-reveal" style="margin-bottom:32px;">{% render 'gg-t', text: section.settings.titulo %}</h2>
+  {%- endif -%}
+
+  <div class="gg-faq gg-reveal">
+    {%- for block in section.blocks -%}
+      <div class="gg-faq__item" data-open="false" {{ block.shopify_attributes }}>
+        <button type="button" class="gg-faq__q" id="gg-faq-btn-{{ block.id }}" aria-expanded="false" aria-controls="gg-faq-panel-{{ block.id }}">
+          <span>{% render 'gg-t', text: block.settings.pregunta %}</span>
+          {% render 'gg-icon', name: 'chevron-down' %}
+        </button>
+        <div class="gg-faq__a" id="gg-faq-panel-{{ block.id }}" role="region" aria-labelledby="gg-faq-btn-{{ block.id }}">
+          <div class="gg-faq__a-inner">{% render 'gg-t', text: block.settings.respuesta %}</div>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+  {%- if section.blocks.size > 0 -%}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {%- for block in section.blocks -%}
+            {
+              "@type": "Question",
+              "name": {{ block.settings.pregunta | json }},
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": {{ block.settings.respuesta | strip_html | json }}
+              }
+            }{%- unless forloop.last -%},{%- endunless -%}
+          {%- endfor -%}
+        ]
+      }
+    </script>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "GG – FAQ",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Preguntas frecuentes" },
+    { "type": "select", "id": "text_align", "label": "Alineación del título", "options": [
+      {"value": "left", "label": "Izquierda"}, {"value": "center", "label": "Centro"}
+    ], "default": "center" },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "heading_size", "label": "Tamaño del título (px)", "min": 20, "max": 48, "step": 2, "default": 30 },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 120, "step": 4, "default": 56 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 120, "step": 4, "default": 56 }
+  ],
+  "blocks": [
+    {
+      "type": "pregunta",
+      "name": "Pregunta",
+      "settings": [
+        { "type": "text", "id": "pregunta", "label": "Pregunta", "default": "¿Pregunta?" },
+        { "type": "textarea", "id": "respuesta", "label": "Respuesta" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "GG – FAQ",
+      "blocks": [
+        { "type": "pregunta", "settings": { "pregunta": "¿Funciona en Xbox Series X/S?", "respuesta": "Sí, el GameSir G7 SE está licenciado oficialmente para Xbox Series X|S." } },
+        { "type": "pregunta", "settings": { "pregunta": "¿Funciona en Xbox One?", "respuesta": "Sí, es compatible con Xbox One y Xbox One S/X." } },
+        { "type": "pregunta", "settings": { "pregunta": "¿Funciona en PC?", "respuesta": "Sí, es compatible con Windows 10 y 11 vía cable USB-C." } },
+        { "type": "pregunta", "settings": { "pregunta": "¿Es inalámbrico?", "respuesta": "No. El GameSir G7 SE es un mando con cable USB-C, sin batería interna: conecta y juega sin esperar carga." } },
+        { "type": "pregunta", "settings": { "pregunta": "¿Qué significa Hall Effect?", "respuesta": "Los joysticks y gatillos usan sensores magnéticos sin contacto físico. Al no rozar, ayuda a reducir el desgaste asociado a los sensores tradicionales." } },
+        { "type": "pregunta", "settings": { "pregunta": "¿Tiene botones traseros?", "respuesta": "Sí, dos botones traseros remapeables con seguro rápido para activarlos o desactivarlos." } },
+        { "type": "pregunta", "settings": { "pregunta": "¿Se puede configurar?", "respuesta": "Sí, con el software gratuito GameSir Nexus: mapeo de botones, zonas muertas, vibración y hasta 3 perfiles guardados." } },
+        { "type": "pregunta", "settings": { "pregunta": "¿Qué incluye el Game Pass?", "respuesta": "1 mes de suscripción a Xbox Game Pass Ultimate, acceso a cientos de juegos en consola, PC y la nube." } },
+        { "type": "pregunta", "settings": { "pregunta": "¿Cómo se activa el Game Pass?", "respuesta": "Recibes el código de Xbox Game Pass Ultimate junto con tu pedido y lo activas tú mismo en tu cuenta de Xbox/Microsoft en un par de clics." } },
+        { "type": "pregunta", "settings": { "pregunta": "¿El Game Pass tiene restricciones?", "respuesta": "Aplican los términos y condiciones de Microsoft para códigos de Game Pass Ultimate (por ejemplo, cuentas nuevas o sin suscripción activa). Si tienes dudas, escríbenos antes de comprar." } },
+        { "type": "pregunta", "settings": { "pregunta": "¿Qué incluye la caja?", "respuesta": "Mando GameSir G7 SE y cable USB-C." } },
+        { "type": "pregunta", "settings": { "pregunta": "¿Cuánto tarda en llegar mi pedido?", "respuesta": "El envío es nacional, entre 1 y 10 días hábiles. Te compartimos el número de guía apenas se despache para que lo puedas seguir." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

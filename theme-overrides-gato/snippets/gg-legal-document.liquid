@@ -1,0 +1,37 @@
+{%- doc -%}
+  Legal / policy page chrome: eyebrow, title and body.
+  @param {string} handle - Page handle
+{%- enddoc -%}
+{%- liquid
+  assign gg_h = handle | default: page.handle
+  assign gg_legal_title = page.title | default: 'Políticas'
+  assign gg_legal_eyebrow = 'Políticas de la tienda'
+  case gg_h
+    when 'quienes-somos'
+      assign gg_legal_title = 'Quiénes somos'
+      assign gg_legal_eyebrow = 'Gato Gamer Store'
+    when 'politica-de-envios'
+      assign gg_legal_title = 'Envíos a Colombia'
+    when 'politica-de-devoluciones'
+      assign gg_legal_title = 'Devoluciones y garantía'
+    when 'politica-de-privacidad'
+      assign gg_legal_title = 'Política de privacidad'
+    when 'terminos-y-condiciones'
+      assign gg_legal_title = 'Términos y condiciones'
+    when 'aviso-legal'
+      assign gg_legal_title = 'Aviso legal'
+  endcase
+  if page.title != blank and template.name == 'page'
+    assign gg_legal_title = page.title
+  endif
+-%}
+<section class="gg-section gg-legal" data-gg-legal-page="{{ gg_h | escape }}">
+  <div class="gg-container gg-legal__wrap">
+    <p class="gg-legal__eyebrow">{{ gg_legal_eyebrow }}</p>
+    <h1 class="gg-legal__title">{{ gg_legal_title }}</h1>
+    <p class="gg-legal__updated">Última actualización: 5 de septiembre de 2026</p>
+    <div class="gg-legal__body rte">
+      {% render 'gg-legal-storefront', handle: gg_h %}
+    </div>
+  </div>
+</section>

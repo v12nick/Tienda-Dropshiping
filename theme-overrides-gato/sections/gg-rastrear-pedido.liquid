@@ -1,0 +1,39 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: var(--gg-bg);
+    min-height: 40vh;
+  }
+{% endstyle %}
+
+<section class="gg-section gg-container gg-track">
+  <div class="gg-track__hero">
+    <span class="gg-hero__eyebrow">Gato Gamer Store</span>
+    <h1 class="gg-track__title">{% render 'gg-t', text: section.settings.titulo | default: 'Rastrea tu pedido' %}</h1>
+    <p class="gg-track__subtitle">El seguimiento está en Track123, con el diseño de Gato Gamer Store.</p>
+    <p style="margin-top:18px;">
+      <a class="gg-btn gg-btn--accent" href="/apps/track123">Abrir rastreador</a>
+    </p>
+  </div>
+</section>
+<script>
+  location.replace('/apps/track123' + (location.search || '') + (location.hash || ''));
+</script>
+
+{% schema %}
+{
+  "name": "GG – Rastrear pedido",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Rastrea tu pedido" },
+    { "type": "textarea", "id": "subtitulo", "label": "Subtítulo", "default": "Ingresa tu número de guía o de pedido y el correo con el que compraste. Te mostramos el estado en Track123." },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 120, "step": 4, "default": 56 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 120, "step": 4, "default": 72 }
+  ],
+  "presets": [
+    { "name": "GG – Rastrear pedido" }
+  ]
+}
+{% endschema %}

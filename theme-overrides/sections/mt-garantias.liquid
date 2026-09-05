@@ -1,0 +1,60 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: {{ section.settings.color_fondo }};
+  }
+{% endstyle %}
+
+<section class="mt-section">
+  <div class="mt-container">
+    <div class="mt-resenas-head mt-reveal">
+      {%- if section.settings.eyebrow != blank -%}<span class="mt-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      <h2 class="mt-h2" style="font-size:{{ section.settings.titulo_size }}px;">{{ section.settings.titulo }}</h2>
+      {%- if section.settings.texto != blank -%}
+        <p class="mt-body" style="max-width:52ch;margin:0 auto;">{{ section.settings.texto }}</p>
+      {%- endif -%}
+    </div>
+    <ul class="mt-garantias">
+      {%- for block in section.blocks -%}
+        <li class="mt-garantia mt-reveal" {{ block.shopify_attributes }}>
+          <strong>{{ block.settings.titulo }}</strong>
+          <p>{{ block.settings.texto }}</p>
+          {%- if block.settings.enlace_texto != blank and block.settings.enlace != blank -%}
+            <a href="{{ block.settings.enlace }}">{{ block.settings.enlace_texto }}</a>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MT – Compra segura",
+  "tag": "section",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño superior", "default": "Compra con tranquilidad" },
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Políticas claras. Sin letras chiquitas escondidas." },
+    { "type": "textarea", "id": "texto", "label": "Texto", "default": "Somos una tienda nueva en Colombia. Preferimos decirte las reglas de envío y cambios antes de que pagues." },
+    { "type": "range", "id": "titulo_size", "label": "Tamaño del título (px)", "min": 24, "max": 56, "step": 2, "unit": "px", "default": 34 },
+    { "type": "color", "id": "color_fondo", "label": "Color de fondo", "default": "#f2f6fc" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 8, "unit": "px", "label": "Espacio superior (px)", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 8, "unit": "px", "label": "Espacio inferior (px)", "default": 96 }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Garantía",
+      "settings": [
+        { "type": "text", "id": "titulo", "label": "Título" },
+        { "type": "textarea", "id": "texto", "label": "Texto" },
+        { "type": "text", "id": "enlace_texto", "label": "Texto del enlace" },
+        { "type": "url", "id": "enlace", "label": "Enlace" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "MT – Compra segura", "category": "CleanPro" }]
+}
+{% endschema %}

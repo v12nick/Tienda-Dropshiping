@@ -1,0 +1,18 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+{% endstyle %}
+
+{% render 'gg-legal-document', handle: page.handle %}
+
+{% schema %}
+{
+  "name": "Página legal",
+  "settings": [
+    { "type": "range", "id": "padding_top", "label": "Espacio arriba (px)", "min": 0, "max": 100, "step": 4, "default": 40 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio abajo (px)", "min": 0, "max": 100, "step": 4, "default": 64 }
+  ]
+}
+{% endschema %}

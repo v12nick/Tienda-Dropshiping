@@ -1,0 +1,44 @@
+{%- comment -%}
+  Robots y descripciones de respaldo. No pisa titles/metas que ya existan en el admin.
+{%- endcomment -%}
+{%- liquid
+  assign gg_noindex = false
+  if template.name == 'search' or template.name == 'cart' or template.name == '404'
+    assign gg_noindex = true
+  endif
+  if request.page_type contains 'customers'
+    assign gg_noindex = true
+  endif
+  if template.name == 'collection' and collection.handle == 'all'
+    assign gg_noindex = true
+  endif
+  if page.handle == 'swym-wishlist' or page.handle == 'swym-share-wishlist' or page.handle == 'favoritos' or page.handle == 'data-sharing-opt-out' or page.handle == 'compra-confirmada' or request.path contains '/pages/compra-confirmada'
+    assign gg_noindex = true
+  endif
+-%}
+{%- if gg_noindex -%}
+  <meta name="robots" content="noindex, follow">
+{%- endif -%}
+{%- if page_description == blank -%}
+  {%- if template.name == 'index' -%}
+    <meta name="description" content="GameSir G7 SE para Xbox y PC en Colombia: Hall Effect, 2 botones traseros y 1 mes de Xbox Game Pass Ultimate incluido. Envío nacional. El costo de envío se confirma al pagar.">
+  {%- elsif template.name == 'product' and product.handle == 'control-gamesir-g7se-cable-joysticks-hall-xbox-pc' -%}
+    <meta name="description" content="{{ product.title | escape }} para Xbox Series X|S, Xbox One y PC. Sticks Hall Effect, 2 botones traseros y 1 mes de Xbox Game Pass Ultimate. Precio en COP. Envío a Colombia.">
+  {%- elsif template.name == 'page' and page.handle == 'quienes-somos' -%}
+    <meta name="description" content="Gato Gamer Store es la tienda en Colombia del mando GameSir G7 SE para Xbox y PC: Hall Effect, botones traseros y 1 mes de Game Pass Ultimate.">
+  {%- elsif template.name == 'page' and page.handle == 'politica-de-envios' -%}
+    <meta name="description" content="Envío del GameSir G7 SE a Colombia en 1 a 10 días hábiles tras el despacho. El costo se confirma al pagar y te enviamos la guía.">
+  {%- elsif template.name == 'page' and page.handle == 'politica-de-devoluciones' -%}
+    <meta name="description" content="Devoluciones del mando GameSir G7 SE en Colombia: retracto, garantía por defectos y condiciones del código de Game Pass Ultimate.">
+  {%- elsif template.name == 'page' and page.handle == 'politica-de-privacidad' -%}
+    <meta name="description" content="Cómo Gato Gamer Store trata tus datos al comprar el GameSir G7 SE en Colombia, según la Ley 1581 de 2012.">
+  {%- elsif template.name == 'page' and page.handle == 'terminos-y-condiciones' -%}
+    <meta name="description" content="Condiciones de compra del GameSir G7 SE y Game Pass Ultimate en Gato Gamer Store. Precios en COP y checkout de Shopify.">
+  {%- elsif template.name == 'page' and page.handle == 'aviso-legal' -%}
+    <meta name="description" content="Información legal de Gato Gamer Store, tienda en Colombia del mando GameSir G7 SE para Xbox y PC.">
+  {%- elsif template.name == 'blog' -%}
+    <meta name="description" content="Guías para elegir y configurar controles Xbox y el GameSir G7 SE en Colombia: Hall Effect, drift, botones traseros y envío nacional.">
+  {%- elsif template.name == 'collection' and collection.handle != 'all' -%}
+    <meta name="description" content="{{ collection.title | escape }} en Gato Gamer Store. Envío nacional en Colombia.">
+  {%- endif -%}
+{%- endif -%}

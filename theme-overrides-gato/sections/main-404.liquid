@@ -1,0 +1,52 @@
+{%- comment -%}
+  Shopify sirve /pages/compra-confirmada como 404 hasta que exista la página
+  en el admin. request.path en ese caso es /404, pero la URL del navegador
+  sigue siendo /pages/compra-confirmada. El JS muestra la confirmación.
+{%- endcomment -%}
+<div class="template-404 page-width page-margin center" data-gg-404>
+  <style type="text/css">
+    .template-404 .title + * {
+      margin-top: 1rem;
+    }
+
+    @media screen and (min-width: 750px) {
+      .template-404 .title + * {
+        margin-top: 2rem;
+      }
+    }
+  </style>
+  <p>
+    {{ 'templates.404.subtext' | t }}
+  </p>
+  <h1 class="title">
+    {{ 'templates.404.title' | t }}
+  </h1>
+  <a href="{{ routes.all_products_collection_url }}" class="button">
+    {{ 'general.continue_shopping' | t }}
+  </a>
+</div>
+
+<div hidden data-gg-confirm-fallback>
+  {% render 'gg-compra-confirmada', mode: 'page' %}
+</div>
+
+{%- comment -%}
+  Las políticas del pie aún pueden no existir como páginas en el admin.
+  Shopify las sirve como 404; este HTML + JS las muestra con la URL real.
+{%- endcomment -%}
+<div hidden data-gg-track-fallback>
+  <section class="gg-section gg-container gg-track">
+    <div class="gg-track__hero">
+      <span class="gg-hero__eyebrow">Gato Gamer Store</span>
+      <h1 class="gg-track__title">Rastrea tu pedido</h1>
+      <p class="gg-track__subtitle">El seguimiento lo hace Track123. Te llevamos ahí.</p>
+      <p style="margin-top:18px;"><a class="gg-btn gg-btn--accent" href="/apps/track123">Abrir rastreador</a></p>
+    </div>
+  </section>
+</div>
+{%- assign gg_legal_handles = 'quienes-somos,politica-de-envios,politica-de-devoluciones,politica-de-privacidad,terminos-y-condiciones,aviso-legal' | split: ',' -%}
+{%- for gg_legal_h in gg_legal_handles -%}
+  <div hidden data-gg-legal-fallback data-handle="{{ gg_legal_h }}">
+    {% render 'gg-legal-document', handle: gg_legal_h %}
+  </div>
+{%- endfor -%}

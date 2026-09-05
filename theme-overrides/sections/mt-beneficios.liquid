@@ -1,0 +1,87 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: {{ section.settings.color_fondo }};
+  }
+{% endstyle %}
+
+<section class="mt-beneficios mt-section">
+  <div class="mt-container">
+    <div class="mt-beneficios-head mt-reveal">
+      {%- if section.settings.eyebrow != blank -%}<span class="mt-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      <h2 class="mt-h2" style="font-size:{{ section.settings.titulo_size }}px;">{{ section.settings.titulo }}</h2>
+      <p class="mt-body">{{ section.settings.texto }}</p>
+    </div>
+    <div class="mt-beneficios-grid mt-stagger">
+      {%- for block in section.blocks -%}
+        <div class="mt-beneficio mt-reveal" style="--mt-i:{{ forloop.index0 }};" {{ block.shopify_attributes }}>
+          <div class="mt-beneficio-icon">
+            {%- case block.settings.icono -%}
+              {%- when 'rayo' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              {%- when 'gota' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2s7 8.5 7 13a7 7 0 0 1-14 0c0-4.5 7-13 7-13z"/></svg>
+              {%- when 'engranaje' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+              {%- when 'bateria' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="7" width="18" height="10" rx="2"/><line x1="23" y1="11" x2="23" y2="13"/></svg>
+              {%- else -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/></svg>
+            {%- endcase -%}
+          </div>
+          {%- if block.settings.spec != blank -%}
+            <p class="mt-beneficio-spec">{{ block.settings.spec }}</p>
+          {%- endif -%}
+          <h3>{{ block.settings.titulo }}</h3>
+          <p>{{ block.settings.texto }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MT – Beneficios",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño superior", "default": "Por qué lo va a amar tu casa" },
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Todo lo que necesitas, en un solo cepillo" },
+    { "type": "range", "id": "titulo_size", "label": "Tamaño del título (px)", "min": 24, "max": 56, "step": 2, "unit": "px", "default": 34 },
+    { "type": "textarea", "id": "texto", "label": "Texto", "default": "Diseñado para que limpiar deje de ser un esfuerzo." },
+    { "type": "color", "id": "color_fondo", "label": "Color de fondo", "default": "#ffffff" },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 96 }
+  ],
+  "blocks": [
+    {
+      "type": "beneficio",
+      "name": "Beneficio",
+      "settings": [
+        { "type": "select", "id": "icono", "label": "Icono", "options": [
+          {"value":"rayo","label":"Rayo (potencia)"},
+          {"value":"gota","label":"Gota (agua)"},
+          {"value":"engranaje","label":"Engranaje (ajustable)"},
+          {"value":"bateria","label":"Batería"}
+        ], "default": "rayo" },
+        { "type": "text", "id": "spec", "label": "Dato destacado", "default": "450 RPM" },
+        { "type": "text", "id": "titulo", "label": "Título", "default": "3 velocidades" },
+        { "type": "textarea", "id": "texto", "label": "Texto", "default": "Hasta 450 RPM para adaptarte a cualquier superficie, de lo más delicado a lo más incrustado." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MT – Beneficios",
+      "blocks": [
+        { "type": "beneficio", "settings": { "icono": "rayo", "spec": "450 RPM", "titulo": "3 velocidades", "texto": "Hasta 450 RPM para adaptarte a cualquier superficie, de lo más delicado a lo más incrustado." } },
+        { "type": "beneficio", "settings": { "icono": "gota", "spec": "IPX7", "titulo": "Resistente al agua", "texto": "Úsalo con total libertad, incluso en la ducha, sin miedo a salpicaduras." } },
+        { "type": "beneficio", "settings": { "icono": "engranaje", "spec": "8 cabezales", "titulo": "Intercambiables", "texto": "Uno para cada superficie: azulejos, sartenes, llantas del coche y más." } },
+        { "type": "beneficio", "settings": { "icono": "bateria", "spec": "Inalámbrico", "titulo": "Batería USB", "texto": "Batería recargable por USB de larga duración, sin cables que estorben." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

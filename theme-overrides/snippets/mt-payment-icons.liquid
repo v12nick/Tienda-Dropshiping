@@ -1,0 +1,24 @@
+{%- comment -%}
+  Iconos de pago del checkout. Si Shopify solo reporta PayPal,
+  mostramos las tarjetas que PayPal acepta más el propio PayPal.
+{%- endcomment -%}
+{%- liquid
+  assign mt_pay_types = shop.enabled_payment_types
+  if mt_pay_types.size == 0
+    assign mt_pay_types = 'visa,master,american_express,paypal' | split: ','
+  elsif mt_pay_types.size == 1 and mt_pay_types.first == 'paypal'
+    assign mt_pay_types = 'visa,master,american_express,paypal' | split: ','
+  endif
+-%}
+<div class="mt-pagos-aceptados{% if class != blank %} {{ class }}{% endif %}">
+  {%- if heading != blank -%}
+    <p class="mt-pagos-aceptados-heading">{{ heading }}</p>
+  {%- endif -%}
+  <ul class="list list-payment" role="list">
+    {%- for type in mt_pay_types -%}
+      <li class="list-payment__item">
+        {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+      </li>
+    {%- endfor -%}
+  </ul>
+</div>
