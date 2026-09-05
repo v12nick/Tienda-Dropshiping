@@ -829,10 +829,25 @@ function initProductGallery() {
   }
 
   function goTo(index, behavior) {
-    if (index < 0 || index >= slides.length) return;
+    var n = slides.length;
+    if (!n) return;
+    index = ((index % n) + n) % n;
     track.scrollTo({ left: slides[index].offsetLeft, behavior: behavior || 'smooth' });
     setActive(index);
+    var color = slides[index].getAttribute('data-gg-slide-color');
+    if (color && root.ggApplyColor) root.ggApplyColor(color);
   }
+
+  root.ggGalleryGoToColor = function (color) {
+    if (!color) return;
+    var idx = slides.findIndex(function (s) {
+      return s.getAttribute('data-gg-slide-color') === color;
+    });
+    if (idx > -1) {
+      track.scrollTo({ left: slides[idx].offsetLeft, behavior: 'smooth' });
+      setActive(idx);
+    }
+  };
 
   root.ggGalleryGoToMedia = function (mediaId) {
     var idx = slides.findIndex(function (s) { return s.getAttribute('data-media-id') === String(mediaId); });
@@ -844,16 +859,19 @@ function initProductGallery() {
   track.addEventListener('scroll', function () {
     clearTimeout(scrollTimer);
     scrollTimer = setTimeout(function () {
-      var idx = Math.round(track.scrollLeft / track.clientWidth);
-      setActive(Math.max(0, Math.min(idx, slides.length - 1)));
+      var idx = Math.round(track.scrollLeft / Math.max(track.clientWidth, 1));
+      idx = Math.max(0, Math.min(idx, slides.length - 1));
+      setActive(idx);
+      var color = slides[idx] && slides[idx].getAttribute('data-gg-slide-color');
+      if (color && root.ggApplyColor) root.ggApplyColor(color);
     }, 80);
   });
 
   if (prevBtn) prevBtn.addEventListener('click', function () {
-    goTo(Math.round(track.scrollLeft / track.clientWidth) - 1);
+    goTo(Math.round(track.scrollLeft / Math.max(track.clientWidth, 1)) - 1);
   });
   if (nextBtn) nextBtn.addEventListener('click', function () {
-    goTo(Math.round(track.scrollLeft / track.clientWidth) + 1);
+    goTo(Math.round(track.scrollLeft / Math.max(track.clientWidth, 1)) + 1);
   });
   dots.forEach(function (d, i) { d.addEventListener('click', function () { goTo(i); }); });
   thumbs.forEach(function (t, i) { t.addEventListener('click', function () { goTo(i); }); });
@@ -1022,7 +1040,7 @@ function initColorPicker() {
     return active ? active.getAttribute('data-gg-color') : '';
   }
 
-  function apply(value) {
+  function apply(value, fromGallery) {
     if (!value) return;
     picks.forEach(function (el) {
       var on = el.getAttribute('data-gg-color') === value;
@@ -1039,7 +1057,12 @@ function initColorPicker() {
     productSwatches.forEach(function (s) {
       if ((s.getAttribute('data-option-value') || '') === value) s.click();
     });
+    if (!fromGallery && root.ggGalleryGoToColor) root.ggGalleryGoToColor(value);
   }
+
+  root.ggApplyColor = function (value) {
+    apply(value, true);
+  };
 
   picks.forEach(function (el) {
     el.addEventListener('click', function () {

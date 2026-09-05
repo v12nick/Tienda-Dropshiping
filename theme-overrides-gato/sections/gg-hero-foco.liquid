@@ -130,56 +130,23 @@
 
 <section class="gg-section gg-container" id="gg-comprar" data-gg-product-root data-gg-track-product="{{ gg_handle }}" data-gg-product-handle="{{ gg_handle }}" data-shop-currency="{{ shop.currency }}">
   <div class="gg-producto">
-    <div class="gg-gallery">
-      {%- liquid
-        assign gg_color_count = 0
-        for block in section.blocks
-          if block.type == 'variante'
-            assign gg_color_count = gg_color_count | plus: 1
-          endif
-        endfor
-      -%}
+    {%- liquid
+      assign gg_color_count = 0
+      for block in section.blocks
+        if block.type == 'variante'
+          assign gg_color_count = gg_color_count | plus: 1
+        endif
+      endfor
+      assign gg_color_gallery = false
+      if gg_color_count > 0
+        assign gg_color_gallery = true
+      elsif gg_media.size == 0
+        assign gg_color_gallery = true
+      endif
+    -%}
+    <div class="gg-gallery{% if gg_color_gallery %} gg-gallery--colors{% endif %}">
       {%- if gg_color_count > 0 -%}
-        <div class="gg-color-mosaic" data-gg-color-mosaic>
-          {%- for block in section.blocks -%}
-            {%- if block.type == 'variante' -%}
-              {%- liquid
-                assign gg_color_name = block.settings.nombre
-                assign gg_color_asset = block.settings.imagen_asset | default: 'gg-g7se-blanco.webp'
-                assign gg_tile_loading = 'lazy'
-                if forloop.first
-                  assign gg_tile_loading = 'eager'
-                endif
-              -%}
-              <button
-                type="button"
-                class="gg-color-tile{% if forloop.first %} gg-active{% endif %}"
-                data-gg-color="{{ gg_color_name | escape }}"
-                aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}"
-                {{ block.shopify_attributes }}
-              >
-                {%- if block.settings.imagen != blank -%}
-                  <img
-                    src="{{ block.settings.imagen | image_url: width: 720 }}"
-                    alt="{{ gg_color_name | escape }}"
-                    width="720"
-                    height="720"
-                    loading="{{ gg_tile_loading }}"
-                  >
-                {%- else -%}
-                  <img
-                    src="{{ gg_color_asset | asset_url }}"
-                    alt="{{ gg_color_name | escape }}"
-                    width="768"
-                    height="768"
-                    loading="{{ gg_tile_loading }}"
-                  >
-                {%- endif -%}
-                <span class="gg-color-tile__name">{{ gg_color_name }}</span>
-              </button>
-            {%- endif -%}
-          {%- endfor -%}
-        </div>
+        {% render 'gg-color-gallery', source: 'blocks', slide_count: gg_color_count %}
       {%- elsif gg_media.size > 0 -%}
         <div class="gg-gallery__viewport">
           <div class="gg-gallery__track" data-gg-track>
@@ -221,16 +188,7 @@
           </div>
         {%- endif -%}
       {%- else -%}
-        <div class="gg-color-mosaic" data-gg-color-mosaic>
-          {%- assign gg_fallback_colors = 'Blanco|gg-g7se-blanco.webp,Azul Dinámico|gg-g7se-azul.webp,Naranja Vibrante|gg-g7se-naranja.webp,Púrpura Radiante|gg-g7se-purpura.webp' | split: ',' -%}
-          {%- for item in gg_fallback_colors -%}
-            {%- assign gg_parts = item | split: '|' -%}
-            <button type="button" class="gg-color-tile{% if forloop.first %} gg-active{% endif %}" data-gg-color="{{ gg_parts[0] | escape }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}">
-              <img src="{{ gg_parts[1] | asset_url }}" alt="{{ gg_parts[0] | escape }}" width="768" height="768" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}">
-              <span class="gg-color-tile__name">{{ gg_parts[0] }}</span>
-            </button>
-          {%- endfor -%}
-        </div>
+        {% render 'gg-color-gallery', source: 'fallback', slide_count: 4 %}
       {%- endif -%}
     </div>
 

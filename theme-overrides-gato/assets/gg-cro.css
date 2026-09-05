@@ -1,5 +1,14 @@
 /* Conversion tweaks that sit on top of the existing black/red storefront. */
 
+.gg-gallery--colors .gg-gallery__nav {
+  display: flex !important;
+  opacity: 1;
+}
+
+.gg-gallery--colors .gg-gallery__viewport:hover .gg-gallery__slide img {
+  transform: none;
+}
+
 .gg-buy__pack,
 .gg-buy__ship {
   margin: 0 0 12px;
