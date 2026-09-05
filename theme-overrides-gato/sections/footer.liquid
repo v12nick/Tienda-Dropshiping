@@ -1,0 +1,120 @@
+
+{% style %}
+  #shopify-section-{{ section.id }} { background: #030303; }
+{% endstyle %}
+
+<footer class="gg-footer">
+  <div class="gg-container">
+    <div class="gg-footer__grid">
+      <div>
+        <a href="{{ routes.root_url }}" class="gg-footer__brand">
+          {%- if section.settings.logo != blank -%}
+            <img src="{{ section.settings.logo | image_url: width: 200 }}" width="{{ section.settings.logo_width }}" height="{{ section.settings.logo_width }}" alt="{{ shop.name }}" style="height:auto;max-height:{{ section.settings.logo_width }}px;width:auto;border-radius:8px;">
+          {%- else -%}
+            <img src="{{ 'gg-logo.png' | file_url }}" width="{{ section.settings.logo_width }}" height="{{ section.settings.logo_width }}" alt="{{ shop.name }}" style="height:auto;max-height:{{ section.settings.logo_width }}px;width:auto;border-radius:8px;">
+          {%- endif -%}
+          <span>{{ shop.name }}</span>
+        </a>
+        <p class="gg-footer__tagline">{% render 'gg-t', text: section.settings.tagline %}</p>
+        <div class="gg-social">
+          {%- if section.settings.instagram_url != blank -%}<a href="{{ section.settings.instagram_url }}" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>{%- endif -%}
+          {%- if section.settings.tiktok_url != blank -%}<a href="{{ section.settings.tiktok_url }}" aria-label="TikTok" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 3c.4 2 1.8 3.6 4 3.9v2.6c-1.4 0-2.8-.4-4-1.2v6.2A5.5 5.5 0 1 1 11 9v2.7a2.8 2.8 0 1 0 2 2.7V3h3.5z"/></svg></a>{%- endif -%}
+          {%- if section.settings.facebook_url != blank -%}<a href="{{ section.settings.facebook_url }}" aria-label="Facebook" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-8h2.7l.4-3.2h-3V7.7c0-.9.3-1.6 1.7-1.6h1.4V3.2C16.4 3.1 15.4 3 14.3 3c-2.5 0-4.3 1.5-4.3 4.4v2.4H7.3v3.2H10V21h3.5z"/></svg></a>{%- endif -%}
+        </div>
+      </div>
+
+      <div class="gg-footer__col">
+        <p class="gg-footer__col-title">{% render 'gg-t', text: section.settings.col1_titulo | default: 'Tienda' %}</p>
+        {%- for i in (1..5) -%}
+          {%- assign lbl = 'col1_link_' | append: i | append: '_label' -%}
+          {%- assign url = 'col1_link_' | append: i | append: '_url' -%}
+          {%- assign lbl_val = section.settings[lbl] -%}
+          {%- assign url_val = section.settings[url] -%}
+          {%- if url_val contains 'rastrea-tu-pedido' -%}
+            {%- assign url_val = '/apps/track123' -%}
+          {%- endif -%}
+          {%- if lbl_val != blank and url_val != blank -%}
+            <a href="{{ url_val }}">{% render 'gg-t', text: lbl_val %}</a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      <div class="gg-footer__col">
+        <p class="gg-footer__col-title">{% render 'gg-t', text: 'Ayuda' %}</p>
+        <a href="/pages/contact">{% render 'gg-t', text: 'Contacto' %}</a>
+        <a href="/pages/politica-de-devoluciones">{% render 'gg-t', text: 'Devoluciones' %}</a>
+        <a href="/pages/politica-de-envios">{% render 'gg-t', text: 'Envíos' %}</a>
+        <a href="/pages/politica-de-privacidad">{% render 'gg-t', text: 'Privacidad' %}</a>
+        <a href="/pages/terminos-y-condiciones">{% render 'gg-t', text: 'Términos y condiciones' %}</a>
+        <a href="/pages/aviso-legal">{% render 'gg-t', text: 'Aviso legal' %}</a>
+      </div>
+
+      <div class="gg-footer__col">
+        <p class="gg-footer__col-title">{% render 'gg-t', text: section.settings.col3_titulo | default: 'Contacto' %}</p>
+        <p style="color:var(--gg-text-muted);font-size:14px;line-height:1.8;">{% render 'gg-t', text: section.settings.contacto_texto %}</p>
+        {%- capture gg_wa_msg -%}{%- render 'gg-t', text: section.settings.whatsapp_mensaje | default: 'Hola, tengo una pregunta sobre un producto de Gato Gamer Store' -%}{%- endcapture -%}
+        <a
+          href="https://wa.me/{{ section.settings.whatsapp_numero }}?text={{ gg_wa_msg | strip | url_encode }}"
+          target="_blank" rel="noopener" class="gg-whatsapp-btn"
+          data-gg-open-aichat
+        >
+          {% render 'gg-icon', name: 'whatsapp' %}
+          <span>{% render 'gg-t', text: 'Chatea con nosotros' %}</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="gg-footer__bottom">
+      <span class="gg-footer__copy">© {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ 'gg.footer_rights' | t }}</span>
+      <div class="gg-footer__pay">
+        {% render 'gg-pay-icons', label: 'Métodos de pago aceptados' %}
+      </div>
+    </div>
+  </div>
+</footer>
+
+{%- unless template.name == 'cart' -%}
+  {% render 'gg-sales-assistant', whatsapp_numero: section.settings.whatsapp_numero %}
+
+  <button
+    type="button"
+    class="gg-alex-fab"
+    data-gg-open-aichat
+    aria-label="{{ 'gg.alex_ai_open' | t }}"
+  >
+    <span class="gg-alex-fab__icon" aria-hidden="true">{% render 'gg-icon', name: 'sparkles' %}</span>
+    <span class="gg-alex-fab__label">{{ 'gg.alex_ai' | t }}</span>
+  </button>
+{%- endunless -%}
+
+{% schema %}
+{
+  "name": "t:sections.footer.name",
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Logo" },
+    { "type": "range", "id": "logo_width", "label": "Tamaño del logo (px)", "min": 28, "max": 120, "step": 4, "default": 40 },
+    { "type": "textarea", "id": "tagline", "label": "Eslogan", "default": "Tu tienda de confianza para mandos y accesorios gaming. Envíos rápidos y compra 100% protegida." },
+    { "type": "header", "content": "Redes sociales" },
+    { "type": "url", "id": "instagram_url", "label": "Instagram" },
+    { "type": "url", "id": "tiktok_url", "label": "TikTok" },
+    { "type": "url", "id": "facebook_url", "label": "Facebook" },
+    { "type": "header", "content": "Columna Tienda" },
+    { "type": "text", "id": "col1_titulo", "label": "Título de la columna", "default": "Tienda" },
+    { "type": "text", "id": "col1_link_1_label", "label": "Enlace 1 – texto", "default": "Xbox" },
+    { "type": "url", "id": "col1_link_1_url", "label": "Enlace 1 – URL" },
+    { "type": "text", "id": "col1_link_2_label", "label": "Enlace 2 – texto", "default": "PlayStation" },
+    { "type": "url", "id": "col1_link_2_url", "label": "Enlace 2 – URL" },
+    { "type": "text", "id": "col1_link_3_label", "label": "Enlace 3 – texto", "default": "Game Pass" },
+    { "type": "url", "id": "col1_link_3_url", "label": "Enlace 3 – URL" },
+    { "type": "text", "id": "col1_link_4_label", "label": "Enlace 4 – texto", "default": "Gift Cards" },
+    { "type": "url", "id": "col1_link_4_url", "label": "Enlace 4 – URL" },
+    { "type": "text", "id": "col1_link_5_label", "label": "Enlace 5 – texto", "default": "Accesorios" },
+    { "type": "url", "id": "col1_link_5_url", "label": "Enlace 5 – URL" },
+    { "type": "header", "content": "Columna Contacto" },
+    { "type": "text", "id": "col3_titulo", "label": "Título de la columna", "default": "Contacto" },
+    { "type": "textarea", "id": "contacto_texto", "label": "Texto de contacto", "default": "¿Dudas con tu pedido? Escríbenos y te respondemos en menos de 24h." },
+    { "type": "text", "id": "whatsapp_numero", "label": "Número de WhatsApp (con código de país, sin +, sin espacios)", "info": "Ejemplo: 573112333744", "default": "573112333744" },
+    { "type": "text", "id": "whatsapp_mensaje", "label": "Mensaje inicial pre-escrito", "default": "Hola, tengo una pregunta sobre un producto de Gato Gamer Store" }
+  ]
+}
+{% endschema %}

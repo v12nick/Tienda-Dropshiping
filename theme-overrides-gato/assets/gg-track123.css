@@ -1,0 +1,598 @@
+/* Track123 + Rastrea tu pedido — Gato Gamer Store (#050505 / #E50914). */
+
+html[data-gg-path-track] {
+  --main-p1: #e50914;
+  --main-p2: rgba(229, 9, 20, 0.14);
+  --text-p1: #f5f5f5;
+  --text-p2: #a6a6a6;
+  --text-p3: #8a8a8a;
+  --text-p4: #666;
+  --background-p1: #111111;
+  --background-p2: #050505;
+  --line-p1: rgba(229, 9, 20, 0.5);
+  --line-p2: #232323;
+  --warning: #e50914;
+  --white: #f5f5f5;
+}
+
+html[data-gg-path-track] [data-gg-confirm="banner"],
+html[data-gg-path-track] [data-gg-404] {
+  display: none !important;
+}
+
+html[data-gg-path-track] [data-gg-track-fallback] {
+  display: block !important;
+}
+
+html[data-gg-path-track] .track123-body,
+.track123-body {
+  background: #050505 !important;
+  color: #f5f5f5 !important;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+}
+
+.track123_track_wrapper,
+.track123_form_wrapper,
+.track123_track_content {
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+}
+
+.track123_track_wrapper {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 12px 16px 72px;
+}
+
+.track123_track_form_title {
+  color: #f5f5f5 !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.02em;
+  text-align: left !important;
+}
+
+.track123_form_wrapper {
+  background: #111 !important;
+  color: #f5f5f5 !important;
+  border: 1px solid #232323 !important;
+  border-radius: 18px !important;
+  padding: 28px !important;
+}
+
+.track123_form_field,
+.track123_form_input,
+.track123_form_wrapper input,
+.track123_form_wrapper .field input {
+  background: #0a0a0a !important;
+  color: #f5f5f5 !important;
+  border-radius: 12px !important;
+}
+
+.field:after {
+  border-color: #232323 !important;
+  box-shadow: none !important;
+}
+
+.track123_form_button,
+.track123_form_wrapper button[type="submit"] {
+  background: #e50914 !important;
+  border: 1px solid #e50914 !important;
+  color: #fff !important;
+  border-radius: 999px !important;
+  font-weight: 700 !important;
+  padding: 14px 28px !important;
+}
+
+.track123_form_button:hover,
+.track123_form_wrapper button[type="submit"]:hover {
+  background: #ff1f2d !important;
+  border-color: #ff1f2d !important;
+  color: #fff !important;
+}
+
+.track123_track_content,
+.track123_result_title,
+.track123_order_status,
+.track123_order_detail_title,
+.track123_track_desc,
+.track123_track_date,
+.track123_order_package_title,
+.track123_order_detail_sub_title,
+.track123_order_step_line_status_name,
+.track123_order_step_line_time {
+  color: #f5f5f5 !important;
+}
+
+.track123_icon svg circle,
+.track123_icon svg path {
+  fill: #e50914 !important;
+  stroke: #e50914 !important;
+}
+
+.gg-track__hero--proxy {
+  padding-top: 40px;
+  margin-bottom: 8px;
+}
+
+.gg-track--app {
+  padding-top: 32px;
+  padding-bottom: 48px;
+}
+
+.gg-track--app .gg-track__hero {
+  max-width: 560px;
+  margin: 0 auto 20px;
+  text-align: center;
+}
+
+.gg-track--app .gg-track__title {
+  margin: 8px 0 8px;
+  font-size: clamp(26px, 4vw, 36px);
+  line-height: 1.15;
+}
+
+.gg-track--app .gg-track__subtitle {
+  margin: 0 auto;
+  max-width: 420px;
+  overflow: visible !important;
+  white-space: normal !important;
+  text-overflow: unset !important;
+  word-break: break-word;
+  color: var(--gg-text-muted, #a6a6a6);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.gg-track--app .gg-track__widget {
+  margin: 0 auto 16px;
+  max-width: 520px;
+}
+
+#track123-app,
+#track123-app > div,
+html[data-gg-path-track] .track123_track_wrapper,
+html[data-gg-path-track] .track123_track_tab_wrapper,
+html[data-gg-path-track] .track123_tab_form_background,
+html[data-gg-path-track] .track123_layout_left,
+html[data-gg-path-track] .track123_tab_form_main_wrapper,
+html[data-gg-path-track] .track123_two_form_wrapper {
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  float: none !important;
+  position: relative !important;
+  width: 100% !important;
+  max-width: 520px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+html[data-gg-path-track] img[src*="traditional_bg_truck"] {
+  display: none !important;
+}
+
+html[data-gg-path-track] .track123_tab_form_background {
+  background-image: none !important;
+  background-color: transparent !important;
+  background-size: auto !important;
+  padding: 0 !important;
+  position: relative !important;
+  left: auto !important;
+  height: auto !important;
+}
+
+html[data-gg-path-track] .track123_track_wrapper,
+html[data-gg-path-track] .track123_track_tab_wrapper {
+  padding: 0 !important;
+}
+
+html[data-gg-path-track] .track123_form_wrapper,
+html[data-gg-path-track] .track123_tab_form_wrapper {
+  width: 100% !important;
+  max-width: 520px !important;
+  margin: 0 auto !important;
+  background: #111 !important;
+  border: 1px solid #232323 !important;
+  border-radius: 18px !important;
+  padding: 20px 18px 18px !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+}
+
+html[data-gg-path-track] .track123_tab.track123_show_tab,
+html[data-gg-path-track] .track123_tab {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: stretch !important;
+  gap: 0;
+  margin: 0 0 16px !important;
+  position: relative !important;
+  width: 100% !important;
+}
+
+html[data-gg-path-track] .track123_tab_bar,
+html[data-gg-path-track] .track123_tab_bar_color {
+  position: relative !important;
+  left: auto !important;
+  right: auto !important;
+  top: auto !important;
+  flex: 1 1 50% !important;
+  width: auto !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  text-align: center !important;
+  padding: 10px 8px 12px !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  line-height: 1.3 !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: unset !important;
+  color: #a6a6a6 !important;
+  border-bottom: 2px solid #232323 !important;
+  background: transparent !important;
+}
+
+html[data-gg-path-track] .track123_tab_bar_color {
+  color: #f5f5f5 !important;
+  border-bottom-color: #e50914 !important;
+}
+
+html[data-gg-path-track] .track123_tracking_line_center,
+html[data-gg-path-track] .hide_tracking_number,
+html[data-gg-path-track] .track123_loading,
+html[data-gg-path-track] [data-track123-section="settings:additional-text"],
+html[data-gg-path-track] .track123_tracking_above:empty,
+html[data-gg-path-track] .track123_tracking_below:empty,
+html[data-gg-path-track] .track123_order_wrapper:empty,
+html[data-gg-path-track] .track123_order_detail_container:empty,
+html[data-gg-path-track] #track123_main_content:empty {
+  display: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+html[data-gg-path-track] .track123_form_error {
+  display: none;
+}
+
+html[data-gg-path-track] .track123_form_error.track123_show,
+html[data-gg-path-track] .track123_form_error[style*="block"],
+html[data-gg-path-track] .track123_form_error[style*="visible"] {
+  display: block;
+  color: #ff6b73 !important;
+  font-size: 12px !important;
+  margin-top: 6px;
+}
+
+html[data-gg-path-track] .track123_form_label {
+  display: block !important;
+  margin: 0 0 6px !important;
+  color: #f5f5f5 !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+}
+
+html[data-gg-path-track] .track123_input_container {
+  margin-bottom: 14px !important;
+}
+
+html[data-gg-path-track] .track123_form_input,
+html[data-gg-path-track] .track123_form_field {
+  width: 100% !important;
+  min-height: 46px !important;
+  padding: 12px 14px !important;
+  box-sizing: border-box !important;
+  border: 1px solid #2a2a2a !important;
+  color: #f5f5f5 !important;
+}
+
+html[data-gg-path-track] #track123-powered-by,
+html[data-gg-path-track] [data-track123-section="settings:branding"] {
+  position: static !important;
+  display: block !important;
+  margin: 12px 0 0 !important;
+  padding: 0 !important;
+  text-align: center !important;
+  opacity: 0.55 !important;
+  color: #8a8a8a !important;
+  font-size: 11px !important;
+  font-style: normal !important;
+  right: auto !important;
+  bottom: auto !important;
+}
+
+html[data-gg-path-track] .track123_form_container button,
+html[data-gg-path-track] .button-enter {
+  width: 100% !important;
+  margin-top: 8px !important;
+  border-radius: 999px !important;
+  background: #e50914 !important;
+  border: 0 !important;
+  color: #fff !important;
+  font-weight: 700 !important;
+  min-height: 48px !important;
+}
+
+html[data-gg-path-track] .gg-confirm,
+html[data-gg-path-track] [data-gg-confirm="banner"] {
+  display: none !important;
+}
+
+.gg-track--app .gg-track__timeline,
+.gg-track__timeline {
+  margin: 0 auto 24px;
+  max-width: 720px;
+  text-align: center;
+}
+
+.gg-track__timeline-title {
+  margin: 0 0 6px;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.gg-track__timeline-copy {
+  margin: 0 auto 20px;
+  max-width: 420px;
+  color: var(--gg-text-muted, #a6a6a6);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.gg-track--app .gg-track__steps,
+.gg-track__steps {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0;
+  position: relative;
+  max-width: 680px;
+}
+
+.gg-track--app .gg-track__steps::before {
+  content: "";
+  position: absolute;
+  top: 14px;
+  left: 8%;
+  right: 8%;
+  height: 2px;
+  background: linear-gradient(to right, #e50914 var(--gg-track-progress, 0%), #2a2a2a var(--gg-track-progress, 0%));
+  z-index: 0;
+}
+
+.gg-track__timeline[data-gg-state="idle"] .gg-track__step-num {
+  border-color: #3a3a3a;
+  color: #8a8a8a;
+  background: #111;
+}
+
+.gg-track__timeline[data-gg-state="idle"] .gg-track__step-label {
+  color: #8a8a8a;
+}
+
+.gg-track__timeline[data-gg-state="live"] .gg-track__step:not(.is-done):not(.is-current) {
+  opacity: 0.38;
+}
+
+.gg-track__timeline[data-gg-state="live"] .gg-track__step.is-done .gg-track__step-num,
+.gg-track__timeline[data-gg-state="live"] .gg-track__step.is-current .gg-track__step-num {
+  background: #e50914;
+  border-color: #e50914;
+  color: #fff;
+}
+
+.gg-track__timeline[data-gg-state="live"] .gg-track__step.is-current .gg-track__step-num {
+  box-shadow: 0 0 0 4px rgb(229 9 20 / 0.28);
+}
+
+.gg-track__timeline[data-gg-state="live"] .gg-track__step.is-alert .gg-track__step-num {
+  background: #111;
+  color: #e50914;
+  box-shadow: 0 0 0 4px rgb(229 9 20 / 0.2);
+}
+
+html[data-gg-path-track] .track123_order_progress_container,
+html[data-gg-path-track] .track123_order_step_line_wrapper {
+  position: absolute !important;
+  left: 0 !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+}
+
+html[data-gg-path-track] .track123_order_status_container + .gg-track__timeline {
+  margin: 12px auto 32px;
+  max-width: 680px;
+}
+
+.gg-track--app .gg-track__step,
+.gg-track__step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex: 1 1 0;
+  margin: 0;
+  padding: 0 4px;
+  background: transparent;
+  border: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.gg-track__step-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #111;
+  border: 2px solid #e50914;
+  color: #e50914;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.gg-track__step-label {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--gg-text, #f5f5f5);
+}
+
+.gg-track__help {
+  text-align: center;
+  color: var(--gg-text-muted, #a6a6a6);
+  font-size: 14px;
+  line-height: 1.6;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+@media (max-width: 749px) {
+  .gg-track--app {
+    padding-top: 16px;
+    padding-bottom: 32px;
+  }
+
+  .gg-track--app .gg-track__hero {
+    margin-bottom: 16px;
+  }
+
+  .gg-track--app .gg-track__subtitle {
+    font-size: 14px;
+    max-width: none;
+  }
+
+  .gg-track--app .gg-track__steps {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 10px 8px;
+  }
+
+  .gg-track--app .gg-track__steps::before {
+    display: none;
+  }
+
+  .gg-track--app .gg-track__step {
+    padding: 12px 6px;
+    background: #111;
+    border: 1px solid #232323;
+    border-radius: 12px;
+  }
+
+  .gg-track--app .gg-track__step.is-done,
+  .gg-track--app .gg-track__step.is-current {
+    border-color: #e50914;
+  }
+
+  html[data-gg-path-track] .track123_form_wrapper,
+  html[data-gg-path-track] .track123_tab_form_wrapper {
+    padding: 16px 12px 14px !important;
+  }
+
+  html[data-gg-path-track] .track123_tab_bar,
+  html[data-gg-path-track] .track123_tab_bar_color {
+    font-size: 12px !important;
+    padding: 8px 4px 10px !important;
+  }
+}
+
+.gg-track__panel {
+  display: grid;
+  gap: 28px;
+  margin: 0 auto 56px;
+  max-width: 720px;
+}
+
+.gg-track__form {
+  display: grid;
+  gap: 10px;
+  background: var(--gg-card, #111);
+  border: 1px solid var(--gg-border, #232323);
+  border-radius: var(--gg-radio-lg, 18px);
+  padding: 28px 24px;
+}
+
+.gg-track__label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gg-text, #f5f5f5);
+}
+
+.gg-track__input {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--gg-border, #232323);
+  background: #0a0a0a;
+  color: var(--gg-text, #f5f5f5);
+  font-size: 15px;
+  font-family: inherit;
+}
+
+.gg-track__input:focus {
+  outline: 2px solid var(--gg-accent, #e50914);
+  outline-offset: 1px;
+}
+
+.gg-track__submit {
+  margin-top: 8px;
+  justify-content: center;
+  width: 100%;
+}
+
+.gg-track__form-note {
+  margin: 4px 0 0;
+  color: var(--gg-text-muted, #a6a6a6);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.gg-track__widget {
+  min-height: 0;
+}
+
+.gg-track__widget:empty {
+  display: none;
+}
+
+.gg-track__help {
+  text-align: center;
+  color: var(--gg-text-muted, #a6a6a6);
+  font-size: 14px;
+  line-height: 1.6;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.gg-track__help a {
+  color: var(--gg-text, #f5f5f5);
+  text-underline-offset: 3px;
+}
+
+.gg-buy__aftertext a {
+  color: var(--gg-accent, #e50914);
+  font-weight: 700;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 749px) {
+  .gg-track__form {
+    padding: 22px 16px;
+  }
+}

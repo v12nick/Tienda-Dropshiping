@@ -1,0 +1,98 @@
+<section class="cp-trust" id="cp-trust-{{ section.id }}">
+  <ul class="cp-trust__row">
+    {%- for block in section.blocks -%}
+      <li class="cp-trust__item" {{ block.shopify_attributes }} style="--d: {{ forloop.index0 | times: 80 }}ms;">
+        <span class="cp-trust__dot" aria-hidden="true"></span>
+        <div>
+          <strong>{{ block.settings.title }}</strong>
+          <p>{{ block.settings.text }}</p>
+        </div>
+      </li>
+    {%- endfor -%}
+  </ul>
+</section>
+
+{% stylesheet %}
+.cp-trust {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 8px 16px 4px;
+}
+.cp-trust__row {
+  list-style: none;
+  margin: 0;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  background: #f4f9fd;
+  border-radius: 24px;
+}
+.cp-trust__item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: #fff;
+  animation: cp-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--d, 0ms);
+}
+.cp-trust__dot {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  margin-top: 6px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #7dd3fc, #1d6fe8 55%, #0ea5e9);
+  box-shadow: 0 0 0 4px rgba(29, 111, 232, 0.12);
+}
+.cp-trust__item strong {
+  display: block;
+  font-size: 0.95rem;
+  color: #0b1f33;
+}
+.cp-trust__item p {
+  margin: 4px 0 0;
+  color: #46607a;
+  font-size: 0.86rem;
+  line-height: 1.4;
+}
+@media (max-width: 749px) {
+  .cp-trust__row { grid-template-columns: 1fr 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cp-trust__item { animation: none; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "CP Confianza",
+  "tag": "section",
+  "class": "cp-section",
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Dato",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titulo" },
+        { "type": "textarea", "id": "text", "label": "Texto" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "CP Confianza",
+      "category": "CleanPro",
+      "blocks": [
+        { "type": "item", "settings": { "title": "IPX7", "text": "Lavable bajo el agua." } },
+        { "type": "item", "settings": { "title": "3 velocidades", "text": "De juntas a superficies." } },
+        { "type": "item", "settings": { "title": "8 cabezales", "text": "Baño, cocina y auto." } },
+        { "type": "item", "settings": { "title": "Inalámbrico", "text": "Carga USB, listo en casa." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

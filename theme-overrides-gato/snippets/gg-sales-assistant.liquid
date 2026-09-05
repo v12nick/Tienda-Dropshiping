@@ -1,0 +1,102 @@
+{%- comment -%}
+  Asistente de ventas liviano. El CSS/JS se cargan al primer clic.
+  WHATSAPP_NUMBER: Personalizar tema → Pie de página → Número de WhatsApp.
+  Formato: 57XXXXXXXXXX (Colombia, sin +, espacios ni guiones).
+  Clarity se sigue cargando solo en gg-deferred-apps (no duplicar).
+{%- endcomment -%}
+{%- liquid
+  assign WHATSAPP_NUMBER = whatsapp_numero | default: section.settings.whatsapp_numero | default: '573112333744'
+  assign gg_wa = WHATSAPP_NUMBER | replace: '+', '' | replace: ' ', '' | replace: '-', ''
+  assign gg_bot_product = all_products['control-gamesir-g7se-cable-joysticks-hall-xbox-pc']
+  assign gg_bot_price_cents = 0
+  assign gg_bot_available = false
+  assign gg_bot_url = '/products/control-gamesir-g7se-cable-joysticks-hall-xbox-pc'
+  assign gg_bot_title = 'GameSir G7 SE'
+  if gg_bot_product != blank
+    assign gg_bot_price_cents = gg_bot_product.selected_or_first_available_variant.price
+    assign gg_bot_available = gg_bot_product.available
+    assign gg_bot_url = gg_bot_product.url
+    assign gg_bot_title = gg_bot_product.title
+  endif
+-%}
+<div
+  id="gg-sales-assistant"
+  class="gg-sa"
+  hidden
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="gg-sa-title"
+>
+  <div class="gg-sa__head">
+    <p id="gg-sa-title" class="gg-sa__title">Gato Gamer Store</p>
+    <p class="gg-sa__sub">Asistente de ventas · GameSir G7 SE</p>
+    <button type="button" class="gg-sa__close" data-gg-sa-close aria-label="Cerrar chat">×</button>
+  </div>
+  <div class="gg-sa__log" data-gg-sa-log></div>
+  <div class="gg-sa__chips" data-gg-sa-chips>
+    <button type="button" data-gg-sa-chip="precio">💰 Precio</button>
+    <button type="button" data-gg-sa-chip="envio">🚚 Envíos</button>
+    <button type="button" data-gg-sa-chip="gamepass">🎁 Game Pass</button>
+    <button type="button" data-gg-sa-chip="xbox">🎮 Xbox / PC</button>
+    <button type="button" data-gg-sa-chip="asesor">👤 Asesor</button>
+  </div>
+  <form class="gg-sa__form" data-gg-sa-form>
+    <label class="visually-hidden" for="gg-sa-input">Escribe tu pregunta</label>
+    <input id="gg-sa-input" type="text" name="q" autocomplete="off" maxlength="240" placeholder="Escribe tu pregunta…">
+    <button type="submit" aria-label="Enviar">Enviar</button>
+  </form>
+</div>
+<script type="application/json" id="gg-assistant-config">
+{
+  "whatsappNumber": {{ gg_wa | json }},
+  "js": {{ 'gg-sales-assistant.js' | asset_url | json }},
+  "css": {{ 'gg-sales-assistant.css' | asset_url | json }},
+  "productTitle": {{ gg_bot_title | json }},
+  "priceCents": {{ gg_bot_price_cents | json }},
+  "shopCurrency": {{ shop.currency | json }},
+  "available": {{ gg_bot_available | json }},
+  "productUrl": {{ gg_bot_url | json }},
+  "trackUrl": "/apps/track123",
+  "shippingUrl": "/pages/politica-de-envios",
+  "returnsUrl": "/pages/politica-de-devoluciones"
+}
+</script>
+<script>
+  window.GGSalesAssistantOpen = function () {
+    var path = location.pathname || '';
+    var onCheckout = path.indexOf('/checkouts') !== -1 || /(^|\/)cart\/?$/.test(path);
+    if (onCheckout) {
+      var cfgEl = document.getElementById('gg-assistant-config');
+      var data = {};
+      try { data = JSON.parse(cfgEl.textContent); } catch (e) { data = {}; }
+      var num = String(data.whatsappNumber || '').replace(/\D/g, '');
+      if (num) {
+        var msg = 'Hola Gato Gamer Store \uD83D\uDC4B. Necesito hablar con un asesor sobre el GameSir G7 SE.';
+        window.open('https://wa.me/' + num + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+      }
+      return;
+    }
+    if (window.GGSalesAssistant && typeof window.GGSalesAssistant.open === 'function') {
+      window.GGSalesAssistant.open();
+      return;
+    }
+    if (window.__ggSaLoading) return;
+    window.__ggSaLoading = true;
+    var cfg = document.getElementById('gg-assistant-config');
+    var payload = {};
+    try { payload = JSON.parse(cfg.textContent); } catch (e) { window.__ggSaLoading = false; return; }
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = payload.css;
+    document.head.appendChild(link);
+    var s = document.createElement('script');
+    s.src = payload.js;
+    s.async = true;
+    s.onload = function () {
+      window.__ggSaLoading = false;
+      if (window.GGSalesAssistant) window.GGSalesAssistant.open();
+    };
+    s.onerror = function () { window.__ggSaLoading = false; };
+    document.body.appendChild(s);
+  };
+</script>

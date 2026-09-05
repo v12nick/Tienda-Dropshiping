@@ -1,0 +1,103 @@
+{%- comment -%}
+ gg-site-schema.liquid
+ Datos estructurados de la tienda (Organization + WebSite) para rich results en Google Search.
+ Se referencia una sola vez desde layout/theme.liquid, justo antes de </head>.
+ {%- endcomment -%}
+ {%- liquid
+ assign social_links = ''
+ assign full_street_address = shop.address.address1
+ if shop.address.address2 != blank
+ assign full_street_address = full_street_address | append: ', ' | append: shop.address.address2
+ endif
+ if settings.social_facebook_link != blank
+ assign social_links = social_links | append: settings.social_facebook_link | append: '::'
+ endif
+ if settings.social_instagram_link != blank
+ assign social_links = social_links | append: settings.social_instagram_link | append: '::'
+ endif
+ if settings.social_youtube_link != blank
+ assign social_links = social_links | append: settings.social_youtube_link | append: '::'
+ endif
+ if settings.social_tiktok_link != blank
+ assign social_links = social_links | append: settings.social_tiktok_link | append: '::'
+ endif
+ if settings.social_twitter_link != blank
+ assign social_links = social_links | append: settings.social_twitter_link | append: '::'
+ endif
+ if settings.social_snapchat_link != blank
+ assign social_links = social_links | append: settings.social_snapchat_link | append: '::'
+ endif
+ if settings.social_pinterest_link != blank
+ assign social_links = social_links | append: settings.social_pinterest_link | append: '::'
+ endif
+ if settings.social_tumblr_link != blank
+ assign social_links = social_links | append: settings.social_tumblr_link | append: '::'
+ endif
+ if settings.social_vimeo_link != blank
+ assign social_links = social_links | append: settings.social_vimeo_link | append: '::'
+ endif
+ assign social_array = social_links | split: '::'
+ assign gg_logo = blank
+ if settings.favicon != blank
+   assign gg_logo = settings.favicon | image_url: width: 512
+ elsif shop.brand.logo != blank
+   assign gg_logo = shop.brand.logo | image_url: width: 512
+ else
+   assign gg_logo = 'gg-logo.png' | file_url
+ endif
+ if gg_logo != blank
+   unless gg_logo contains 'http'
+     assign gg_logo = gg_logo | prepend: 'https:'
+   endunless
+ endif
+ -%}
+ <script type="application/ld+json">
+ {
+ "@context": "https://schema.org",
+ "@type": "Organization",
+ "@id": "{{ request.origin }}/#organization",
+ "name": {{ shop.name | json }},
+ "url": "{{ request.origin }}/"{% if gg_logo != blank %},
+ "logo": {{ gg_logo | json }},
+ "image": {{ gg_logo | json }}{% endif %}{% if shop.email != blank %},
+ "email": {{ shop.email | json }}{% endif %},
+ "telephone": "+573112333744"{% if shop.address.country_code != blank or shop.address.city != blank %},
+ "address": {
+ "@type": "PostalAddress"{% if full_street_address != blank %},
+"streetAddress": {{ full_street_address | json }}{% endif %}{% if shop.address.city != blank %},
+ "addressLocality": {{ shop.address.city | json }}{% endif %}{% if shop.address.province != blank %},
+ "addressRegion": {{ shop.address.province | json }}{% endif %}{% if shop.address.zip != blank %},
+ "postalCode": {{ shop.address.zip | json }}{% endif %}{% if shop.address.country_code != blank %},
+ "addressCountry": {{ shop.address.country_code | json }}{% endif %}
+ }{% endif %},
+ "sameAs": [{% assign gg_same_first = true %}{% for link in social_array %}{% if link != blank %}{% unless gg_same_first %},{% endunless %}{{ link | json }}{% assign gg_same_first = false %}{% endif %}{% endfor %}],
+    "hasMerchantReturnPolicy": {
+      "@id": "{{ request.origin }}/#return-policy",
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "CO",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnMethod": "https://schema.org/ReturnByMail",
+      "returnFees": "https://schema.org/ReturnFeesCustomerResponsibility",
+      "url": "{{ request.origin }}/policies/refund-policy"
+    }
+ }
+ </script>
+ 
+ <script type="application/ld+json">
+ {
+ "@context": "https://schema.org",
+ "@type": "WebSite",
+ "@id": "{{ request.origin }}/#website",
+ "url": "{{ request.origin }}/",
+ "name": {{ shop.name | json }},
+ "potentialAction": {
+ "@type": "SearchAction",
+ "target": {
+ "@type": "EntryPoint",
+ "urlTemplate": "{{ request.origin }}/search?q={search_term_string}"
+ },
+ "query-input": "required name=search_term_string"
+ }
+ }
+ </script>

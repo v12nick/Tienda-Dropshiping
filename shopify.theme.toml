@@ -1,0 +1,5 @@
+# TiendaDrop — connected Shopify store
+# https://admin.shopify.com/store/mm0afk-rw
+
+[environments.default]
+store = "mm0afk-rw.myshopify.com"

@@ -1,0 +1,86 @@
+{%- comment -%}
+  Carrusel de fotos por color (una imagen a la vez, flechas izquierda/derecha).
+  Parámetros: source ('blocks' | 'fallback'), slide_count (number)
+{%- endcomment -%}
+{%- assign gg_slide_n = slide_count | plus: 0 -%}
+<div class="gg-gallery__viewport">
+  <div class="gg-gallery__track" data-gg-track>
+    {%- if source == 'blocks' -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'variante' -%}
+          {%- liquid
+            assign gg_color_name = block.settings.nombre
+            assign gg_color_asset = block.settings.imagen_asset | default: 'gg-g7se-blanco.webp'
+            assign gg_slide_loading = 'lazy'
+            if forloop.first
+              assign gg_slide_loading = 'eager'
+            endif
+          -%}
+          <div
+            class="gg-gallery__slide{% if forloop.first %} gg-active{% endif %}"
+            data-gg-slide
+            data-gg-slide-color="{{ gg_color_name | escape }}"
+            {{ block.shopify_attributes }}
+          >
+            {%- if block.settings.imagen != blank -%}
+              <img
+                src="{{ block.settings.imagen | image_url: width: 900 }}"
+                alt="{{ gg_color_name | escape }}"
+                width="900"
+                height="900"
+                loading="{{ gg_slide_loading }}"
+              >
+            {%- else -%}
+              <img
+                src="{{ gg_color_asset | asset_url }}"
+                alt="{{ gg_color_name | escape }}"
+                width="768"
+                height="768"
+                loading="{{ gg_slide_loading }}"
+              >
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    {%- else -%}
+      {%- assign gg_fallback_colors = 'Blanco|gg-g7se-blanco.webp,Azul Dinámico|gg-g7se-azul.webp,Naranja Vibrante|gg-g7se-naranja.webp,Púrpura Radiante|gg-g7se-purpura.webp' | split: ',' -%}
+      {%- for item in gg_fallback_colors -%}
+        {%- assign gg_parts = item | split: '|' -%}
+        <div
+          class="gg-gallery__slide{% if forloop.first %} gg-active{% endif %}"
+          data-gg-slide
+          data-gg-slide-color="{{ gg_parts[0] | escape }}"
+        >
+          <img
+            src="{{ gg_parts[1] | asset_url }}"
+            alt="{{ gg_parts[0] | escape }}"
+            width="768"
+            height="768"
+            loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+          >
+        </div>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+  {%- if gg_slide_n > 1 -%}
+    <button type="button" class="gg-gallery__nav gg-gallery__nav--prev" data-gg-gallery-prev aria-label="Imagen anterior">{% render 'gg-icon', name: 'chevron-left' %}</button>
+    <button type="button" class="gg-gallery__nav gg-gallery__nav--next" data-gg-gallery-next aria-label="Siguiente imagen">{% render 'gg-icon', name: 'chevron-right' %}</button>
+  {%- endif -%}
+</div>
+{%- if gg_slide_n > 1 -%}
+  <div class="gg-gallery__dots" data-gg-dots>
+    {%- if source == 'blocks' -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'variante' -%}
+          <button type="button" class="gg-gallery__dot{% if forloop.first %} gg-active{% endif %}" data-gg-dot aria-label="{{ block.settings.nombre | escape }}"{% if forloop.first %} aria-current="true"{% endif %}></button>
+        {%- endif -%}
+      {%- endfor -%}
+    {%- else -%}
+      {%- assign gg_fallback_colors = 'Blanco|gg-g7se-blanco.webp,Azul Dinámico|gg-g7se-azul.webp,Naranja Vibrante|gg-g7se-naranja.webp,Púrpura Radiante|gg-g7se-purpura.webp' | split: ',' -%}
+      {%- for item in gg_fallback_colors -%}
+        {%- assign gg_parts = item | split: '|' -%}
+        <button type="button" class="gg-gallery__dot{% if forloop.first %} gg-active{% endif %}" data-gg-dot aria-label="{{ gg_parts[0] | escape }}"{% if forloop.first %} aria-current="true"{% endif %}></button>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+{%- endif -%}

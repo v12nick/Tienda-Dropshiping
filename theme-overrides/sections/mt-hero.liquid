@@ -1,0 +1,82 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  #shopify-section-{{ section.id }} .mt-hero-inner{
+    color: #fff;
+    background: #070b14;
+  }
+  #shopify-section-{{ section.id }} .mt-hero-inner h1 {
+    font-size: {{ section.settings.titulo_size }}px;
+    color: #fff;
+  }
+  #shopify-section-{{ section.id }} .mt-hero-inner p,
+  #shopify-section-{{ section.id }} .mt-hero-badge,
+  #shopify-section-{{ section.id }} .mt-hero-stat b,
+  #shopify-section-{{ section.id }} .mt-hero-stat span {
+    color: #fff;
+  }
+{% endstyle %}
+
+<section class="mt-hero mt-section">
+  {%- if section.settings.imagen_fondo != blank -%}
+    <img class="mt-hero-bg" src="{{ section.settings.imagen_fondo | image_url: width: 2400 }}" alt="" loading="eager" fetchpriority="high">
+  {%- else -%}
+    <img class="mt-hero-bg" src="{{ 'mt-hero.jpg' | asset_url }}" alt="{{ section.settings.titulo | escape }}" loading="eager" fetchpriority="high">
+  {%- endif -%}
+  <div class="mt-hero-scrim"></div>
+  <div class="mt-hero-inner">
+    {%- if section.settings.badge != blank -%}
+      <span class="mt-hero-badge mt-reveal">{{ section.settings.badge }}</span>
+    {%- endif -%}
+    <h1 class="mt-reveal">{{ section.settings.titulo }}</h1>
+    <p class="mt-reveal">{{ section.settings.texto }}</p>
+    <div class="mt-hero-ctas mt-reveal">
+      <a href="{{ section.settings.boton_url | default: '#' }}" class="mt-btn mt-btn-primario">{{ section.settings.boton_texto }}</a>
+      {%- if section.settings.boton2_texto != blank -%}
+        <a href="{{ section.settings.boton2_url | default: '#' }}" class="mt-btn mt-btn-ghost">{{ section.settings.boton2_texto }}</a>
+      {%- endif -%}
+    </div>
+    <div class="mt-hero-stats mt-reveal">
+      {%- for i in (1..3) -%}
+        {%- assign num_key = 'stat_' | append: i | append: '_num' -%}
+        {%- assign label_key = 'stat_' | append: i | append: '_label' -%}
+        {%- assign num = section.settings[num_key] -%}
+        {%- assign label = section.settings[label_key] -%}
+        {%- if num != blank -%}
+          <div class="mt-hero-stat"><b>{{ num }}</b><span>{{ label }}</span></div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MT – Hero",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "badge", "label": "Texto de la insignia", "default": "Más de 12.000 hogares felices" },
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Limpia como nunca, en la mitad de tiempo" },
+    { "type": "range", "id": "titulo_size", "label": "Tamaño del título (px)", "min": 28, "max": 76, "step": 2, "unit": "px", "default": 44 },
+    { "type": "textarea", "id": "texto", "label": "Texto", "default": "El cepillo eléctrico giratorio que elimina grasa, moho y suciedad incrustada en segundos. Inalámbrico, resistente al agua y con 8 cabezales para cada rincón de tu casa." },
+    { "type": "image_picker", "id": "imagen_fondo", "label": "Imagen de fondo" },
+    { "type": "text", "id": "boton_texto", "label": "Texto botón principal", "default": "Quiero el mío" },
+    { "type": "url", "id": "boton_url", "label": "Enlace botón principal" },
+    { "type": "text", "id": "boton2_texto", "label": "Texto botón secundario (opcional)", "default": "Ver cómo funciona" },
+    { "type": "url", "id": "boton2_url", "label": "Enlace botón secundario" },
+    { "type": "header", "content": "Cifras destacadas" },
+    { "type": "text", "id": "stat_1_num", "label": "Cifra 1", "default": "450 RPM" },
+    { "type": "text", "id": "stat_1_label", "label": "Etiqueta 1", "default": "de potencia de giro" },
+    { "type": "text", "id": "stat_2_num", "label": "Cifra 2", "default": "IPX7" },
+    { "type": "text", "id": "stat_2_label", "label": "Etiqueta 2", "default": "resistente al agua" },
+    { "type": "text", "id": "stat_3_num", "label": "Cifra 3", "default": "8 en 1" },
+    { "type": "text", "id": "stat_3_label", "label": "Etiqueta 3", "default": "cabezales incluidos" },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 0 }
+  ],
+  "presets": [ { "name": "MT – Hero" } ]
+}
+{% endschema %}

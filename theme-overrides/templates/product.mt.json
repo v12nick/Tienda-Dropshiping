@@ -1,0 +1,84 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "principal": {
+      "type": "mt-producto",
+      "settings": {
+        "mostrar_badge": true,
+        "badge_texto": "Nuevo en Colombia",
+        "titulo_h1": "Cepillo eléctrico 8 en 1: limpia azulejos, cocina y llantas sin agacharte",
+        "resenas_texto": "Marta, Javier, Lucía y Diego ya lo usan en casa. Ver reseñas.",
+        "boton_texto": "Pedir el mío",
+        "confianza_1": "Envío a Colombia — plazos según ciudad",
+        "confianza_2": "Retracto 5 días · fallas hasta 30 días",
+        "confianza_3": "Pago cifrado en el checkout de Shopify"
+      },
+      "blocks": {
+        "c1": { "type": "caracteristica", "settings": { "titulo": "Rotación 360°", "texto": "Elimina grasa y suciedad incrustada con un movimiento giratorio continuo, sin esfuerzo manual." } },
+        "c2": { "type": "caracteristica", "settings": { "titulo": "Mango extensible 130 cm", "texto": "Llega a techos de ducha y rincones altos sin subirte a nada." } },
+        "c3": { "type": "caracteristica", "settings": { "titulo": "IPX7 resistente al agua", "texto": "Diseñado para usarse con seguridad en zonas húmedas, incluida la ducha." } },
+        "c4": { "type": "caracteristica", "settings": { "titulo": "Batería recargable USB", "texto": "Carga con el cable incluido. No uses cargadores de carga rápida." } }
+      },
+      "block_order": ["c1", "c2", "c3", "c4"]
+    },
+    "garantias": {
+      "type": "mt-garantias",
+      "settings": {
+        "eyebrow": "Compra con tranquilidad",
+        "titulo": "Reglas claras antes de pagar",
+        "texto": "Envío, retracto y pago claros antes de comprar. Las reseñas con sello de compra verificada están más abajo."
+      },
+      "blocks": {
+        "g1": { "type": "item", "settings": { "titulo": "Envío", "texto": "2 a 7 días hábiles en ciudades principales. 5 a 12 días en el resto del país. El costo se calcula al checkout.", "enlace_texto": "Ver envíos", "enlace": "/pages/contact#mt-envios" } },
+        "g2": { "type": "item", "settings": { "titulo": "Retracto", "texto": "5 días hábiles para retractarte en compras a distancia, según la ley colombiana.", "enlace_texto": "Ver cambios", "enlace": "/pages/contact#mt-devoluciones" } },
+        "g3": { "type": "item", "settings": { "titulo": "Fallas", "texto": "Si llega dañado o incompleto, avísanos dentro de 30 días y lo resolvemos.", "enlace_texto": "Ver política", "enlace": "/pages/contact#mt-devoluciones" } },
+        "g4": { "type": "item", "settings": { "titulo": "Pago", "texto": "Checkout de Shopify. Los medios disponibles (tarjeta, PayPal u otros) se muestran al pagar.", "enlace_texto": "Contacto", "enlace": "shopify://pages/contact" } }
+      },
+      "block_order": ["g1", "g2", "g3", "g4"]
+    },
+    "resenas": {
+      "type": "mt-resenas",
+      "settings": {
+        "eyebrow": "Prueba social",
+        "titulo": "Lo que dicen quienes ya lo usaron",
+        "texto": "Compras verificadas. Cuatro hogares, el mismo cepillo."
+      },
+      "blocks": {
+        "r1": { "type": "resena", "settings": { "texto": "Increíble lo que quita en segundos. Ya no me arrodillo para fregar la bañera.", "nombre": "Marta G.", "detalle": "Compra verificada" } },
+        "r2": { "type": "resena", "settings": { "texto": "El mango extensible es lo mejor: limpio los azulejos altos sin subirme a ningún sitio.", "nombre": "Javier R.", "detalle": "Compra verificada" } },
+        "r3": { "type": "resena", "settings": { "texto": "Pensé que era otro cacharro que acabaría en el cajón, pero lo uso cada semana.", "nombre": "Lucía P.", "detalle": "Compra verificada" } },
+        "r4": { "type": "resena", "settings": { "texto": "Los cabezales de coche me sorprendieron, dejan las llantas impecables.", "nombre": "Diego M.", "detalle": "Compra verificada" } }
+      },
+      "block_order": ["r1", "r2", "r3", "r4"]
+    },
+    "faq": {
+      "type": "mt-faq",
+      "settings": {},
+      "blocks": {
+        "f1": { "type": "pregunta", "settings": { "pregunta": "¿Es resistente al agua?", "respuesta": "Sí. Tiene certificación IPX7: puedes usarlo en la ducha y zonas húmedas." } },
+        "f2": { "type": "pregunta", "settings": { "pregunta": "¿Cómo se carga la batería?", "respuesta": "Con el cable USB incluido. No uses cargadores de carga rápida: pueden dañar la batería." } },
+        "f3": { "type": "pregunta", "settings": { "pregunta": "¿Qué cabezales incluye?", "respuesta": "8 cabezales: cerdas redondas, cepillo plano, cepillo de esquinas y almohadillas suaves, entre otros." } },
+        "f4": { "type": "pregunta", "settings": { "pregunta": "¿Cuánto tarda en llegar?", "respuesta": "En ciudades principales, 2 a 7 días hábiles. En el resto del país, 5 a 12 días. El costo de envío se calcula al checkout." } },
+        "f5": { "type": "pregunta", "settings": { "pregunta": "¿Puedo devolverlo?", "respuesta": "Tienes 5 días hábiles de retracto. Si llega dañado o incompleto, avísanos en 30 días." } }
+      },
+      "block_order": ["f1", "f2", "f3", "f4", "f5"]
+    },
+    "cta": {
+      "type": "mt-cta-final",
+      "settings": {
+        "titulo": "Tu casa merece este nivel de limpieza",
+        "texto": "Pídelo ahora. Envío a Colombia y políticas claras antes de pagar.",
+        "boton_texto": "Pedir el mío"
+      }
+    }
+  },
+  "order": ["principal", "garantias", "resenas", "faq", "cta"]
+}

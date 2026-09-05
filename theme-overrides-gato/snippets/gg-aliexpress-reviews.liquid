@@ -1,0 +1,338 @@
+{% doc %}
+Renders AliExpress reviews imported for the GameSir G7 SE into the Gato reviews slot.
+@param {object} product - Product currently shown in the reviews section
+@example
+{% render 'gg-aliexpress-reviews', product: product %}
+{% enddoc %}
+
+{%- liquid
+  assign gg_show = false
+  if product == blank
+    assign gg_show = true
+  endif
+  if product.handle == 'control-gamesir-g7se-cable-joysticks-hall-xbox-pc'
+    assign gg_show = true
+  endif
+  if product.handle == 'mando-gamesir-g7se-efecto-hall-xbox-pc-android'
+    assign gg_show = true
+  endif
+-%}
+{%- if gg_show -%}
+  <div class="gg-ae-reviews" data-gg-ae-reviews data-gg-ae-rating="4.9" data-gg-ae-count="190">
+    <p class="gg-ae-reviews__note">Opiniones de compradores del mismo GameSir G7 SE en AliExpress. Quienes compren aquí reciben el correo de Judge.me después del pedido.</p>
+    <ul class="gg-ae-reviews__list">
+        <li class="gg-ae-reviews__item">
+          <div class="gg-ae-reviews__head">
+            <div class="gg-ae-reviews__stars" aria-label="5 de 5">
+              <span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span>
+            </div>
+            <div class="gg-ae-reviews__meta">
+              <strong>Comprador · Brasil</strong>
+              <span>28 MAY 2026</span>
+            </div>
+          </div>
+          <p class="gg-ae-reviews__body">Muy bien, llegó rápido y está en excelentes condiciones. Ahora me siento seguro de que ya no tendré que lidiar con Drfit bajo mi control jajaja Lo recomiendo, lo recomiendo encarecidamente, y viene con un Game Pass Ultimate de regalo.</p>
+          <div class="gg-ae-reviews__photos"><a class="gg-ae-reviews__photo" href="https://ae-pic-a1.aliexpress-media.com/kf/A4a2a380121144fbb870f17f3a0db3c4fs.jpg" target="_blank" rel="nofollow noopener"><img src="https://ae-pic-a1.aliexpress-media.com/kf/A4a2a380121144fbb870f17f3a0db3c4fs.jpg" alt="Foto de la reseña" loading="lazy" decoding="async" width="96" height="96"></a></div>
+        </li>
+        <li class="gg-ae-reviews__item">
+          <div class="gg-ae-reviews__head">
+            <div class="gg-ae-reviews__stars" aria-label="5 de 5">
+              <span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span>
+            </div>
+            <div class="gg-ae-reviews__meta">
+              <strong>Comprador · UY</strong>
+              <span>25 ABR 2026</span>
+            </div>
+          </div>
+          <p class="gg-ae-reviews__body">Llegó muy rápido, funciona y se ve muy bien. Aunque soy un hombre, este de color morado es muy bonito, así que lo compré. Ahora que está aquí, el próximo que compraré será el azul.</p>
+          <div class="gg-ae-reviews__photos"><a class="gg-ae-reviews__photo" href="https://ae-pic-a1.aliexpress-media.com/kf/Aefcb82e72ce640bf83eecb44e13dd831f.jpg" target="_blank" rel="nofollow noopener"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Aefcb82e72ce640bf83eecb44e13dd831f.jpg" alt="Foto de la reseña" loading="lazy" decoding="async" width="96" height="96"></a></div>
+        </li>
+        <li class="gg-ae-reviews__item">
+          <div class="gg-ae-reviews__head">
+            <div class="gg-ae-reviews__stars" aria-label="5 de 5">
+              <span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span>
+            </div>
+            <div class="gg-ae-reviews__meta">
+              <strong>B***r</strong>
+              <span>10 JUN 2026</span>
+            </div>
+          </div>
+          <p class="gg-ae-reviews__body">El controlador está muy bien construido y tiene un diseño atractivo. El cable mide aproximadamente 3 metros de largo, es bastante largo y está hecho de un material de calidad.</p>
+          <div class="gg-ae-reviews__photos"><a class="gg-ae-reviews__photo" href="https://ae-pic-a1.aliexpress-media.com/kf/Ae1b167c99293465e8a010d1b3cea1f4b2.jpg" target="_blank" rel="nofollow noopener"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Ae1b167c99293465e8a010d1b3cea1f4b2.jpg" alt="Foto de la reseña" loading="lazy" decoding="async" width="96" height="96"></a><a class="gg-ae-reviews__photo" href="https://ae-pic-a1.aliexpress-media.com/kf/A9dbe370ed7f24f36978113386b6ff2ffw.jpg" target="_blank" rel="nofollow noopener"><img src="https://ae-pic-a1.aliexpress-media.com/kf/A9dbe370ed7f24f36978113386b6ff2ffw.jpg" alt="Foto de la reseña" loading="lazy" decoding="async" width="96" height="96"></a></div>
+        </li>
+        <li class="gg-ae-reviews__item">
+          <div class="gg-ae-reviews__head">
+            <div class="gg-ae-reviews__stars" aria-label="5 de 5">
+              <span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span>
+            </div>
+            <div class="gg-ae-reviews__meta">
+              <strong>Comprador · Brasil</strong>
+              <span>05 MAY 2026</span>
+            </div>
+          </div>
+          <p class="gg-ae-reviews__body">Al principio dudaba en comprar aquí, pero resultó ser una experiencia excelente, llegó muy rápido, antes del plazo establecido y con todo en perfecto estado.</p>
+          <div class="gg-ae-reviews__photos"><a class="gg-ae-reviews__photo" href="https://ae-pic-a1.aliexpress-media.com/kf/A946d8a7ce68449ccad04baaf075b78565.jpg" target="_blank" rel="nofollow noopener"><img src="https://ae-pic-a1.aliexpress-media.com/kf/A946d8a7ce68449ccad04baaf075b78565.jpg" alt="Foto de la reseña" loading="lazy" decoding="async" width="96" height="96"></a></div>
+        </li>
+        <li class="gg-ae-reviews__item">
+          <div class="gg-ae-reviews__head">
+            <div class="gg-ae-reviews__stars" aria-label="5 de 5">
+              <span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span>
+            </div>
+            <div class="gg-ae-reviews__meta">
+              <strong>Comprador · Brasil</strong>
+              <span>19 MAY 2026</span>
+            </div>
+          </div>
+          <p class="gg-ae-reviews__body">Muy contento con mi compra, el controlador es realmente original y llegó en 1 semana. Puedes comprar sin miedo... muchas gracias, Game Sir.</p>
+          <div class="gg-ae-reviews__photos"><a class="gg-ae-reviews__photo" href="https://ae-pic-a1.aliexpress-media.com/kf/Ab7e3e08d413b49b6aac7405760dadfc8m.jpg" target="_blank" rel="nofollow noopener"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Ab7e3e08d413b49b6aac7405760dadfc8m.jpg" alt="Foto de la reseña" loading="lazy" decoding="async" width="96" height="96"></a></div>
+        </li>
+        <li class="gg-ae-reviews__item">
+          <div class="gg-ae-reviews__head">
+            <div class="gg-ae-reviews__stars" aria-label="5 de 5">
+              <span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span>
+            </div>
+            <div class="gg-ae-reviews__meta">
+              <strong>Comprador · Brasil</strong>
+              <span>25 MAY 2026</span>
+            </div>
+          </div>
+          <p class="gg-ae-reviews__body">El controlador es excelente, este controlador es mil veces mejor que el controlador original de Xbox, mil veces mejor.</p>
+          <div class="gg-ae-reviews__photos"><a class="gg-ae-reviews__photo" href="https://ae-pic-a1.aliexpress-media.com/kf/A1088d5b7a75242b9964a716396ced219h.jpg" target="_blank" rel="nofollow noopener"><img src="https://ae-pic-a1.aliexpress-media.com/kf/A1088d5b7a75242b9964a716396ced219h.jpg" alt="Foto de la reseña" loading="lazy" decoding="async" width="96" height="96"></a><a class="gg-ae-reviews__photo" href="https://ae-pic-a1.aliexpress-media.com/kf/Ad1441eb2112749369db82ebf1aefcc0du.jpg" target="_blank" rel="nofollow noopener"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Ad1441eb2112749369db82ebf1aefcc0du.jpg" alt="Foto de la reseña" loading="lazy" decoding="async" width="96" height="96"></a></div>
+        </li>
+        <li class="gg-ae-reviews__item">
+          <div class="gg-ae-reviews__head">
+            <div class="gg-ae-reviews__stars" aria-label="5 de 5">
+              <span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span>
+            </div>
+            <div class="gg-ae-reviews__meta">
+              <strong>Comprador · Estados Unidos</strong>
+              <span>06 FEB 2026</span>
+            </div>
+          </div>
+          <p class="gg-ae-reviews__body">Llegó en excelentes condiciones, tal como se anunciaba. Controlador auténtico y de alta calidad.</p>
+          <div class="gg-ae-reviews__photos"><a class="gg-ae-reviews__photo" href="https://ae-pic-a1.aliexpress-media.com/kf/A619cd950bdc74323afa868cc5ee05cb8V.jpg" target="_blank" rel="nofollow noopener"><img src="https://ae-pic-a1.aliexpress-media.com/kf/A619cd950bdc74323afa868cc5ee05cb8V.jpg" alt="Foto de la reseña" loading="lazy" decoding="async" width="96" height="96"></a><a class="gg-ae-reviews__photo" href="https://ae-pic-a1.aliexpress-media.com/kf/Ac8edda566ac04653b3eefc906efa5310b.jpg" target="_blank" rel="nofollow noopener"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Ac8edda566ac04653b3eefc906efa5310b.jpg" alt="Foto de la reseña" loading="lazy" decoding="async" width="96" height="96"></a></div>
+        </li>
+        <li class="gg-ae-reviews__item">
+          <div class="gg-ae-reviews__head">
+            <div class="gg-ae-reviews__stars" aria-label="5 de 5">
+              <span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span>
+            </div>
+            <div class="gg-ae-reviews__meta">
+              <strong>Comprador · Polonia</strong>
+              <span>05 DIC 2025</span>
+            </div>
+          </div>
+          <p class="gg-ae-reviews__body">Súper controlador, lo recomiendo. Mejor calidad de fabricación que el original de Microsoft.</p>
+          <div class="gg-ae-reviews__photos"><a class="gg-ae-reviews__photo" href="https://ae-pic-a1.aliexpress-media.com/kf/A6409852114ac491b83847c24c1d89ff9j.jpg" target="_blank" rel="nofollow noopener"><img src="https://ae-pic-a1.aliexpress-media.com/kf/A6409852114ac491b83847c24c1d89ff9j.jpg" alt="Foto de la reseña" loading="lazy" decoding="async" width="96" height="96"></a><a class="gg-ae-reviews__photo" href="https://ae-pic-a1.aliexpress-media.com/kf/Af10658af1678426f86b4acb764d5b6cah.jpg" target="_blank" rel="nofollow noopener"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Af10658af1678426f86b4acb764d5b6cah.jpg" alt="Foto de la reseña" loading="lazy" decoding="async" width="96" height="96"></a><a class="gg-ae-reviews__photo" href="https://ae-pic-a1.aliexpress-media.com/kf/A13587bfc2bc445cb9f1a14e2825d0e694.jpg" target="_blank" rel="nofollow noopener"><img src="https://ae-pic-a1.aliexpress-media.com/kf/A13587bfc2bc445cb9f1a14e2825d0e694.jpg" alt="Foto de la reseña" loading="lazy" decoding="async" width="96" height="96"></a></div>
+        </li>
+        <li class="gg-ae-reviews__item">
+          <div class="gg-ae-reviews__head">
+            <div class="gg-ae-reviews__stars" aria-label="5 de 5">
+              <span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span>
+            </div>
+            <div class="gg-ae-reviews__meta">
+              <strong>Comprador · UY</strong>
+              <span>07 JUN 2026</span>
+            </div>
+          </div>
+          <p class="gg-ae-reviews__body">Controlador &quot;Otro planeta&quot;. Una versión turboalimentada del controlador original de Xbox.</p>
+          <div class="gg-ae-reviews__photos"><a class="gg-ae-reviews__photo" href="https://ae-pic-a1.aliexpress-media.com/kf/Ac6b6da362ee440bcad35e3c78ea23758n.jpg" target="_blank" rel="nofollow noopener"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Ac6b6da362ee440bcad35e3c78ea23758n.jpg" alt="Foto de la reseña" loading="lazy" decoding="async" width="96" height="96"></a><a class="gg-ae-reviews__photo" href="https://ae-pic-a1.aliexpress-media.com/kf/A2f7cdf90f353486488b420fbccf1945cI.jpg" target="_blank" rel="nofollow noopener"><img src="https://ae-pic-a1.aliexpress-media.com/kf/A2f7cdf90f353486488b420fbccf1945cI.jpg" alt="Foto de la reseña" loading="lazy" decoding="async" width="96" height="96"></a><a class="gg-ae-reviews__photo" href="https://ae-pic-a1.aliexpress-media.com/kf/A1028b47677704ff18228cef5062f93b7g.jpg" target="_blank" rel="nofollow noopener"><img src="https://ae-pic-a1.aliexpress-media.com/kf/A1028b47677704ff18228cef5062f93b7g.jpg" alt="Foto de la reseña" loading="lazy" decoding="async" width="96" height="96"></a></div>
+        </li>
+        <li class="gg-ae-reviews__item">
+          <div class="gg-ae-reviews__head">
+            <div class="gg-ae-reviews__stars" aria-label="5 de 5">
+              <span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span>
+            </div>
+            <div class="gg-ae-reviews__meta">
+              <strong>Z***s</strong>
+              <span>27 MAY 2026</span>
+            </div>
+          </div>
+          <p class="gg-ae-reviews__body">El control es excepcional, pero mi código de GamePass estaba caducado y no pude usarlo.</p>
+          <div class="gg-ae-reviews__photos"><a class="gg-ae-reviews__photo" href="https://ae-pic-a1.aliexpress-media.com/kf/Ad978ae2065754ad5b89fe0dd686ef110b.jpg" target="_blank" rel="nofollow noopener"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Ad978ae2065754ad5b89fe0dd686ef110b.jpg" alt="Foto de la reseña" loading="lazy" decoding="async" width="96" height="96"></a><a class="gg-ae-reviews__photo" href="https://ae-pic-a1.aliexpress-media.com/kf/A517e86da7bfc4d41824b983fe86b8c8dk.jpg" target="_blank" rel="nofollow noopener"><img src="https://ae-pic-a1.aliexpress-media.com/kf/A517e86da7bfc4d41824b983fe86b8c8dk.jpg" alt="Foto de la reseña" loading="lazy" decoding="async" width="96" height="96"></a><a class="gg-ae-reviews__photo" href="https://ae-pic-a1.aliexpress-media.com/kf/A5a899b8cd64f4354bb2e7ea5d6357882C.jpg" target="_blank" rel="nofollow noopener"><img src="https://ae-pic-a1.aliexpress-media.com/kf/A5a899b8cd64f4354bb2e7ea5d6357882C.jpg" alt="Foto de la reseña" loading="lazy" decoding="async" width="96" height="96"></a></div>
+        </li>
+        <li class="gg-ae-reviews__item">
+          <div class="gg-ae-reviews__head">
+            <div class="gg-ae-reviews__stars" aria-label="5 de 5">
+              <span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span>
+            </div>
+            <div class="gg-ae-reviews__meta">
+              <strong>Comprador · Brasil</strong>
+              <span>05 JUN 2026</span>
+            </div>
+          </div>
+          <p class="gg-ae-reviews__body">Aún no he probado el producto, pero por los videos parece ser de buena calidad.</p>
+          <div class="gg-ae-reviews__photos"><a class="gg-ae-reviews__photo" href="https://ae-pic-a1.aliexpress-media.com/kf/Affd219150597474da10590a6e17ff8f6t.jpg" target="_blank" rel="nofollow noopener"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Affd219150597474da10590a6e17ff8f6t.jpg" alt="Foto de la reseña" loading="lazy" decoding="async" width="96" height="96"></a><a class="gg-ae-reviews__photo" href="https://ae-pic-a1.aliexpress-media.com/kf/A8a5daf5a96b64e49ba1a2902c9a76337G.jpg" target="_blank" rel="nofollow noopener"><img src="https://ae-pic-a1.aliexpress-media.com/kf/A8a5daf5a96b64e49ba1a2902c9a76337G.jpg" alt="Foto de la reseña" loading="lazy" decoding="async" width="96" height="96"></a></div>
+        </li>
+        <li class="gg-ae-reviews__item">
+          <div class="gg-ae-reviews__head">
+            <div class="gg-ae-reviews__stars" aria-label="5 de 5">
+              <span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span>
+            </div>
+            <div class="gg-ae-reviews__meta">
+              <strong>Comprador · Brasil</strong>
+              <span>08 JUN 2026</span>
+            </div>
+          </div>
+          <p class="gg-ae-reviews__body">Perfecto, tengo uno en blanco y morado, y ahora también tengo este en azul.</p>
+          <div class="gg-ae-reviews__photos"><a class="gg-ae-reviews__photo" href="https://ae-pic-a1.aliexpress-media.com/kf/A729329f6a226432ab1a95818b57d34a0O.jpg" target="_blank" rel="nofollow noopener"><img src="https://ae-pic-a1.aliexpress-media.com/kf/A729329f6a226432ab1a95818b57d34a0O.jpg" alt="Foto de la reseña" loading="lazy" decoding="async" width="96" height="96"></a></div>
+        </li>
+        <li class="gg-ae-reviews__item">
+          <div class="gg-ae-reviews__head">
+            <div class="gg-ae-reviews__stars" aria-label="5 de 5">
+              <span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span>
+            </div>
+            <div class="gg-ae-reviews__meta">
+              <strong>Comprador · Brasil</strong>
+              <span>12 SEP 2025</span>
+            </div>
+          </div>
+          <p class="gg-ae-reviews__body">Excelente producto, todo llegó a tiempo según lo informado. Lo recomiendo.</p>
+          <div class="gg-ae-reviews__photos"><a class="gg-ae-reviews__photo" href="https://ae-pic-a1.aliexpress-media.com/kf/Acb6fab18dc374199b6a36adab1211f40b.jpg" target="_blank" rel="nofollow noopener"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Acb6fab18dc374199b6a36adab1211f40b.jpg" alt="Foto de la reseña" loading="lazy" decoding="async" width="96" height="96"></a></div>
+        </li>
+        <li class="gg-ae-reviews__item">
+          <div class="gg-ae-reviews__head">
+            <div class="gg-ae-reviews__stars" aria-label="5 de 5">
+              <span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span>
+            </div>
+            <div class="gg-ae-reviews__meta">
+              <strong>Comprador · Brasil</strong>
+              <span>12 SEP 2025</span>
+            </div>
+          </div>
+          <p class="gg-ae-reviews__body">Excelente producto, todo llegó a tiempo según lo informado. Lo recomiendo.</p>
+          <div class="gg-ae-reviews__photos"><a class="gg-ae-reviews__photo" href="https://ae-pic-a1.aliexpress-media.com/kf/Acb6fab18dc374199b6a36adab1211f40b.jpg" target="_blank" rel="nofollow noopener"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Acb6fab18dc374199b6a36adab1211f40b.jpg" alt="Foto de la reseña" loading="lazy" decoding="async" width="96" height="96"></a></div>
+        </li>
+        <li class="gg-ae-reviews__item">
+          <div class="gg-ae-reviews__head">
+            <div class="gg-ae-reviews__stars" aria-label="5 de 5">
+              <span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span>
+            </div>
+            <div class="gg-ae-reviews__meta">
+              <strong>Comprador · Brasil</strong>
+              <span>12 SEP 2025</span>
+            </div>
+          </div>
+          <p class="gg-ae-reviews__body">Excelente producto, todo llegó a tiempo según lo informado. Lo recomiendo.</p>
+          <div class="gg-ae-reviews__photos"><a class="gg-ae-reviews__photo" href="https://ae-pic-a1.aliexpress-media.com/kf/Acb6fab18dc374199b6a36adab1211f40b.jpg" target="_blank" rel="nofollow noopener"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Acb6fab18dc374199b6a36adab1211f40b.jpg" alt="Foto de la reseña" loading="lazy" decoding="async" width="96" height="96"></a></div>
+        </li>
+        <li class="gg-ae-reviews__item">
+          <div class="gg-ae-reviews__head">
+            <div class="gg-ae-reviews__stars" aria-label="5 de 5">
+              <span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span>
+            </div>
+            <div class="gg-ae-reviews__meta">
+              <strong>Comprador · Brasil</strong>
+              <span>12 SEP 2025</span>
+            </div>
+          </div>
+          <p class="gg-ae-reviews__body">Excelente producto, todo llegó a tiempo según lo informado. Lo recomiendo.</p>
+          <div class="gg-ae-reviews__photos"><a class="gg-ae-reviews__photo" href="https://ae-pic-a1.aliexpress-media.com/kf/Acb6fab18dc374199b6a36adab1211f40b.jpg" target="_blank" rel="nofollow noopener"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Acb6fab18dc374199b6a36adab1211f40b.jpg" alt="Foto de la reseña" loading="lazy" decoding="async" width="96" height="96"></a></div>
+        </li>
+        <li class="gg-ae-reviews__item">
+          <div class="gg-ae-reviews__head">
+            <div class="gg-ae-reviews__stars" aria-label="5 de 5">
+              <span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span>
+            </div>
+            <div class="gg-ae-reviews__meta">
+              <strong>Comprador · Brasil</strong>
+              <span>12 SEP 2025</span>
+            </div>
+          </div>
+          <p class="gg-ae-reviews__body">Excelente producto, todo llegó a tiempo según lo informado. Lo recomiendo.</p>
+          <div class="gg-ae-reviews__photos"><a class="gg-ae-reviews__photo" href="https://ae-pic-a1.aliexpress-media.com/kf/Acb6fab18dc374199b6a36adab1211f40b.jpg" target="_blank" rel="nofollow noopener"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Acb6fab18dc374199b6a36adab1211f40b.jpg" alt="Foto de la reseña" loading="lazy" decoding="async" width="96" height="96"></a></div>
+        </li>
+        <li class="gg-ae-reviews__item">
+          <div class="gg-ae-reviews__head">
+            <div class="gg-ae-reviews__stars" aria-label="5 de 5">
+              <span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span>
+            </div>
+            <div class="gg-ae-reviews__meta">
+              <strong>Comprador · Brasil</strong>
+              <span>12 SEP 2025</span>
+            </div>
+          </div>
+          <p class="gg-ae-reviews__body">Excelente producto, todo llegó a tiempo según lo informado. Lo recomiendo.</p>
+          <div class="gg-ae-reviews__photos"><a class="gg-ae-reviews__photo" href="https://ae-pic-a1.aliexpress-media.com/kf/Acb6fab18dc374199b6a36adab1211f40b.jpg" target="_blank" rel="nofollow noopener"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Acb6fab18dc374199b6a36adab1211f40b.jpg" alt="Foto de la reseña" loading="lazy" decoding="async" width="96" height="96"></a></div>
+        </li>
+        <li class="gg-ae-reviews__item">
+          <div class="gg-ae-reviews__head">
+            <div class="gg-ae-reviews__stars" aria-label="5 de 5">
+              <span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span>
+            </div>
+            <div class="gg-ae-reviews__meta">
+              <strong>Comprador · Brasil</strong>
+              <span>28 NOV 2025</span>
+            </div>
+          </div>
+          <p class="gg-ae-reviews__body">Es un buen producto, estoy satisfecho con la compra, envío rápido.</p>
+          <div class="gg-ae-reviews__photos"><a class="gg-ae-reviews__photo" href="https://ae-pic-a1.aliexpress-media.com/kf/Ac25e96c807f941918d2d2073eede20d7x.jpg" target="_blank" rel="nofollow noopener"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Ac25e96c807f941918d2d2073eede20d7x.jpg" alt="Foto de la reseña" loading="lazy" decoding="async" width="96" height="96"></a></div>
+        </li>
+        <li class="gg-ae-reviews__item">
+          <div class="gg-ae-reviews__head">
+            <div class="gg-ae-reviews__stars" aria-label="5 de 5">
+              <span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span>
+            </div>
+            <div class="gg-ae-reviews__meta">
+              <strong>Comprador · Brasil</strong>
+              <span>28 NOV 2025</span>
+            </div>
+          </div>
+          <p class="gg-ae-reviews__body">Es un buen producto, estoy satisfecho con la compra, envío rápido.</p>
+          <div class="gg-ae-reviews__photos"><a class="gg-ae-reviews__photo" href="https://ae-pic-a1.aliexpress-media.com/kf/Ac25e96c807f941918d2d2073eede20d7x.jpg" target="_blank" rel="nofollow noopener"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Ac25e96c807f941918d2d2073eede20d7x.jpg" alt="Foto de la reseña" loading="lazy" decoding="async" width="96" height="96"></a></div>
+        </li>
+        <li class="gg-ae-reviews__item">
+          <div class="gg-ae-reviews__head">
+            <div class="gg-ae-reviews__stars" aria-label="5 de 5">
+              <span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span>
+            </div>
+            <div class="gg-ae-reviews__meta">
+              <strong>Comprador · Brasil</strong>
+              <span>28 NOV 2025</span>
+            </div>
+          </div>
+          <p class="gg-ae-reviews__body">Es un buen producto, estoy satisfecho con la compra, envío rápido.</p>
+          <div class="gg-ae-reviews__photos"><a class="gg-ae-reviews__photo" href="https://ae-pic-a1.aliexpress-media.com/kf/Ac25e96c807f941918d2d2073eede20d7x.jpg" target="_blank" rel="nofollow noopener"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Ac25e96c807f941918d2d2073eede20d7x.jpg" alt="Foto de la reseña" loading="lazy" decoding="async" width="96" height="96"></a></div>
+        </li>
+        <li class="gg-ae-reviews__item">
+          <div class="gg-ae-reviews__head">
+            <div class="gg-ae-reviews__stars" aria-label="5 de 5">
+              <span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span>
+            </div>
+            <div class="gg-ae-reviews__meta">
+              <strong>Comprador · Brasil</strong>
+              <span>28 NOV 2025</span>
+            </div>
+          </div>
+          <p class="gg-ae-reviews__body">Es un buen producto, estoy satisfecho con la compra, envío rápido.</p>
+          <div class="gg-ae-reviews__photos"><a class="gg-ae-reviews__photo" href="https://ae-pic-a1.aliexpress-media.com/kf/Ac25e96c807f941918d2d2073eede20d7x.jpg" target="_blank" rel="nofollow noopener"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Ac25e96c807f941918d2d2073eede20d7x.jpg" alt="Foto de la reseña" loading="lazy" decoding="async" width="96" height="96"></a></div>
+        </li>
+        <li class="gg-ae-reviews__item">
+          <div class="gg-ae-reviews__head">
+            <div class="gg-ae-reviews__stars" aria-label="5 de 5">
+              <span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span>
+            </div>
+            <div class="gg-ae-reviews__meta">
+              <strong>Comprador · Brasil</strong>
+              <span>07 OCT 2025</span>
+            </div>
+          </div>
+          <p class="gg-ae-reviews__body">Muy bueno....................................sjsjsjjsjsjjsksjsjsh</p>
+          <div class="gg-ae-reviews__photos"><a class="gg-ae-reviews__photo" href="https://ae-pic-a1.aliexpress-media.com/kf/A237f52a4722545b2a1ab5cc597c95aa9i.jpg" target="_blank" rel="nofollow noopener"><img src="https://ae-pic-a1.aliexpress-media.com/kf/A237f52a4722545b2a1ab5cc597c95aa9i.jpg" alt="Foto de la reseña" loading="lazy" decoding="async" width="96" height="96"></a></div>
+        </li>
+        <li class="gg-ae-reviews__item">
+          <div class="gg-ae-reviews__head">
+            <div class="gg-ae-reviews__stars" aria-label="5 de 5">
+              <span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span><span class="gg-resenas-badge__star is-on">{% render 'gg-icon', name: 'star' %}</span>
+            </div>
+            <div class="gg-ae-reviews__meta">
+              <strong>E***s</strong>
+              <span>17 SEP 2025</span>
+            </div>
+          </div>
+          <p class="gg-ae-reviews__body">Producto de excelente calidad. Entrega rápida. Muy satisfecho.</p>
+          <div class="gg-ae-reviews__photos"><a class="gg-ae-reviews__photo" href="https://ae-pic-a1.aliexpress-media.com/kf/Ab2cc33affb304b40a4cc19b5eeac3cadR.jpg" target="_blank" rel="nofollow noopener"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Ab2cc33affb304b40a4cc19b5eeac3cadR.jpg" alt="Foto de la reseña" loading="lazy" decoding="async" width="96" height="96"></a></div>
+        </li>
+    </ul>
+  </div>
+{%- endif -%}

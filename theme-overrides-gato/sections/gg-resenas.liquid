@@ -1,0 +1,93 @@
+<link rel="stylesheet" href="{{ 'gg-reviews.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="{{ 'gg-reviews.css' | asset_url }}"></noscript>
+<script src="{{ 'gg-reviews.js' | asset_url }}" defer="defer"></script>
+
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: var(--gg-bg);
+    overflow: visible;
+  }
+  #shopify-section-{{ section.id }} .gg-section-title {
+    font-size: {{ section.settings.heading_size }}px;
+    text-align: {{ section.settings.text_align }};
+  }
+  #shopify-section-{{ section.id }} .gg-resenas__intro,
+  #shopify-section-{{ section.id }} .gg-resenas__subtitle {
+    text-align: {{ section.settings.text_align }};
+  }
+  {% if section.settings.text_align == 'center' %}
+  #shopify-section-{{ section.id }} .gg-resenas__subtitle {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  {% endif %}
+{% endstyle %}
+
+{%- liquid
+  assign gg_product = section.settings.producto
+  if gg_product == blank
+    assign gg_product = product
+  endif
+  if gg_product == blank
+    assign gg_product = all_products['control-gamesir-g7se-cable-joysticks-hall-xbox-pc']
+  endif
+-%}
+
+<section
+  class="gg-section gg-container gg-resenas"
+  id="gg-resenas"
+  data-gg-resenas
+  data-gg-imported="true"
+  data-gg-product-id="{{ gg_product.id }}"
+  data-gg-product-handle="{{ gg_product.handle }}"
+>
+  <div class="gg-resenas__intro">
+    {%- if section.settings.titulo != blank -%}
+      <h2 class="gg-section-title gg-reveal">{% render 'gg-t', text: section.settings.titulo %}</h2>
+    {%- endif -%}
+    {%- if section.settings.subtitulo != blank -%}
+      <p class="gg-resenas__subtitle">{% render 'gg-t', text: section.settings.subtitulo %}</p>
+    {%- endif -%}
+
+    <div class="gg-resenas__summary">
+      {% render 'gg-resenas-badge', product: gg_product %}
+    </div>
+  </div>
+
+  <div class="gg-resenas__apps">
+    {% render 'gg-aliexpress-reviews', product: gg_product %}
+    {% render 'gg-judgeme-reviews', product: gg_product %}
+    {%- for block in section.blocks -%}
+      {% render block %}
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "GG – Reseñas de clientes",
+  "tag": "section",
+  "class": "gg-resenas-section",
+  "settings": [
+    { "type": "product", "id": "producto", "label": "Producto", "info": "Judge.me ya está en esta sección. Pide la reseña por correo después de la compra; aquí no hay formulario para escribir." },
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Reseñas de clientes" },
+    { "type": "textarea", "id": "subtitulo", "label": "Subtítulo", "default": "Opiniones reales de quienes ya compraron. Después de la compra, Judge.me envía el correo para dejar la reseña." },
+    { "type": "select", "id": "text_align", "label": "Alineación del título", "options": [
+      {"value": "left", "label": "Izquierda"},
+      {"value": "center", "label": "Centro"}
+    ], "default": "center" },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "heading_size", "label": "Tamaño del título (px)", "min": 20, "max": 48, "step": 2, "default": 30 },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 120, "step": 4, "default": 56 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 120, "step": 4, "default": 40 }
+  ],
+  "blocks": [
+    { "type": "@app" }
+  ],
+  "presets": [
+    { "name": "GG – Reseñas de clientes" }
+  ]
+}
+{% endschema %}

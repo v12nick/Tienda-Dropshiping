@@ -1,0 +1,720 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "gg-hero-foco",
+      "settings": {
+        "eyebrow": "GameSir × Gato Gamer Store",
+        "headline": "GameSir G7 SE: Hall Effect + Game Pass",
+        "subheadline": "Control oficial para Xbox y PC. Hall Effect, 2 botones traseros y 1 mes de Xbox Game Pass Ultimate incluido.",
+        "gamepass_texto": "Incluye 1 mes de Xbox Game Pass Ultimate",
+        "para_quien": "Para Xbox Series X|S, Xbox One y PC. Mando con cable USB-C, no es inalámbrico.",
+        "metodos_pago_texto": "Paga con tarjeta, PSE o Bre-B",
+        "despues_compra_texto": "Te avisamos por correo apenas se despache tu pedido.",
+        "despues_compra_link_texto": "Rastrea tu pedido aquí",
+        "compat_1": "Xbox Series X|S",
+        "compat_2": "Xbox One",
+        "compat_3": "PC con Windows 10/11",
+        "boton_texto": "Comprar ahora",
+        "sticky_boton_texto": "Comprar ahora",
+        "confianza_1": "Envío a Colombia · 1 a 10 días hábiles",
+        "confianza_2": "Pago con tarjeta, PSE y Bre-B",
+        "confianza_3": "WhatsApp y compra protegida",
+        "title_size": 40,
+        "title_size_mobile": 26,
+        "padding_top": 32,
+        "padding_bottom": 40
+      }
+    },
+    "oferta": {
+      "type": "gg-oferta-bundle",
+      "settings": {
+        "titulo": "Control + 1 mes de Game Pass Ultimate",
+        "item_1_titulo": "GameSir G7 SE",
+        "item_1_texto": "Mando con cable, Hall Effect",
+        "item_2_titulo": "1 mes Xbox Game Pass Ultimate",
+        "item_2_texto": "Cientos de juegos para consola, PC y la nube",
+        "nota": "Recibe el código de tu Xbox Game Pass Ultimate y actívalo directo en tu cuenta de Xbox/Microsoft.",
+        "boton_texto": "Comprar ahora",
+        "padding_top": 24,
+        "padding_bottom": 24
+      }
+    },
+    "confianza_tienda": {
+      "type": "gg-beneficios",
+      "blocks": {
+        "t1": {
+          "type": "beneficio",
+          "settings": {
+            "icono": "check",
+            "titulo": "Tienda colombiana",
+            "texto": "Vendemos y enviamos a Colombia. Atención por WhatsApp en español."
+          }
+        },
+        "t2": {
+          "type": "beneficio",
+          "settings": {
+            "icono": "lock",
+            "titulo": "Pago seguro",
+            "texto": "Pagas en el checkout de Shopify, con Bold: tarjeta, PSE o Bre-B."
+          }
+        },
+        "t3": {
+          "type": "beneficio",
+          "settings": {
+            "icono": "truck",
+            "titulo": "Envíos nacionales",
+            "texto": "Plazo estimado: 1 a 10 días hábiles una vez despachado. El costo se confirma al pagar."
+          }
+        },
+        "t4": {
+          "type": "beneficio",
+          "settings": {
+            "icono": "box",
+            "titulo": "Seguimiento del pedido",
+            "texto": "Te enviamos la guía por correo. También puedes usar Rastrea tu pedido."
+          }
+        },
+        "t5": {
+          "type": "beneficio",
+          "settings": {
+            "icono": "chat",
+            "titulo": "Atención por WhatsApp",
+            "texto": "311 233 3744 para dudas de envío, Game Pass, compatibilidad o tu pedido."
+          }
+        },
+        "t6": {
+          "type": "beneficio",
+          "settings": {
+            "icono": "shield",
+            "titulo": "Compra protegida",
+            "texto": "Si el mando llega defectuoso o dañado, te lo cambiamos o reembolsamos. Cambio de opinión: 30 días, sin uso y en su empaque. El código de Game Pass no se reembolsa una vez enviado."
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5",
+        "t6"
+      ],
+      "settings": {
+        "titulo": "¿Por qué comprar en Gato Gamer Store?",
+        "subtitulo": "",
+        "text_align": "center",
+        "heading_size": 30,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "beneficios": {
+      "type": "gg-beneficios",
+      "blocks": {
+        "b1": {
+          "type": "beneficio",
+          "settings": {
+            "icono": "target",
+            "titulo": "Precisión",
+            "texto": "Sticks Hall Effect para más precisión y menos riesgo de drift en ranked."
+          }
+        },
+        "b2": {
+          "type": "beneficio",
+          "settings": {
+            "icono": "sliders",
+            "titulo": "Personalización",
+            "texto": "Configura sensibilidad y remapeo de botones con el software GameSir Nexus."
+          }
+        },
+        "b3": {
+          "type": "beneficio",
+          "settings": {
+            "icono": "gamepad",
+            "titulo": "Control",
+            "texto": "2 botones traseros configurables para ganar ventaja en cada partida."
+          }
+        },
+        "b4": {
+          "type": "beneficio",
+          "settings": {
+            "icono": "monitor",
+            "titulo": "Compatibilidad",
+            "texto": "Funciona por cable en Xbox Series X|S, Xbox One y PC con Windows."
+          }
+        },
+        "b5": {
+          "type": "beneficio",
+          "settings": {
+            "icono": "play",
+            "titulo": "Experiencia",
+            "texto": "Conecta por USB-C, configura tu perfil y juega. Sin pilas, sin emparejar."
+          }
+        },
+        "b6": {
+          "type": "beneficio",
+          "settings": {
+            "icono": "bolt",
+            "titulo": "Game Pass",
+            "texto": "1 mes de Xbox Game Pass Ultimate incluido para empezar a jugar ya."
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6"
+      ],
+      "settings": {
+        "titulo": "¿Por qué este control?",
+        "text_align": "center",
+        "heading_size": 30,
+        "padding_top": 56,
+        "padding_bottom": 40
+      }
+    },
+    "showcase": {
+      "type": "gg-showcase",
+      "blocks": {
+        "sc1": {
+          "type": "foto",
+          "settings": {
+            "imagen_defecto": "gg-ia-showcase-1.jpg",
+            "caption": "Vista frontal"
+          }
+        },
+        "sc2": {
+          "type": "foto",
+          "settings": {
+            "imagen_defecto": "gg-ia-showcase-2.jpg",
+            "caption": "Perfil y empuñadura"
+          }
+        },
+        "sc3": {
+          "type": "foto",
+          "settings": {
+            "imagen_defecto": "gg-ia-showcase-3.jpg",
+            "caption": "Botones traseros"
+          }
+        },
+        "sc4": {
+          "type": "foto",
+          "settings": {
+            "imagen_defecto": "gg-ia-showcase-4.jpg",
+            "caption": "Joystick Hall Effect"
+          }
+        },
+        "sc5": {
+          "type": "foto",
+          "settings": {
+            "imagen_defecto": "gg-ia-showcase-5.jpg",
+            "caption": "USB-C y audio 3.5mm"
+          }
+        }
+      },
+      "block_order": [
+        "sc1",
+        "sc2",
+        "sc3",
+        "sc4",
+        "sc5"
+      ],
+      "disabled": true,
+      "settings": {
+        "titulo": "Conócelo en detalle",
+        "text_align": "left",
+        "heading_size": 30,
+        "padding_top": 40,
+        "padding_bottom": 56
+      }
+    },
+    "halleffect": {
+      "type": "gg-hall-effect",
+      "settings": {
+        "titulo": "¿Qué es la tecnología Hall Effect?",
+        "subtitulo": "En palabras simples: menos desgaste, más precisión con el paso del tiempo.",
+        "text_align": "center",
+        "old_titulo": "Control tradicional",
+        "old_texto": "Los joysticks usan sensores de contacto que se desgastan con el roce. Con el uso, ese desgaste es la causa más común del famoso 'drift' o movimiento fantasma.",
+        "new_titulo": "GameSir Hall Effect",
+        "new_texto": "Los joysticks y gatillos usan sensores magnéticos que no se tocan entre sí. Al no haber roce, ayuda a reducir el desgaste asociado a los sensores tradicionales y mantiene la precisión por más tiempo.",
+        "nota": "Ningún control es indestructible, pero la tecnología Hall Effect reduce de forma real una de las causas más comunes de desgaste.",
+        "heading_size": 30,
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
+    "caracteristicas": {
+      "type": "gg-beneficios",
+      "blocks": {
+        "c1": {
+          "type": "beneficio",
+          "settings": {
+            "icono": "target",
+            "titulo": "Joysticks Hall Effect",
+            "texto": "Sensores magnéticos sin contacto, sin desgaste por roce."
+          }
+        },
+        "c2": {
+          "type": "beneficio",
+          "settings": {
+            "icono": "bolt",
+            "titulo": "Gatillos Hall Effect",
+            "texto": "Respuesta consistente y modo hair trigger para disparo más rápido."
+          }
+        },
+        "c3": {
+          "type": "beneficio",
+          "settings": {
+            "icono": "gamepad",
+            "titulo": "Botones traseros",
+            "texto": "2 botones remapeables con seguro rápido para activarlos o no."
+          }
+        },
+        "c4": {
+          "type": "beneficio",
+          "settings": {
+            "icono": "sliders",
+            "titulo": "GameSir Nexus",
+            "texto": "Hasta 3 perfiles, mapeo de botones, zonas muertas y vibración."
+          }
+        },
+        "c5": {
+          "type": "beneficio",
+          "settings": {
+            "icono": "monitor",
+            "titulo": "Audio 3.5 mm",
+            "texto": "Jack de audio con controles integrados, sin abrir menús."
+          }
+        },
+        "c6": {
+          "type": "beneficio",
+          "settings": {
+            "icono": "plug",
+            "titulo": "Cable USB-C",
+            "texto": "Cable desmontable, conexión estable sin baterías que cargar."
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
+      ],
+      "disabled": true,
+      "settings": {
+        "titulo": "Características",
+        "text_align": "center",
+        "heading_size": 30,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "comparativa": {
+      "type": "gg-comparativa",
+      "blocks": {
+        "f1": {
+          "type": "fila",
+          "settings": {
+            "caracteristica": "Joysticks Hall Effect",
+            "nosotros": "Sí",
+            "tradicional": "No"
+          }
+        },
+        "f2": {
+          "type": "fila",
+          "settings": {
+            "caracteristica": "Gatillos Hall Effect",
+            "nosotros": "Sí",
+            "tradicional": "No"
+          }
+        },
+        "f3": {
+          "type": "fila",
+          "settings": {
+            "caracteristica": "Botones traseros configurables",
+            "nosotros": "2",
+            "tradicional": "No"
+          }
+        },
+        "f4": {
+          "type": "fila",
+          "settings": {
+            "caracteristica": "Software de personalización",
+            "nosotros": "GameSir Nexus",
+            "tradicional": "Limitado"
+          }
+        },
+        "f5": {
+          "type": "fila",
+          "settings": {
+            "caracteristica": "Modo hair trigger",
+            "nosotros": "Sí",
+            "tradicional": "No"
+          }
+        },
+        "f6": {
+          "type": "fila",
+          "settings": {
+            "caracteristica": "Game Pass Ultimate incluido",
+            "nosotros": "1 mes",
+            "tradicional": "No"
+          }
+        },
+        "f7": {
+          "type": "fila",
+          "settings": {
+            "caracteristica": "Xbox + PC",
+            "nosotros": "Sí",
+            "tradicional": "Sí"
+          }
+        }
+      },
+      "block_order": [
+        "f1",
+        "f2",
+        "f3",
+        "f4",
+        "f5",
+        "f6",
+        "f7"
+      ],
+      "settings": {
+        "titulo": "¿Por qué G7 SE?",
+        "text_align": "center",
+        "header_nosotros": "G7 SE",
+        "header_tradicional": "Estándar",
+        "nota": "Comparativa basada en características públicas de cada producto. No sustituye la ficha técnica oficial.",
+        "heading_size": 30,
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
+    "prensa": {
+      "type": "gg-prensa",
+      "blocks": {
+        "p1": {
+          "type": "resena",
+          "settings": {
+            "cita": "Mejor que un mando oficial",
+            "medio": "Tom's Guide (traducido)",
+            "rating": ""
+          }
+        },
+        "p2": {
+          "type": "resena",
+          "settings": {
+            "cita": "Este es un control que nunca, jamás, va a desarrollar drift en los joysticks",
+            "medio": "TheSixthAxis (traducido)",
+            "rating": "8/10"
+          }
+        },
+        "p3": {
+          "type": "resena",
+          "settings": {
+            "cita": "¿El mando estándar de Xbox se volvió innecesario?",
+            "medio": "GamesRadar+ (traducido)",
+            "rating": ""
+          }
+        },
+        "p4": {
+          "type": "resena",
+          "settings": {
+            "cita": "Combate el drift con joysticks Hall Effect",
+            "medio": "9to5Toys (traducido)",
+            "rating": ""
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3",
+        "p4"
+      ],
+      "settings": {
+        "titulo": "No solo lo decimos nosotros",
+        "subtitulo": "Lo que dice la prensa especializada sobre el GameSir G7 SE.",
+        "text_align": "center",
+        "heading_size": 30,
+        "padding_top": 56,
+        "padding_bottom": 8
+      }
+    },
+    "resenas_clientes": {
+      "type": "gg-resenas",
+      "settings": {
+        "producto": "control-gamesir-g7se-cable-joysticks-hall-xbox-pc",
+        "titulo": "Reseñas de clientes",
+        "subtitulo": "Lo que dicen nuestros clientes. Opiniones reales.",
+        "text_align": "center",
+        "heading_size": 30,
+        "padding_top": 56,
+        "padding_bottom": 40
+      }
+    },
+    "comofunciona": {
+      "type": "gg-como-funciona",
+      "blocks": {
+        "s1": {
+          "type": "paso",
+          "settings": {
+            "imagen_defecto": "gg-ia-paso-1.jpg",
+            "titulo": "Elige tu GameSir",
+            "texto": "Confirma color y cantidad."
+          }
+        },
+        "s2": {
+          "type": "paso",
+          "settings": {
+            "imagen_defecto": "gg-ia-paso-2.jpg",
+            "titulo": "Realiza tu compra",
+            "texto": "Pago seguro en el checkout de Shopify."
+          }
+        },
+        "s3": {
+          "type": "paso",
+          "settings": {
+            "imagen_defecto": "gg-ia-paso-3.jpg",
+            "titulo": "Recibe tu control",
+            "texto": "Envío a Colombia, 1 a 10 días hábiles al despachar. Te enviamos la guía."
+          }
+        },
+        "s4": {
+          "type": "paso",
+          "settings": {
+            "imagen_defecto": "gg-ia-paso-4.jpg",
+            "titulo": "Activa tu Game Pass",
+            "texto": "Redime el código de Xbox Game Pass Ultimate que te llega y actívalo en tu cuenta."
+          }
+        },
+        "s5": {
+          "type": "paso",
+          "settings": {
+            "imagen_defecto": "gg-ia-paso-5.jpg",
+            "titulo": "Conecta y juega",
+            "texto": "Plug and play: sin pilas, sin emparejar."
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4",
+        "s5"
+      ],
+      "settings": {
+        "titulo": "Cómo funciona",
+        "text_align": "center",
+        "boton_texto": "Comprar ahora",
+        "heading_size": 30,
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
+    "video": {
+      "type": "gg-video",
+      "settings": {
+        "titulo": "Míralo de cerca",
+        "subtitulo": "Un vistazo real al detalle y la construcción del GameSir G7 SE.",
+        "text_align": "center",
+        "heading_size": 30,
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
+    "faq": {
+      "type": "gg-faq",
+      "blocks": {
+        "q1": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "¿Funciona en Xbox Series X/S?",
+            "respuesta": "Sí, el GameSir G7 SE está licenciado oficialmente para Xbox Series X|S."
+          }
+        },
+        "q2": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "¿Funciona en Xbox One?",
+            "respuesta": "Sí, es compatible con Xbox One y Xbox One S/X."
+          }
+        },
+        "q3": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "¿Funciona en PC?",
+            "respuesta": "Sí, es compatible con Windows 10 y 11 vía cable USB-C."
+          }
+        },
+        "q4": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "¿Es inalámbrico?",
+            "respuesta": "No. El GameSir G7 SE es un mando con cable USB-C, sin batería interna: conecta y juega sin esperar carga."
+          }
+        },
+        "q5": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "¿Qué significa Hall Effect?",
+            "respuesta": "Los joysticks y gatillos usan sensores magnéticos sin contacto físico. Al no rozar, ayuda a reducir el desgaste asociado a los sensores tradicionales. Más detalle en la <a href=\"/blogs/noticias/que-es-hall-effect-en-mandos\">guía Hall Effect</a>."
+          }
+        },
+        "q6": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "¿Tiene botones traseros?",
+            "respuesta": "Sí, dos botones traseros remapeables con seguro rápido para activarlos o desactivarlos."
+          }
+        },
+        "q7": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "¿Se puede configurar?",
+            "respuesta": "Sí, con el software gratuito GameSir Nexus: mapeo de botones, zonas muertas, vibración y hasta 3 perfiles guardados."
+          }
+        },
+        "q8": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "¿Qué incluye el Game Pass?",
+            "respuesta": "1 mes de suscripción a Xbox Game Pass Ultimate, con acceso a cientos de juegos en consola, PC y la nube."
+          }
+        },
+        "q9": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "¿Cómo se activa el Game Pass?",
+            "respuesta": "Recibes el código de Xbox Game Pass Ultimate junto con tu pedido y lo activas tú mismo en tu cuenta de Xbox/Microsoft en un par de clics."
+          }
+        },
+        "q10": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "¿El Game Pass tiene restricciones?",
+            "respuesta": "Aplican los términos de Microsoft para códigos de Game Pass Ultimate. Si tienes dudas sobre tu cuenta, escríbenos antes de comprar."
+          }
+        },
+        "q11": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "¿Qué incluye la caja?",
+            "respuesta": "Mando GameSir G7 SE y cable USB-C."
+          }
+        },
+        "q12": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "¿Cuánto tarda en llegar mi pedido?",
+            "respuesta": "Envío a Colombia. Plazo estimado: 1 a 10 días hábiles una vez despachado. El costo se confirma en el checkout, antes de pagar. Te enviamos la guía por correo."
+          }
+        },
+        "q13": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "¿Qué incluye la compra?",
+            "respuesta": "El pack es el mando GameSir G7 SE, el cable USB-C de la caja y 1 mes de Xbox Game Pass Ultimate (código para activar en tu cuenta)."
+          }
+        },
+        "q14": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "¿Es original / está licenciado para Xbox?",
+            "respuesta": "Sí. El GameSir G7 SE está licenciado oficialmente para Xbox Series X|S."
+          }
+        },
+        "q15": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "¿Puedo rastrear mi pedido?",
+            "respuesta": "Sí. Cuando se despacha te enviamos el número de guía por correo. También puedes usar la página Rastrea tu pedido o escribirnos por WhatsApp."
+          }
+        },
+        "q16": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "¿Qué medios de pago tienen?",
+            "respuesta": "El pago se hace en el checkout de Shopify, con Bold: tarjeta, PSE, Bre-B y las billeteras que aparezcan en esa pasarela."
+          }
+        },
+        "q17": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "¿Qué ocurre si tengo un problema?",
+            "respuesta": "Escríbenos por WhatsApp al 311 233 3744 con tu número de pedido. Si el mando llega defectuoso o dañado en el envío, te lo cambiamos o reembolsamos. El detalle está en la política de devoluciones."
+          }
+        }
+      },
+      "block_order": [
+        "q13",
+        "q14",
+        "q1",
+        "q3",
+        "q8",
+        "q9",
+        "q12",
+        "q15",
+        "q16",
+        "q17",
+        "q2",
+        "q4",
+        "q5",
+        "q6",
+        "q7",
+        "q10",
+        "q11"
+      ],
+      "settings": {
+        "titulo": "Preguntas frecuentes",
+        "text_align": "center",
+        "heading_size": 30,
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
+    "ctafinal": {
+      "type": "gg-cta-final",
+      "settings": {
+        "titulo": "Lleva el G7 SE + 1 mes de Game Pass",
+        "texto": "Sticks Hall Effect para reducir el drift, botones traseros y Game Pass Ultimate. Precio en pesos colombianos, envío a Colombia.",
+        "gamepass_texto": "incluye 1 mes de Game Pass Ultimate",
+        "boton_texto": "Comprar ahora",
+        "padding_top": 40,
+        "padding_bottom": 72
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "oferta",
+    "confianza_tienda",
+    "prensa",
+    "beneficios",
+    "halleffect",
+    "comparativa",
+    "comofunciona",
+    "video",
+    "faq",
+    "resenas_clientes",
+    "showcase",
+    "caracteristicas",
+    "ctafinal"
+  ]
+}
